@@ -1,0 +1,335 @@
+.messages{
+    margin-left: -34px;
+    height: 87vh;
+    width: 75vw; 
+    position: absolute;
+    top: 54%;
+    left: 50%;
+    border: 1px solid #bdbdbd;
+    transform: translate(-50%,-50%);} 
+.top-left{
+    border-right: 1px solid #bdbdbd;
+    border-bottom: 1px solid #bdbdbd;}
+.bottom-left{
+    border-right: 1px solid #bdbdbd;}
+.top-right{
+    border-bottom: 1px solid #bdbdbd;}
+.rights{
+    top: 0;position: fixed;
+    margin-top: 90px;
+    margin-top: 0 !important;
+}  
+.top-left,.top-right{
+    width: 100%;    
+    height: 13%;
+}
+.bottom-left,.bottom-right{
+    width: 100%;
+    height: 87%; 
+    overflow: auto;
+}  
+.bottom-right{
+    border-bottom-right-radius: 5px;
+    border: none;
+    height: 75%;}
+.top-left p{ 
+    color: #000;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);}
+.top-left img{ 
+    float: right;
+    padding: 25px;
+}
+.we{
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    align-items: center;
+}
+.we p{
+    margin-top: 20px;
+}
+.we button{
+    margin-top: 20px;
+    background-color: #0072ffd1;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+}
+.user{
+    
+    height: 75%;
+    position: absolute;
+    top: 20%;
+    width: 200px;
+    left: 5%; 
+}
+.user img{
+    position: absolute;
+    width: 30px;
+    height: 30px;
+}
+.user p,.user span{
+    padding-left:50px;
+}
+.user p{
+    width: 200%;
+    font-size: 16px;
+    line-height: 30px;
+    margin: -6px 0 -6px;
+    font-weight: 600;
+}
+
+
+.bottom-left img{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    float: left;
+    margin: 15px;
+}
+.bottom-left ul{height: 100%;}
+.bottom-left li{ 
+    width: 100%;  
+    height: 15%;
+} 
+.bottom-left li:hover{
+    background-color: #80808014;
+}    
+.bottom-left li p,.bottom-left li .is-pulled-right{
+    margin-top:5% ;
+}
+.bottom-right .img-upload{
+    height: 300px;
+    width: 200px;
+    border-radius: 20px;
+}
+.bottom-right .time{
+    opacity: 0.5;
+    text-align: center;
+    font-size: 12px;
+    line-height: 24px;
+} 
+#app{overflow: auto;}
+.my-messages{
+
+    float: right;
+    width: 95%; 
+    margin-top: 15px;
+    margin-bottom:15px;
+    
+}
+.my-messages .me-messages{ 
+    float: right; 
+    margin-right: 20px;
+}
+.my-messages p{
+    background-color:#80808021 ;
+    border-radius: 20px;
+    padding: 15px;
+    width: 200px;
+}
+.friend-messages{float: left;
+    width: 100%;
+    margin-top: 15p;
+    margin-bottom:15px;
+}
+.friend-messages p{
+    
+    background-color:#fff ;
+    border-radius: 20px;
+    border: 1px solid gray;
+    padding: 10px;
+    margin-left: 40px;
+    width: 200px;
+    box-sizing: border-box;
+}
+.your-messages{
+    margin-left: 20px;
+}
+.your-messages img{
+    position: absolute;
+    bottom: 0;
+} 
+.form-chat{
+    width: 90%; 
+    margin: 15px;
+    bottom: 0;
+}
+.form-chat .img-1{
+    position: absolute;
+    margin: 10px;
+}
+.form-chat .img-2{
+    position: absolute;  
+    top:0;
+    right: 0;
+    margin: 5px;
+    margin-right: 80px;
+    width: 35px;
+    height: 35px;
+}
+.form-chat .img-3{
+    position: absolute;  
+    top:0;
+    right: 0;
+    width: 30px;
+    height: 30px;
+    margin: 5px;
+    margin-right: 40px;
+}
+.form-chat textarea{
+    resize: none;  
+    padding-left: 50px;
+    padding-top: 10px;
+    width: 100%;   
+    border: 1px solid rgb(128 128 128 / 0.38);
+    border-radius: 20px;
+    outline: none;
+}
+.form-chat button{
+    color:#0095f6;
+    position: absolute;
+    top:0;
+    right:0;
+    background-color: transparent;
+    border: none;
+    padding: 13px;
+    outline: none;
+    font-weight: 700;
+    cursor: pointer;
+}  
+@media only screen and (max-width: 1000px){
+    .messages{  margin-left: 0;} 
+} 
+   
+@media only screen and (max-height: 530px){
+    .messages{  margin-top: 34px;} 
+    .top-left,.top-right{ 
+        height: 25%;}
+    .bottom-left li{ 
+            width: 100%;  
+            height: 35%;
+        }
+    .bottom-left,.bottom-right{ 
+    height: 75%;}
+}
+#id01{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.4);  
+    z-index: 100;
+}
+.w3-modal-content{
+    position: absolute;
+    top: 20%;
+    left: 35%;
+    background-color:#fff;
+    width: 360px; 
+}
+.po{
+    flex-direction: column;
+    border-radius: 10px;
+}
+.pp{ 
+    height: 30px;
+}
+.pp span{ 
+    float: left;
+    width: 10%; 
+    text-align: center;
+    font-size: 40px;
+}
+.pp p{
+    width: 70%;
+    text-align: center;
+    line-height: 45px;
+    font-weight: 600;}
+.pp button{
+    color:#0095f6;
+    line-height: 45px;
+}
+.pi{ 
+    border-top: 1px solid #bdbdbd;
+    border-bottom: 1px solid #bdbdbd;
+    margin-top: 10px;
+}
+.pi p{position: absolute;
+    padding: 15px;}
+.pi input{
+    margin: 15px;
+    width: 69%;
+    border: none;
+    font-size: 17px;
+    margin-left: 60px;
+}
+.pu{ 
+    height: 210px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.pu .pq{
+    padding: 25px;
+    line-height: 40px;}
+.py{
+    padding-top: 10px;
+    padding-left: 15px;
+    height: 56px;  
+}
+.py img{
+    float: left;
+    width: 10%;
+}
+.py div{
+    float: left;
+    width: 80%;
+    padding: 0px 15px;  
+}
+.py button{ 
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    color:white;
+    border: 1px solid #bdbdbd;}
+.py:hover{background-color: #fafafa}
+.background-blue{background-color:#0095f6;border:none;color:#fff}
+.background-white{background-color:#fff;color: #000;}
+.pt a{ 
+    display: flex;
+    background: #e0f1ff;
+    color: #0095f6;
+    padding: 8px 12px;
+    border-radius: 5px;
+}
+
+.pt a span{
+    margin-left: 5px;}
+.pe{
+    float: left;
+    width: 83%;
+    max-height: 270px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin-left: 60px;
+}
+.pe .pt{
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-bottom: 5px;
+}
+.pw{
+    max-height: 120px; 
+    width: 105%;
+    flex-wrap: wrap;
+    box-sizing: content-box;} 
+.info{
+    float: right;
+    margin: 15px;
+    padding: 8px;
+    padding-left: 12px;
+    padding-right: 12px;
+    border: 1px solid black;
+    border-radius: 50%;}

@@ -1,0 +1,133 @@
+*{
+    padding: 0;
+    margin: 0; 
+    margin-top: 1vw; 
+}
+a{text-decoration: none;color:black}
+body{
+    background-color: #fafafa;
+    width: 0;
+    margin: 0 auto;
+    position: relative;
+} 
+button{ outline:none}
+.login-left{ 
+    position: absolute;
+    width: 35vw;
+    right: 0;
+}  
+.login-right{
+    
+    background: white;
+    width: 30vw;
+    height: 500px;
+    text-align: center;
+    border:1px solid #bdbdbd;  
+} 
+section{ 
+    position: absolute;
+    top: 40%;
+    left: 65%;
+    transform: translate(-50%,-50%); 
+    border: 1px solid #bdbdbd;
+    height: 450px;
+    width: 350px;
+    background-color: white;
+    text-align: center;
+} 
+
+.username{
+    height: 53px;
+    position: relative;
+    font-family: sans-serif;
+    width: 70%;
+    margin: auto;
+}
+.username input{
+    height: 30px;
+    position: absolute;
+    display: block;
+    border: 1px solid #bdbdbd;
+    width: 100%;
+    z-index: 2;
+    font-size: 14px;
+    padding-left: 5px;
+    bottom: 0;
+    color: #1e2d48;
+    background-color: #bababa14;  
+    outline: none;
+}
+.username span{
+     
+    position: absolute; 
+    margin: 0px;
+    left: 0; 
+    font-size: 14px;
+    color: red;
+
+}  
+.or{
+    display: flex;
+    height: 5px;
+    position: relative;
+    width: 70%;
+    margin: auto; 
+    opacity: 0.5;
+}
+.bar{
+    width: 40%;
+    height: 1px; 
+    background-color: #bdbdbd;
+    margin-top: 7px;
+    padding-left: 10px;
+}
+.content{
+    margin: 0px 23px 0px 25px;}
+
+.fb-login,.google-login,.forget-password{
+    width: 70%;
+    margin: auto;
+    float: center;
+    margin-bottom: 15px; 
+}  
+.fb-login{
+
+    margin-left: 25px;
+}
+.fb-login a{
+    color: #0095f6;
+    text-decoration: none;
+}
+.google-login{
+    margin-left: 20px;
+}
+.google-login a{
+    color:brown;
+    text-decoration: none;
+} 
+.register{ 
+    background-color: #fff; 
+    border: 1px solid #bdbdbd;
+    width: 27vw;
+    text-align: center; 
+    padding: 20px;
+    margin-top: 45px;
+}
+.register a{
+    text-decoration: none;
+    color:#0095f6
+}
+ 
+button{
+    width: 70%;
+    border: none;
+    padding: 5px;
+    background-color: #0095f6; 
+    border-radius: 5px;
+    color: white;
+    cursor:pointer
+}
+@media only screen and (max-width:850px){
+    .login-left{display: none;}
+    section{left: 50%;}
+}
