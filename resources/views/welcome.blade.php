@@ -199,14 +199,16 @@
                   </div>
                   @endif
                </div>
-               <div class="d-inline-block" style="position: absolute; top: 0;right: 0;color: #00b8ff;margin-top: 10px;">
-                  <p class="cs {{$list->id}}" onclick="follow('{{$list->id}}')">Theo dõi</p>
+               <div class="d-inline-block" style="position: absolute; top: 0;right: 0;margin-top: 10px;">
+                  <p class="cs follow{{$list->id}}  text-blue" onclick="follow('{{$list->id}}')">Theo dõi</p>
+                  <div class="load{{$list->id}}" style="margin-top:-10px;display:none">
+                  <img src="{{ asset('img/loading.gif')}}">
+                  </div>
                </div>
             </div>
             <script>
-            $(".{{$list->id}}").on("click",function(){
-               $(this).text('Đang theo dõi');
-               $(this).css('color','black');
+            $(".follow{{$list->id}}").on("click",function(){ 
+               $(this).toggleClass("text-blue");
             })
             </script>
             @endif

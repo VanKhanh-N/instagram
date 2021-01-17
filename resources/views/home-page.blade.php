@@ -5,92 +5,59 @@
 <br> 
 <body>
    <section class="sd">
+      <div class="img">
       @if(!$user->avatar) 
       <label for="upload_user_avatar"> <img src="/img/no-user.png" class="rounded-circle user cs avatar_user_uploaded"></label>
+     
+      @elseif(substr($user->avatar,0,4)=='http')
+      <img src="{{ $user->avatar }}" class="rounded-circle user cs avatar_user_uploaded" id="myBtn-5">
+      @else
+      <img src="{{ pare_url_file($user->avatar,'user') }}" class="rounded-circle user cs avatar_user_uploaded" id="myBtn-5">
+      @endif
+      <img src="{{ asset('img/loading.gif')}}" class=" uploadavatar imguser" style="display:none;">
+      
+      </div>
       <form method="POST" enctype="multipart/form-data" id="form_upload_user_avatar">
          @csrf
          <input type="file" onchange="uploadUserAvatar(this,'form_upload_user_avatar')" accept="image/*"  name="upload_user_avatar" class="d-none" id="upload_user_avatar">
       </form>
-      @else 
-      @if(substr($user->avatar,0,4)=='http')
-      <img src="{{ $user->avatar }}" class="rounded-circle user cs avatar_user_uploaded" id="myBtn-5">
-      @else
-      <img src="{{ pare_url_file($user->avatar,'user') }}" class="rounded-circle user cs avatar_user_uploaded" id="myBtn-5">
-      @endif   
-      @endif
       <!-- modal user image -->
       <div id="myModal-5" class="modal">
          <div class="modal-content setting animate__animated animate__zoomIn" >
             <li class="hed"><a href="javascript:;" >Thay ảnh của bạn</a></li>
             <li>
-               <label for="change_user" class="text-blue cs">Tải ảnh lên</label>
+               <label for="change_user" class="text-blue change cs">Tải ảnh lên</label>
                <form method="POST" enctype="multipart/form-data" id="form_change_user_avatar">
                   @csrf
                   <input type="file" onchange="uploadUserAvatar(this,'form_change_user_avatar')" accept="image/*"  name="upload_user_avatar" class="d-none" id="change_user">
                </form>
             </li>
-            <li><a href="javascript:;" class="text-red remove_current_photo">Xóa ảnh </a></li>
+            <li><a href="javascript:;" class="text-red remove_current_photo">Gỡ ảnh hiện tại</a></li>
             <li class="cs" id="exit5"><a href="">Thoát</a></li>
          </div>
       </div>
       <div class="csa">
          <div class="clr csb">
-            <span class="os">{{ $user->user }}</span>
+            <span class="os" style="float:left">{{ $user->user }}</span>
             @if($user->user === \Auth::user()->user)
             <a href="">Chỉnh sửa trang cá nhân</a>
             <i class="fa fa-2x fa-sun-o" id="myBtn-2"></i> 
             <span class="fa-stack fa-lg cs" id="myBtn"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-plus fa-stack-1x"></i></span> 
             @else  
-            <button style="display:none" class="follow follows{{$user->id}}">Theo dõi</button>  
-            <a style="display:none" href="{{ route('chat.show', $user->id) }}" class="message">Nhắn tin</a>
-            <a style="display:none" class="unfollow follows{{$user->id}}"href="javascript:;"><i class="fa fa-lg fa-user-times"></i></a>
-            <script>
-$('.follows{{$user->id}}').on('click',function(){
-   var users='{{$user->id}}';
-   $.get({
-        url:"/follow",
-        data:{followed:users},
-        success:function(data){ 
-            $('.follower').text(data.user.follower);
-            if(data.user.follower==1 && data.action =='them'){
-               $(".settingss").empty();
-                $('.settingss').prepend(` 
-                <a href="${data.user.user}" class="zx position-relative user${data.user.id}">
-                     <img src="uploads/user/${data.user.avatar}" class="w-35 rounded-circle"> 
-                     <b class="zz">${data.user.user}</b><br>
-                     <b class="os">${data.user.c_name}</b>
-                     </a>
-                
-                `);
-            }
-           else if(data.user.follower==0){
-                $(".settingss").empty();
-                $('.settingss').prepend(` 
-                <li><i class="fa fa-lg fa-user-plus"></i></li>
-                <li class="two">Người theo dõi</li>
-                <li class="three">Bạn sẽ thấy tất cả những người theo dõi bạn ở đây.</li>
-                `);
-            }
-            else{
-               if(data.action=='them'){
-               $('.settingss').prepend(` 
-                <a href="${data.user.user}" class="zx position-relative user${data.user.id}">
-                     <img src="uploads/user/${data.user.avatar}" class="w-35 rounded-circle"> 
-                     <b class="zz">${data.user.user}</b><br>
-                     <b class="os">${data.user.c_name}</b>
-                     </a>
-                `);
-               }
-               else{
-                  $('.user'+data.user.id).remove();
-               }
-            }
-        }
-    })
-})
-    
- 
- </script>
+            <div class="list-follow">
+            @if(!$followed)
+            <button class="follow" onclick="follow('{{$user->id}}')">
+                  <img src="{{ asset('img/loading.gif')}}" class="w-30 load{{$user->id}}" style="display:none">
+                  <p class="text-follows{{$user->id}}">Theo dõi</p>
+             </button>  
+            @else
+            <a href="{{ route('chat.show', $user->id) }}" class="message">Nhắn tin</a>
+            <a class="unfollow follows{{$user->id}}"href="javascript:;"  onclick="follow('{{$user->id}}')">
+            <i class="fa  fa-user-times"></i>
+            <img src="{{ asset('img/loading.gif')}}" class="w-30 load{{$user->id}}" style="display:none;margin-top: -11px;">
+         </a>
+            @endif
+</div>
             @endif
          </div>
          <!-- modal setting -->
@@ -123,68 +90,88 @@ $('.follows{{$user->id}}').on('click',function(){
                   @else
                   <!-- số người theo dõi mình -->
                   @foreach($userFollow as $list)  
-                  <li class="clr" style="height: 50px;">
-                     <a href="{{ $list->users->user }}" class="zx position-relative user{{$list->id}}">
+                  <li class="clr user{{$list->user_id}}" style="height: 50px;">
+                     <a href="{{ $list->users->user }}" class="zx position-relative ">
                      <img src="{{ pare_url_file($list->users->avatar,'user') }}" class="w-35 rounded-circle"> 
                      <b class="zz">{{ $list->users->user }}</b><br>
                      <b class="os">{{ $list->users->c_name }}</b>
                      </a>
                      @if($list->user_id!=\Auth::id())
-                     <button class="{{ \App\Models\Follow::checkFollow(\Auth::id(),$list->user_id) ?'background-white':'background-blue'}}  zc zc{{$list->id}}" onclick="follow('{{$list->user_id}}')">
-                        <cen class="zbc{{$list->id}} {{\App\Models\Follow::checkFollow(\Auth::id(),$list->user_id) ?'d-none':''}}">Theo dõi</cen>
-                        <str class="znc{{$list->id}} {{\App\Models\Follow::checkFollow(\Auth::id(),$list->user_id) ?'':'d-none'}}">Đang theo dõi</str>
-                     </button>
+                     @if(\App\Models\Follow::checkFollow(\Auth::id(),$list->user_id))
+                      @if($user->id != \Auth::id())
+                     <button class="followss zc{{$list->user_id}}" onclick="follows('{{$list->user_id}}')" ><cen class="cen{{$list->user_id}}">Đang theo dõi</cen>
+                     <img src="{{ asset('img/loading.gif')}}" class="w-30 load{{$list->user_id}}" style="display:none;margin-top: -11px;">
+                     @else
+                     <button class="followss zc{{$list->user_id}}" onclick="followss('{{$list->user_id}}')" ><cen class="cen{{$list->user_id}}">Đang theo dõi</cen>
+                     <img src="{{ asset('img/loading.gif')}}" class="w-30 load{{$list->user_id}}" style="display:none;margin-top: -11px;">
                      @endif
-                  </li>
-                  <script>
-                     $('.zc{{$list->id}}').on('click',function(){
-                        $(this).toggleClass('background-white');
-                        $(this).toggleClass('background-blue');
-                        $('.zbc{{$list->id}}').toggleClass('d-none');
-                        $('.znc{{$list->id}}').toggleClass('d-none');
-                     })
-                  </script>
+                  </button>
+                     @else  
+                     @if($user->id != \Auth::id())
+                     <button class="follows zc{{$list->user_id}}" onclick="follows('{{$list->user_id}}')" ><cen class="cen{{$list->user_id}}">Theo dõi</cen>
+                      <img src="{{ asset('img/loading.gif')}}"  style="display:none;"class="w-30 load{{$list->user_id}}">
+                  </button> 
+                     @else
+                     <button class="follows zc{{$list->user_id}}" onclick="followss('{{$list->user_id}}')" ><cen class="cen{{$list->user_id}}">Theo dõi</cen>
+                      <img src="{{ asset('img/loading.gif')}}"  style="display:none;"class="w-30 load{{$list->user_id}}">
+                     </button> 
+                     @endif
+                     @endif
+                     @endif
+                  </li> 
+                 
                   @endforeach
                   @endif
                   </div>
                </div>
             </div>
             <!--end modal-->
-            <p class="cs" id="myBtn-7">Đang theo dõi <b style="float: none;">{{ count($areFollow) }}</b> người dùng</p>
+            <p class="cs" id="myBtn-7">Đang theo dõi <b class="count" style="float: none;">{{ count($areFollow) }}</b> người dùng</p>
             <!-- modal setting -->
             <div id="myModal-7" class="modal">
                <div class="modal-content settings animate__animated animate__zoomIn" >
                   <li class="one">Người theo dõi <span class="float-right cs" id="exit7">&times;</span></li>
-                  @if(!count($areFollow))
+                 <div class="list">
+                 @if(!count($areFollow))
                   <li><i class="fa fa-lg fa-user-plus"></i></li>
                   <li class="two">Người đang theo dõi</li>
                   <li class="three">Bạn sẽ thấy tất cả những người bạn đang theo dõi ở đây.</li>
                   @else
                   <!-- đang theo dõi -->
                   @foreach($areFollow as $key=> $list)   
-                  <li class="clr" style="height: 50px;">
+                  <li class="clr users{{$list->friends->id}}" style="height: 50px;">
                      <a href="{{ $list->friends->user }}" class="zx position-relative">
                      <img src="{{ pare_url_file($list->friends->avatar,'user') }}" class="w-35 rounded-circle"> 
                      <b class="zz">{{ $list->friends->user }}</b><br>
                      <b class="os">{{ $list->friends->c_name }}</b>
                      </a>
-                     @if($list->friends->id!=\Auth::id())
-                     <button class="{{\App\Models\Follow::checkFollow(\Auth::id(),$list->followed) ?'background-white':'background-blue'}} zcx zcx{{$key}}" onclick="follow('{{$list->followed}}')">
-                        <cen class="zcc{{$list->id}} {{\App\Models\Follow::checkFollow(\Auth::id(),$list->followed) ?'d-none':''}}">Theo dõi</cen>
-                        <str class="zvc{{$list->id}} {{\App\Models\Follow::checkFollow(\Auth::id(),$list->followed) ?'':'d-none'}}">Đang theo dõi</str>
-                     </button>
+                     @if($list->friends->id!=\Auth::id()) 
+                     @if(\App\Models\Follow::checkFollow(\Auth::id(),$list->friends->id))
+                     @if($user->id != \Auth::id())
+                     <button class="followss zc{{$list->friends->id}}" onclick="follows('{{$list->friends->id}}')" ><cen class="cen{{$list->friends->id}}">Đang theo dõi</cen>
+                     <img src="{{ asset('img/loading.gif')}}" class="w-30 load{{$list->friends->id}}" style="display:none;margin-top: -11px;">
+                     @else
+                     <button class="followss zc{{$list->friends->id}}" onclick="followss('{{$list->friends->id}}')" ><cen class="cen{{$list->friends->id}}">Đang theo dõi</cen>
+                     <img src="{{ asset('img/loading.gif')}}" class="w-30 load{{$list->friends->id}}" style="display:none;margin-top: -11px;">
                      @endif
-                  </li>
-                  <script>
-                     $('.zcx{{$key}}').on('click',function(){
-                        $(this).toggleClass('background-white');
-                        $(this).toggleClass('background-blue');
-                        $('.zcc{{$list->id}}').toggleClass('d-none');
-                        $('.zvc{{$list->id}}').toggleClass('d-none');
-                     })
-                  </script>
+                  </button>
+                     @else 
+                     @if($user->id != \Auth::id()) 
+                     <button class="follows zc{{$list->friends->id}}" onclick="follows('{{$list->friends->id}}')" ><cen class="cen{{$list->friends->id}}">Theo dõi</cen>
+                      <img src="{{ asset('img/loading.gif')}}"  style="display:none;"class="w-30 load{{$list->friends->id}}">
+                  </button> 
+                  @else
+                  <button class="follows zc{{$list->friends->id}}" onclick="followss('{{$list->friends->id}}')" ><cen class="cen{{$list->friends->id}}">Theo dõi</cen>
+                      <img src="{{ asset('img/loading.gif')}}"  style="display:none;"class="w-30 load{{$list->friends->id}}">
+                  </button> 
+                  @endif
+                     @endif
+
+                     @endif
+                  </li> 
                   @endforeach
                   @endif
+                 </div>
                </div>
             </div>
             <!--end modal-->
@@ -204,12 +191,14 @@ $('.follows{{$user->id}}').on('click',function(){
             <div class="title ">
                <a href="javascript:;" class="back"><i class="fa fa-long-arrow-left"></i> Back </a>
                <p>New Post</p>
-               <button type="submit">Share</button> 
+               <button type="submit" class="submit">Share</button> 
+               <img src="{{asset('img/loading.gif')}}"  class="w-30 nos" style="display:none">
             </div>
             <textarea name="p_content" class="textarea" placeholder="Write a caption... (max 2000 charaters)"></textarea>
       </div>
       <img id="image-post" src="{{ asset('img/heart-outline.png') }}" >
    </div>
+   
    <div class="posts">
    <div class="d-gri csd">
    <button id="first" class="bt"><i class="fa fa-table"></i> BÀI VIẾT</button>
@@ -266,7 +255,7 @@ $('.follows{{$user->id}}').on('click',function(){
                <img src="{{ pare_url_file($val->p_image,'profile') }}" class="csq"> 
                <div class="cle">
                   <div class="heq">
-                     <div class="hew"><a href="{{ route('get.home-page',$val->user->user)}}"><img src="{{ pare_url_file($val->user->avatar,'user') }}"></a> </div>
+                     <div class="hew"><a href="{{ route('get.home-page',$val->user->user)}}"><img src="{{ pare_url_file($val->user->avatar,'user') }}" class="avatar_user_uploaded"></a> </div>
                      <div class="hee">
                         <p><a href="{{ route('get.home-page',$val->user->user)}}"><b>{{$val->user->c_name}} </a></b>
                            @if($val->user->id==$user->id)
@@ -277,21 +266,23 @@ $('.follows{{$user->id}}').on('click',function(){
                      </div>
                      <i class="fa fa-ellipsis-h"></i>
                   </div>
-                  <div class="her hdl{{$val->id}}">
+                  <div class="her hdl{{$val->id}}" id="hell">
                      @if($val->p_content!='')
                      <div class="clr het">
-                        <div class="hew"><a href="{{ route('get.home-page',$val->user->user)}}"><img src="{{ pare_url_file($val->user->avatar,'user') }}"></a> </div>
+                        <div class="hew"><a href="{{ route('get.home-page',$val->user->user)}}"><img src="{{ pare_url_file($val->user->avatar,'user') }}" class="avatar_user_uploaded"></a> </div>
                         <div class="hep">
                            <p><a href="{{ route('get.home-page',$val->user->user)}}"><b>{{$val->user->c_name}}</a> </b> {{$val->p_content}}</p>
                         </div>
                         <i class="fa fa-ellipsis-h"></i> 
-                        <div class="os heo">12h</div>
-                     </div>
+                        <div class="os heo">{{ $val->created_at->diffForHumans($now) }} 
+                        </div>
+                       
+                     </div>  
                      @endif  
                      @foreach(\App\Models\Comment::where('c_post',$val->id)->get() as $cmt)  
                       
                      <div class="clr het">
-                        <div class="hew"><a href="{{ route('get.home-page',$cmt->users->user)}}"><img src="{{ pare_url_file($cmt->users->avatar,'user') }}"></a> </div>
+                        <div class="hew"><a href="{{ route('get.home-page',$cmt->users->user)}}"><img src="{{ pare_url_file($cmt->users->avatar,'user') }}" class="{{ $cmt->c_user_id ==\Auth::id() ? 'avatar_user_uploaded' :''}}"></a> </div>
                         <div class="hep">
                            <p><b><a href="{{ route('get.home-page',$cmt->users->user)}}">{{$cmt->users->c_name}}</a> </b> {{$cmt->c_comment}}</p>
                         </div>
@@ -327,12 +318,17 @@ $('.follows{{$user->id}}').on('click',function(){
                         <textarea class="textarea-{{$val->id}} textarea-comment{{$val->id}}" placeholder="Add a comment..."></textarea>
                         <input type="hidden" value="{{$val->id}}" class="post-comment{{$val->id}}">   
                         <button class="submit-{{$val->id}} submit-comment{{$val->id}} disabled">Đăng</button>
+                        <img src="{{ asset('img/loading.gif')}}" class="w-30 load-comment" style="top: 10px;right: 15px;position: absolute;display:none;">
                      </form>
                   </div>
                </div>
             </div>
          </div>
          <script>   
+            $('body').on('click','#myBtnn{{$val->id}}',function(){
+               var $div = $("#hell"); 
+               $div.scrollTop($div[0].scrollHeight);
+            })
             //không cho người dùng đăng khi chưa comment
             $('.textarea-{{$val->id}}').on('keyup',function(){
                if(!$('.textarea-{{$val->id}}').val())
@@ -341,14 +337,15 @@ $('.follows{{$user->id}}').on('click',function(){
                $('.submit-{{$val->id}}').removeClass('disabled');
                }
             })
-            //hiện modal bài viết
+            //hiện modal bài viết 
+          
             var thismodal{{$val->id}} = document.getElementById("myModall{{$val->id}}"); 
             var thisbtn{{$val->id}} = document.getElementById("myBtnn{{$val->id}}"); 
             var html=document.getElementsByTagName("html");
             thisbtn{{$val->id}}.onclick = function() {
             thismodal{{$val->id}}.style.display = "block";
             var post='{{$val->id}}';
-            var URL ="{{ route('post.increview')}}"; 
+            var URL ="{{ route('post.increview')}}";  
             $.get({
                url:URL,
                data:{post:post},
@@ -371,15 +368,29 @@ $('.follows{{$user->id}}').on('click',function(){
             var URL= $(this).parents('form').attr('action');
             var c_comment=$('.textarea-comment{{$val->id}}').val();
             var c_post=$('.post-comment{{$val->id}}').val();
-            var c_user_id={{ \Auth::id()}}; 
+            var c_user_id='{{ \Auth::id()}}'; 
             $.get({ 
             url:URL,
-            data:{c_comment:c_comment,c_post:c_post,c_user_id:c_user_id}
+            data:{c_comment:c_comment,c_post:c_post,c_user_id:c_user_id},
+            beforeSend:function(){
+               $('.load-comment').show();
+               $('.submit-{{$val->id}}').hide();
+            },
+            complete:function(){
+               $('.load-comment').hide();
+               $('.submit-{{$val->id}}').show();
+            }
             }).done(function(e){
+               if(e.user.avatar){
+                  var img ="/uploads/user/"+e.user.avatar;
+               }
+               else{
+                  img ='/img/no-user.png';
+               }
             $('.comment{{$val->id}}').text(e.count.p_comment);
-            $(".hdl{{$val->id}}").app(`
+            $(".hdl{{$val->id}}").append(`
             <div class="clr het">
-            <div class="hew"><a href="/${e.user.user}"><img src="/uploads/user/${e.user.avatar}"></a> </div>
+            <div class="hew"><a href="/${e.user.user}"><img src="${img}" class="avatar_user_uploaded"></a> </div>
             <div class="hep"><p><b><a href="/${e.user.user}">${e.user.c_name}</a> </b>${c_comment}</p></div>
             <i class="fa fa-ellipsis-h"></i>
             <div class="os heo">2h</div>
@@ -387,6 +398,9 @@ $('.follows{{$user->id}}').on('click',function(){
             `);
             $('.textarea-comment{{$val->id}}').val('');
             $('.submit-comment{{$val->id}}').addClass('disabled');
+
+            var $div = $("#hell"); 
+            $div.scrollTop($div[0].scrollHeight); 
             });
             })
             
@@ -425,9 +439,9 @@ $('.follows{{$user->id}}').on('click',function(){
 <p class="os" style="text-align:center">&copy; 2020 INSTAGRAM FROM FACEBOOK</p>
 <br>
 <script src="{{ asset('js/post.js') }}"></script> 
-<script src="{{ asset('js/avatar.js') }}"></script>
+<script src="{{ asset('js/avatar.js') }}"></script> 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>  
-<script type="text/javascript">
+<script type="text/javascript"> 
    //add to profile
       $('#profiles').on('change',function(ev){ 
         var reader=new FileReader(); 
@@ -473,28 +487,7 @@ $('.follows{{$user->id}}').on('click',function(){
    })
 </script>  
 <script>
-   $(function(){
-      
-      if(!{{$followed}}){
-         $('.message').hide();
-         $('.unfollow').hide();
-         $('.follow').show();
-      }else{
-         $('.follow').hide();
-         $('.message').show();
-         $('.unfollow').show();
-      };
-   
-      $('.follow').on('click',function(){
-         $(this).hide();
-         $('.message').show();
-         $('.unfollow').show();
-      })
-      $('.unfollow').on('click',function(){
-         $(this).hide();
-         $('.message').hide();
-         $('.follow').show();
-      })
+   $(function(){  
       $('.next').on('click',function(){
             $('.first').addClass('d-none');
             $('.second').removeClass('d-none');
@@ -507,7 +500,10 @@ $('.follows{{$user->id}}').on('click',function(){
             $('.image b').on('click',function(){
             $('.image').addClass('d-none');
        })
-       
+       $('.submit').on('click',function(){
+         $(this).hide();
+         $('.nos').show();
+      })
    })
    
    var modal6 = document.getElementById("myModal-6");
@@ -571,20 +567,18 @@ $('.follows{{$user->id}}').on('click',function(){
       modal2.style.display = "none";
    }
    var modal5 = document.getElementById("myModal-5");
-   var btn5 = document.getElementById("myBtn-5");
-   var exit5 = document.getElementById("exit5");
-   
-   btn5.onclick = function() {
-      modal5.style.display = "block";
-   } 
-   
-   exit5.onclick = function(event) { 
-      event.preventDefault();    
-      modal5.style.display = "none";
-   }
    
    
    
+   
+</script>
+<script>
+   $('body').on('click','#myBtn-5',function(){
+      $('#myModal-5').show();
+   })
+   $('body').on('click','#exit5',function(){
+      $('#myModal-5').hide();
+   })
 </script>
 </body>
 </html>

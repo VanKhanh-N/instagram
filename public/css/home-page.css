@@ -1,9 +1,9 @@
 :root {
     --animate-duration: 0.3s !important;
 }
-*::-webkit-scrollbar {
+/* *::-webkit-scrollbar {
     display: none;
-}
+} */
 p{
     font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
     font-size: 15px;
@@ -22,6 +22,14 @@ section img.user{
     height: 150px; 
     object-fit: cover;
 }
+.imguser{ 
+    height: 40px;
+    position: absolute;
+    top: 50%;
+    margin-left: 200px;
+    left: 5%;
+}
+.constrast{    filter: contrast(0.5);}
 section span{
    font-size: 22px;
 }
@@ -45,9 +53,12 @@ section span{
 .csc{
    height: 15%;
 }
-.csc p{
+.csc p,.list-follow{
     float: left; 
 } 
+.list-follow{
+    margin: 5px;
+}
 .csc p{
     width: 22%;
 }
@@ -258,6 +269,7 @@ footer ul{
 .heq{ 
     height: 7%;}
 .heq img,.her img{
+    object-fit: cover;
     width: 40px;
     height: 40px;border-radius: 50%; }
 .hew{
@@ -416,11 +428,28 @@ h2{
     height: 400px;
 }
 .follow{
-    background: #0095f6; 
+    background: #0095f6;
     border-radius: 5px;
     color: white;
     margin-left: 20px;
-    padding: 10px;}
+    width: 80px;
+    height: 30px;padding-left: 10px;margin-top:-5px
+}
+.follows{  
+    background: #0095f6;
+    border-radius: 5px;
+    color: white;
+    width: 80px;
+    height: 30px;margin-top:5px
+}
+
+.followss{  
+    border: 1px solid #bdbdbd;
+    border-radius: 5px;
+    color: black;
+    width: 95px;
+    height: 30px;margin-top:5px
+}
 .hem{font-size: 15px;
     font-family: "lucida grande",tahoma,verdana,arial,sans-serif;}
 .fa-15x{font-size: 1.5em !important;}
@@ -458,6 +487,7 @@ h2{
     position: absolute;
     top: 0;
     left: 0;
+    object-fit: cover;
     margin-left: 10px;
     margin-top: 5px;}
 .zx .zz{
@@ -465,13 +495,7 @@ h2{
     padding-left: 60px;}
 .zx .os{
     padding-left: 60px;
-}
-.zc,.zcx{ 
-    border: 1px solid #bdbdbd;
-    border-radius: 5px;
-    margin-top: 7px;
-    padding: 5px;}
-
+} 
 
 @media only screen and (max-width: 670px){
     .sd,.posts{width: 100%;}

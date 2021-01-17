@@ -11,6 +11,7 @@ use App\Models\Post;
 use App\Models\Comment;
 use App\Models\Follow;
 use Carbon\Carbon;
+Carbon::setLocale('vi');
 class HomePageController extends Controller
 { public function __construct()
     {
@@ -21,10 +22,14 @@ class HomePageController extends Controller
         //$id là username có thể là Auth->user hoặc không  
         $user=User::where('user',$id)->first();  
         $post=Post::where(['p_user'=>$user['id'],
-                           'p_type'=>'profile'])->get();
+                           'p_type'=>'profile'])
+                    ->orderBy('created_at','desc')
+                   ->get();
                            
         $video=Post::where(['p_user'=>$user['id'],
-                           'p_type'=>'video'])->get();
+                           'p_type'=>'video'])
+                    ->orderBy('created_at','desc')
+                    ->get();
             
         
         //số người đang theo dõi
@@ -34,6 +39,7 @@ class HomePageController extends Controller
         //đang theo dõi ai
         $userFollow =Follow::where('followed',$user['id'])->orderBy('created_at','desc')->get();
         $viewData=[  
+            'now'        => Carbon::now('Asia/Ho_Chi_Minh'),
             'user'       => $user,
             'post'       => $post, 
             'title'      => $user['c_name'],
@@ -46,9 +52,8 @@ class HomePageController extends Controller
     } 
     public function saveProfile(Request $request){   
         $data=$request->except('_token','profiles','stories');  
-        $data['created_at']=Carbon::now();
-        $data['p_user']=\Auth::id();
-        $data['updated_at']=Carbon::now();
+        $data['created_at']=Carbon::now('Asia/Ho_Chi_Minh');
+        $data['p_user']=\Auth::id(); 
         if($request->profiles){
             $image =upload_image('profiles',"profile");
             if($image['code']==1)
@@ -75,16 +80,15 @@ class HomePageController extends Controller
         $user->avatar=$image['name'];
     }
     if($user->update()){
-        echo 200;
+       return  User::find(\Auth::user()->id);
     }else{
-        echo 700;
+        return 700;
     }
 }
     
     public function deleteProfile(Request $request){ 
         $user =  User::find(\Auth::user()->id); 
-        $user->avatar='';
-        $user->updated_at=Carbon::now();
+        $user->avatar='';  
         if($user->update()){
             echo 200;
         }else{
@@ -94,25 +98,26 @@ class HomePageController extends Controller
     public function follow(Request $request){
         $data=$request->all();
         $data['user_id']=\Auth::user()->id;
-        $data['created_at']=Carbon::now();
-        $data['updated_at']=Carbon::now();
+        $data['created_at']=Carbon::now('Asia/Ho_Chi_Minh'); 
         $isFollow =Follow::where(['user_id'=>\Auth::user()->id,'followed'=>$data['followed']])->count();
         if($isFollow){
             Follow::where(['user_id'=>\Auth::user()->id,'followed'=>$data['followed']])->delete();
             User::where('id',$data['followed'])->decrement('follower');
             return response([
-                'action'    =>'bot',
-                'user'      =>User::find($data['followed']),
-                'followed'  =>Follow::where('user_id',\Auth::id())->count()
+                'action'    => 'bot',
+                'user'      => User::find($data['followed']),
+                'auth'      => \Auth::user(),
+                'followed'  => Follow::where('user_id',\Auth::id())->count(), 
                 ]);
         }
         else{
             $id=Follow::insertGetId($data); 
             User::where('id',$data['followed'])->increment('follower');
             return response([
-                'action'=>'them',
-                'user'=>User::find($data['followed']),
-                'followed'  =>Follow::where('user_id',\Auth::id())->count()
+                'action'    => 'them',
+                'user'      => User::find($data['followed']),
+                'auth'      => \Auth::user(),
+                'followed'  => Follow::where('user_id',\Auth::id())->count()
                 ]);
         } 
     }

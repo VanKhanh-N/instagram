@@ -27,7 +27,7 @@ class HomeController extends Controller
                     ->select('posts.*')
                     ->limit(5)
                     ->get(); 
-        $user =User::where('users.id','!=',\Auth::user()->id)->limit(5)->inRandomOrder()->get();  
+        $user =User::where('users.id','!=',\Auth::id())->take(5)->inRandomOrder()->get();  
         
         $data=[
             'posts' => $posts, 

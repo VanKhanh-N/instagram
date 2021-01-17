@@ -16,7 +16,7 @@ $('#myModal-5').hide();
 function UpdateUserAvatar(form){
  let myForm = document.getElementById(form);
  let formData = new FormData(myForm);
- 
+ $('#myModal-5').hide();
   var url="/upload_user";
   $.ajax({
        type: 'POST',
@@ -26,8 +26,21 @@ function UpdateUserAvatar(form){
        cache: false,
        processData: false,
        url:url,
-       success:function(e){  
-        location.reload(); 
+       beforeSend:function(){
+         $('.imguser').show();
+         $('.avatar_user_uploaded').addClass('constrast');
+       },
+       complete:function(){
+         $('.avatar_user_uploaded').removeClass('constrast');
+         $('.imguser').hide();
+       },
+       success:function(e){    
+         $('.img').empty();
+         $('.img').prepend(`
+         <img src="uploads/user/'+${e.avatar}" class="rounded-circle user cs avatar_user_uploaded" id="myBtn-5">
+         <img src="img/loading.gif" class=" uploadavatar imguser" style="display:none;">
+         `);
+         $('.avatar_user_uploaded').attr('src','uploads/user/'+e.avatar);
        }
   })
 } 
@@ -35,13 +48,24 @@ function UpdateUserAvatar(form){
  
 //remove_current_photo
 $('.remove_current_photo').on('click',function(){
-var url="/delete";
-$('#myModal-5').hide();  
-$('.avatar_user_uploaded').attr('src','/img/no-user.png');  
+var url="/delete"; 
+$('#myModal-5').hide();    
  $.get({
     url:url,
-    success:function(){
-        location.reload();
+    beforeSend:function(){
+      $('.imguser').show();
+      $('.avatar_user_uploaded').addClass('constrast');
+    },
+    complete:function(){
+      $('.imguser').hide();
+      $('.avatar_user_uploaded').removeClass('constrast');
+    },success:function(){
+    $('.img').empty();
+    $('.img').prepend(`
+    <label for="upload_user_avatar"> <img src="/img/no-user.png" class="rounded-circle user cs avatar_user_uploaded"></label> 
+    <img src="img/loading.gif" class=" uploadavatar imguser" style="display:none;">
+    `);
+    $('.avatar_user_uploaded').attr('src','/img/no-user.png');
     }
  })
 }) 
