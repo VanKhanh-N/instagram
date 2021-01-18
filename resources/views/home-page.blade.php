@@ -24,23 +24,23 @@
       <!-- modal user image -->
       <div id="myModal-5" class="modal">
          <div class="modal-content setting animate__animated animate__zoomIn" >
-            <li class="hed"><a href="javascript:;" >Thay ảnh của bạn</a></li>
+            <li class="hed"><a href="javascript:;" >{{ __('translate.Change Profile Photo')}}</a></li>
             <li>
-               <label for="change_user" class="text-blue change cs">Tải ảnh lên</label>
+               <label for="change_user" class="text-blue change cs">{{ __('translate.Upload Photo')}}</label>
                <form method="POST" enctype="multipart/form-data" id="form_change_user_avatar">
                   @csrf
                   <input type="file" onchange="uploadUserAvatar(this,'form_change_user_avatar')" accept="image/*"  name="upload_user_avatar" class="d-none" id="change_user">
                </form>
             </li>
-            <li><a href="javascript:;" class="text-red remove_current_photo">Gỡ ảnh hiện tại</a></li>
-            <li class="cs" id="exit5"><a href="">Thoát</a></li>
+            <li><a href="javascript:;" class="text-red remove_current_photo">{{ __('translate.Remove Current Photo')}}</a></li>
+            <li class="cs" id="exit5"><a href="">{{ __('translate.Cancel')}}</a></li>
          </div>
       </div>
       <div class="csa">
          <div class="clr csb">
             <span class="os" style="float:left">{{ $user->user }}</span>
             @if($user->user === \Auth::user()->user)
-            <a href="">Chỉnh sửa trang cá nhân</a>
+            <a href="">{{ __('translate.Edit Profile')}}</a>
             <i class="fa fa-2x fa-sun-o" id="myBtn-2"></i> 
             <span class="fa-stack fa-lg cs" id="myBtn"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-plus fa-stack-1x"></i></span> 
             @else  
@@ -48,10 +48,10 @@
             @if(!$followed)
             <button class="follow" onclick="follow('{{$user->id}}')">
                   <img src="{{ asset('img/loading.gif')}}" class="w-30 load{{$user->id}}" style="display:none">
-                  <p class="text-follows{{$user->id}}">Theo dõi</p>
+                  <p class="text-follows{{$user->id}}">{{ __('translate.follow')}}</p>
              </button>  
             @else
-            <a href="{{ route('chat.show', $user->id) }}" class="message">Nhắn tin</a>
+            <a href="{{ route('chat.show', $user->id) }}" class="message">{{ __('translate.Message')}}</a>
             <a class="unfollow follows{{$user->id}}"href="javascript:;"  onclick="follow('{{$user->id}}')">
             <i class="fa  fa-user-times"></i>
             <img src="{{ asset('img/loading.gif')}}" class="w-30 load{{$user->id}}" style="display:none;margin-top: -11px;">
@@ -63,30 +63,30 @@
          <!-- modal setting -->
          <div id="myModal-2" class="modal ">
             <div class="modal-content setting animate__animated animate__zoomIn" >
-               <li><a href="">Đổi mật khẩu</a></li>
-               <li><a href="">Thẻ tên</a></li>
-               <li><a href="">Ứng dụng và trang web</a></li>
-               <li><a href="">Thông báo</a></li>
-               <li><a href="">Bảo mật và quyền riêng tư</a></li>
-               <li><a href="">Hoạt động đăng nhập</a></li>
-               <li><a href="">Email từ Instagram</a></li>
-               <li><a href="">Báo cáo sự cố</a></li>
-               <li><a href="">Đăng xuất</a></li>
-               <li><a href="" id="exit">Hủy</a></li>
+               <li><a href="">{{ __('translate.Change Password')}}</a></li>
+               <li><a href="">{{ __('translate.Nametag')}}</a></li>
+               <li><a href="">{{ __('translate.Apps and Websites')}}</a></li>
+               <li><a href="">{{ __('translate.Notifications')}}</a></li>
+               <li><a href="">{{ __('translate.Privacy and Security')}}</a></li>
+               <li><a href="">{{ __('translate.Login Activity')}}</a></li>
+               <li><a href="">{{ __('translate.Emails from Instagram')}}</a></li>
+               <li><a href="">{{ __('translate.Report a Problem')}}</a></li>
+               <li><a href="{{ route('get.logout') }}">{{ __('translate.Log Out')}}</a></li>
+               <li><a href="#" id="exit">{{ __('translate.Cancel')}}</a></li>
             </div>
          </div>
          <div class="clr csc">
-            <p><b style="padding-right: 5px;">{{ count($post)}}</b> bài viết</p>
-            <p class="cs" id="myBtn-6"><b style="padding-right: 5px;" class="follower">{{count($userFollow)}}</b> người theo dõi</p>
+            <p><b style="padding-right: 5px;">{{ count($post)}}</b> {{ __('translate.posts')}}</p>
+            <p class="cs" id="myBtn-6"><b style="padding-right: 5px;" class="follower">{{count($userFollow)}}</b>{{ __('translate.followers')}}</p>
             <!-- modal setting -->
             <div id="myModal-6" class="modal">
                <div class="modal-content settings animate__animated animate__zoomIn" >
-                  <li class="one">Người theo dõi <span class="float-right cs" id="exit6">&times;</span></li>
+                  <li class="one">{{ ucwords(__('translate.followers'))}} <span class="float-right cs" id="exit6">&times;</span></li>
                  <div class="settingss">
                  @if(!count($userFollow)) 
                   <li class="k-none"><i class="fa fa-lg fa-user-plus"></i></li>
-                  <li class="k-none two">Người theo dõi</li>
-                  <li class="k-none three">Bạn sẽ thấy tất cả những người theo dõi bạn ở đây.</li>
+                  <li class="k-none two">{{ ucwords(__('translate.followers'))}}</li>
+                  <li class="k-none three">{{ __("translate.You'll see all the people who follow you here.")}}</li>
                   @else
                   <!-- số người theo dõi mình -->
                   @foreach($userFollow as $list)  
@@ -99,20 +99,20 @@
                      @if($list->user_id!=\Auth::id())
                      @if(\App\Models\Follow::checkFollow(\Auth::id(),$list->user_id))
                       @if($user->id != \Auth::id())
-                     <button class="followss zc{{$list->user_id}}" onclick="follows('{{$list->user_id}}')" ><cen class="cen{{$list->user_id}}">Đang theo dõi</cen>
+                     <button class="followss zc{{$list->user_id}}" onclick="follows('{{$list->user_id}}')" ><cen class="cen{{$list->user_id}}">{{ __('translate.folowing')}}</cen>
                      <img src="{{ asset('img/loading.gif')}}" class="w-30 load{{$list->user_id}}" style="display:none;margin-top: -11px;">
                      @else
-                     <button class="followss zc{{$list->user_id}}" onclick="followss('{{$list->user_id}}')" ><cen class="cen{{$list->user_id}}">Đang theo dõi</cen>
+                     <button class="followss zc{{$list->user_id}}" onclick="followss('{{$list->user_id}}')" ><cen class="cen{{$list->user_id}}">{{ __('translate.folowing')}}</cen>
                      <img src="{{ asset('img/loading.gif')}}" class="w-30 load{{$list->user_id}}" style="display:none;margin-top: -11px;">
                      @endif
                   </button>
                      @else  
                      @if($user->id != \Auth::id())
-                     <button class="follows zc{{$list->user_id}}" onclick="follows('{{$list->user_id}}')" ><cen class="cen{{$list->user_id}}">Theo dõi</cen>
+                     <button class="follows zc{{$list->user_id}}" onclick="follows('{{$list->user_id}}')" ><cen class="cen{{$list->user_id}}">{{ __('translate.follow')}}</cen>
                       <img src="{{ asset('img/loading.gif')}}"  style="display:none;"class="w-30 load{{$list->user_id}}">
                   </button> 
                      @else
-                     <button class="follows zc{{$list->user_id}}" onclick="followss('{{$list->user_id}}')" ><cen class="cen{{$list->user_id}}">Theo dõi</cen>
+                     <button class="follows zc{{$list->user_id}}" onclick="followss('{{$list->user_id}}')" ><cen class="cen{{$list->user_id}}">{{ __('translate.follow')}}</cen>
                       <img src="{{ asset('img/loading.gif')}}"  style="display:none;"class="w-30 load{{$list->user_id}}">
                      </button> 
                      @endif
@@ -126,16 +126,16 @@
                </div>
             </div>
             <!--end modal-->
-            <p class="cs" id="myBtn-7">Đang theo dõi <b class="count" style="float: none;">{{ count($areFollow) }}</b> người dùng</p>
+            <p class="cs" id="myBtn-7">{{ __('translate.folowing')}} <b class="count" style="float: none;">{{ count($areFollow) }}</b>{{ __('translate.following')}}</p>
             <!-- modal setting -->
             <div id="myModal-7" class="modal">
                <div class="modal-content settings animate__animated animate__zoomIn" >
-                  <li class="one">Người theo dõi <span class="float-right cs" id="exit7">&times;</span></li>
+                  <li class="one">{{ ucwords(__('translate.followers'))}} <span class="float-right cs" id="exit7">&times;</span></li>
                  <div class="list">
                  @if(!count($areFollow))
                   <li><i class="fa fa-lg fa-user-plus"></i></li>
-                  <li class="two">Người đang theo dõi</li>
-                  <li class="three">Bạn sẽ thấy tất cả những người bạn đang theo dõi ở đây.</li>
+                  <li class="two">{{ ucwords(__('translate.folowing'))}}</li>
+                  <li class="three">{{ __("translate.You'll see all the people who follow you here.")}}</li>
                   @else
                   <!-- đang theo dõi -->
                   @foreach($areFollow as $key=> $list)   
@@ -148,20 +148,20 @@
                      @if($list->friends->id!=\Auth::id()) 
                      @if(\App\Models\Follow::checkFollow(\Auth::id(),$list->friends->id))
                      @if($user->id != \Auth::id())
-                     <button class="followss zc{{$list->friends->id}}" onclick="follows('{{$list->friends->id}}')" ><cen class="cen{{$list->friends->id}}">Đang theo dõi</cen>
+                     <button class="followss zc{{$list->friends->id}}" onclick="follows('{{$list->friends->id}}')" ><cen class="cen{{$list->friends->id}}">{{ __('translate.folowing')}}</cen>
                      <img src="{{ asset('img/loading.gif')}}" class="w-30 load{{$list->friends->id}}" style="display:none;margin-top: -11px;">
                      @else
-                     <button class="followss zc{{$list->friends->id}}" onclick="followss('{{$list->friends->id}}')" ><cen class="cen{{$list->friends->id}}">Đang theo dõi</cen>
+                     <button class="followss zc{{$list->friends->id}}" onclick="followss('{{$list->friends->id}}')" ><cen class="cen{{$list->friends->id}}">{{ __('translate.folowing')}}</cen>
                      <img src="{{ asset('img/loading.gif')}}" class="w-30 load{{$list->friends->id}}" style="display:none;margin-top: -11px;">
                      @endif
                   </button>
                      @else 
                      @if($user->id != \Auth::id()) 
-                     <button class="follows zc{{$list->friends->id}}" onclick="follows('{{$list->friends->id}}')" ><cen class="cen{{$list->friends->id}}">Theo dõi</cen>
+                     <button class="follows zc{{$list->friends->id}}" onclick="follows('{{$list->friends->id}}')" ><cen class="cen{{$list->friends->id}}">{{ __('translate.follow')}}</cen>
                       <img src="{{ asset('img/loading.gif')}}"  style="display:none;"class="w-30 load{{$list->friends->id}}">
                   </button> 
                   @else
-                  <button class="follows zc{{$list->friends->id}}" onclick="followss('{{$list->friends->id}}')" ><cen class="cen{{$list->friends->id}}">Theo dõi</cen>
+                  <button class="follows zc{{$list->friends->id}}" onclick="followss('{{$list->friends->id}}')" ><cen class="cen{{$list->friends->id}}">{{ __('translate.follow')}}</cen>
                       <img src="{{ asset('img/loading.gif')}}"  style="display:none;"class="w-30 load{{$list->friends->id}}">
                   </button> 
                   @endif
@@ -181,17 +181,17 @@
    </section>
    <div class="image d-none">
       <div class="title first">
-         <b>Cancel</b>
-         <p>New Post</p>
-         <a href="javascript:;" class="next">Next <i class="fa fa-long-arrow-right"></i></a>
+         <b>{{ __('translate.Cancel')}}</b>
+         <p>{{ __('translate.New Post')}}</p>
+         <a href="javascript:;" class="next">{{ __('translate.Next')}} <i class="fa fa-long-arrow-right"></i></a>
       </div>
       <div class="second d-none">
          <form action="{{ route('post.profile')}}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="title ">
-               <a href="javascript:;" class="back"><i class="fa fa-long-arrow-left"></i> Back </a>
-               <p>New Post</p>
-               <button type="submit" class="submit">Share</button> 
+               <a href="javascript:;" class="back"><i class="fa fa-long-arrow-left"></i> {{ __('translate.Back')}} </a>
+               <p>{{ __('translate.New Post')}}</p>
+               <button type="submit" class="submit">{{ __('translate.Share')}}</button> 
                <img src="{{asset('img/loading.gif')}}"  class="w-30 nos" style="display:none">
             </div>
             <textarea name="p_content" class="textarea" placeholder="Write a caption... (max 2000 charaters)"></textarea>
@@ -201,25 +201,25 @@
    
    <div class="posts">
    <div class="d-gri csd">
-   <button id="first" class="bt"><i class="fa fa-table"></i> BÀI VIẾT</button>
+   <button id="first" class="bt"><i class="fa fa-table"></i> {{ strtoupper(__('translate.posts'))}}</button>
    <button id="second"><i class="fa fa-television"></i> IGTV</button>
-   <button id="third"><i class="fa  fa-arrows-alt"></i> ĐÃ LƯU</button>
-   <button id="fourst"><i class="fa fa-user"></i> ĐƯỢC GẮN THẺ</button> 
+   <button id="third"><i class="fa  fa-arrows-alt"></i> {{ strtoupper(__('translate.saved'))}}</button>
+   <button id="fourst"><i class="fa fa-user"></i> {{ __('translate.TAGGED')}}</button> 
    </div> 
    <!-- modal upload profile and story -->
    <div id="myModal" class="modal"> 
    <div class="modal-content upload animate__animated animate__zoomIn ">
-   <h4>Upload photo</h4>
+   <h4>{{ __('translate.Upload photo')}}</h4>
    <div class="button">
    <div class="label">
-   <label for="profiles" class="cs">Add to Profile</label>  
+   <label for="profiles" class="cs">{{ __('translate.Add to Profile')}}</label>  
    <!--file-->
    <input type="file" accept="image/*" name="profiles" accept="image/*" id="profiles" class='d-none'>
    <!--file-->
-   <p>or</p>
+   <p>{{ __('translate.or')}}</p>
    </div>
    <div class="label label2">
-   <label for="stories" class="cs">Add to Stories</label>
+   <label for="stories" class="cs">{{ __('translate.Add to Stories')}}</label>
    <input type="file" accept="image/*" name="stories" id="stories"  accept="image/*" class="d-none"> 
    </div>
    </div>
@@ -231,8 +231,8 @@
       <div class="clr">
          <br>
          <div class="hea">
-            <b>Start capturing and sharing your moments.</b>
-            <p>Get the app to share your first photo or video.</p>
+            <b>{{ __('translate.Start capturing and sharing your moments.')}}</b>
+            <p>{{ __('translate.Get the app to share your first photo or video.')}}</p>
             <br><br>
             <img src="{{ asset('img/appstore.png')}}" class="cs" style="height:40px;width:135px">
             <img src="{{ asset('img/chplay.png')}}" class="cs" style="height:40px;width:135px">
@@ -260,7 +260,7 @@
                         <p><a href="{{ route('get.home-page',$val->user->user)}}"><b>{{$val->user->c_name}} </a></b>
                            @if($val->user->id==$user->id)
                            @else
-                           &#8729; <b>Đang theo dõi</b>
+                           &#8729; <b>{{ __('translate.folowing')}}</b>
                            @endif
                         </p>
                      </div>
@@ -301,8 +301,8 @@
                      <i class="fa fa-15x fa-comment-o"></i> 
                      <i class="fa fa-15x fa-share-alt"></i>
                      <i class="fa fa-15x fa-bookmark-o float-right"></i><br>
-                     <p class="f-6 view{{$val->id}}">{{$val->p_view}} lượt xem</p>
-                     <p class="f-6 like{{$val->id}}">{{$val->p_favourite}} lượt thích</p> 
+                     <p class="f-6 "><b class="view{{$val->id}}">{{$val->p_view}}</b> {{ __('translate.views')}}</p>
+                     <p class="f-6 "><b class="like{{$val->id}}">{{$val->p_favourite}}</b> {{ __('translate.likes')}}</p> 
                      <p class="os">4 giờ trước</p>
                   </div>
                   <script> 
@@ -315,9 +315,9 @@
                   <div class="heu">
                      <form action="{{ route('comment.post')}}">
                         @csrf
-                        <textarea class="textarea-{{$val->id}} textarea-comment{{$val->id}}" placeholder="Add a comment..."></textarea>
+                        <textarea class="textarea-{{$val->id}} textarea-comment{{$val->id}}" placeholder="{{ __('translate.Add a comment')}}..."></textarea>
                         <input type="hidden" value="{{$val->id}}" class="post-comment{{$val->id}}">   
-                        <button class="submit-{{$val->id}} submit-comment{{$val->id}} disabled">Đăng</button>
+                        <button class="submit-{{$val->id}} submit-comment{{$val->id}} disabled">{{ __('translate.Post')}}</button>
                         <img src="{{ asset('img/loading.gif')}}" class="w-30 load-comment" style="top: 10px;right: 15px;position: absolute;display:none;">
                      </form>
                   </div>
@@ -350,7 +350,7 @@
                url:URL,
                data:{post:post},
                success:function(e){  
-                  $('.view{{$val->id}}').text(e.p_view+' lượt xem');
+                  $('.view{{$val->id}}').text(e.p_view);
                }
             })
             }   
@@ -413,25 +413,26 @@
       @if(!count($video))
       <div class="hef">
          <span class="fa-stack fa-2x fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-video-camera fa-stack-1x"></i></span>
-         <p>Upload a Video</p>
-         <p>Videos must be between 1 and 60 minutes long.</p>
-         <a href="{{ route('upload.video')}}">Upload</a>
+         <p>{{ __('translate.Upload a Video') }}</p>
+         <p>{{ __('translate.Videos must be between 1 and 60 minutes long.') }}</p>
+         <a href="{{ route('upload.video')}}">{{ __('translate.Upload') }}</a>
       </div>
       @endif
    </div>
    <footer>
       <ul>
-         <li class=" "><a href="">Giới thiệu</a></li>
+         <li class=" "><a href="">{{ __('translate.About')}}</a></li>
          <li class=" "><a href="">Blog</a></li>
-         <li class=" "><a href="">Việc làm</a></li>
-         <li class=" "><a href="">Trợ giúp</a></li>
+         <li class=" "><a href="">{{ __('translate.Jobs')}}</a></li>
+         <li class=" "><a href="">{{ __('translate.Help')}}</a></li>
          <li class=" "><a href="">API</a></li>
-         <li class=" "><a href="">Quyền riêng tư</a></li>
-         <li class=" "><a href="">Điều khoản</a></li>
-         <li class=" "><a href="">Tài khoản liên quan nhất</a></li>
+         <li class=" "><a href="">{{ __('translate.Privacy')}}</a></li>
+         <li class=" "><a href="">{{ __('translate.Terms')}}</a></li>
+         <li class=" "><a href="">{{ __('translate.Top Accounts')}}</a></li>
          <li class=" "><a href="">Hashtag</a></li>
-         <li class=" "><a href="">Vị trí</a></li>
-         <li class=" "><a href="">Ngôn ngữ</a></li>
+         <li class=" "><a href="">{{ __('translate.Locations')}}</a></li>
+         <li class=" "><a href="{{route('language',['vi']) }}">Tiếng Việt</a></li>
+         <li class=" "><a href="{{route('language',['en']) }}">English</a></li>
       </ul>
       <br> 
    </footer>

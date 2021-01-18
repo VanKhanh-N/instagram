@@ -6,25 +6,25 @@
     <div class="w3-modal-content animate__flipInX d-flex po"> 
       <div class="clr pp">
          <span class="cs closemodal">&times;</span>
-         <p>Tin nhắn mới</p>
-         <button class="disabled nexts">Kế tiếp</button>
+         <p>{{ __('translate.New Message')}}</p>
+         <button class="disabled nexts">{{ __('translate.Next')}}</button>
       </div>
 
       <div class="pi"> 
          <form >
          @csrf
-         <p class="pr">Đến:</p>
+         <p class="pr">{{ __('translate.To')}}:</p>
         <div class="pe">
         <div class="d-flex pw">
              
          </div>
         </div>
-         <input type="text" name="key" placeholder="Tìm kiếm..." id="search" autocomplete="off">
+         <input type="text" name="key" placeholder="{{ __('translate.Search')}}..." id="search" autocomplete="off">
          </form>
       </div>
 
       <div class="pu "> 
-         <b class="pq">Được đề xuất</b>
+         <b class="pq">{{ __('translate.Suggested')}}</b>
          @foreach($chat as $key=>$list)
          <div class="clr py cs py{{$list->id}}"> 
             <img src="{{ pare_url_file($list->friends->avatar,'user')}}" class="rounded-circle">
@@ -100,9 +100,9 @@
 <div class="rights d-inline-block" style="height: 100%;width:65%;background-color: white; ">
     <div class="d-flex we">
         <img src="{{asset('img/direct-content.png')}}">
-        <p>Tin nhắn của bạn</p> 
-        <p class="os">Gửi ảnh và tin nhắn riêng tư cho bạn bè hoặc nhóm.</p>
-        <button class="openmodal">Gửi tin nhắn</button>
+        <p>{{ __('translate.Your Messages')}}</p> 
+        <p class="os">{{ __('translate.Send private photos and messages to a friend or group.')}}</p>
+        <button class="openmodal">{{ __('translate.Send Message')}}</button>
     </div>
 </div>
 </section>

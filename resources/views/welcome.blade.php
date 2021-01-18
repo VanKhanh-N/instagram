@@ -176,8 +176,8 @@
             </div>
             <br><br>  
             <div class="d-flex w-100">
-               <p class="text-gray w-100">Gợi ý cho bạn</p>
-               <a href="" class="text-black float-right w-100" style="font-size:12px">Xem tất cả</a>
+               <p class="text-gray w-100">{{ __('translate.Suggestions For You')}}</p>
+               <a href="" class="text-black float-right w-100" style="font-size:12px">{{ __('translate.See All')}}</a>
             </div>
 
             @foreach($user as $list)
@@ -200,7 +200,7 @@
                   @endif
                </div>
                <div class="d-inline-block" style="position: absolute; top: 0;right: 0;margin-top: 10px;">
-                  <p class="cs follow{{$list->id}}  text-blue" onclick="follow('{{$list->id}}')">Theo dõi</p>
+                  <p class="cs follow{{$list->id}}  text-blue" onclick="follow('{{$list->id}}')">{{ __('translate.follow')}}</p>
                   <div class="load{{$list->id}}" style="margin-top:-10px;display:none">
                   <img src="{{ asset('img/loading.gif')}}">
                   </div>
@@ -217,17 +217,18 @@
 
             <div class="about-us">
                <ul style="width: 80%;line-height:20px;margin-top: 30px;font-size:12px;opacity: 0.5;">
-                  <li class="d-inline-block "><a href="">Giới thiệu</a>	&#8226;</li>
-                  <li class="d-inline-block "><a href="">Trợ giúp</a>	&#8226;</li>
-                  <li class="d-inline-block "><a href="">Báo chí</a>	&#8226;</li>
+                  <li class="d-inline-block "><a href="">{{ __('translate.About')}}</a>	&#8226;</li>
+                  <li class="d-inline-block "><a href="">{{ __('translate.Help')}}</a>	&#8226;</li>
+                  <li class="d-inline-block "><a href="">{{ __('translate.Press')}}</a>	&#8226;</li>
                   <li class="d-inline-block "><a href="">API</a>	&#8226;</li>
-                  <li class="d-inline-block "><a href="">Việc làm</a>	&#8226;</li>
-                  <li class="d-inline-block "><a href="">Quyền riêng tư</a>	&#8226;</li>
-                  <li class="d-inline-block "><a href="">Điều khoản</a>	&#8226;</li>
-                  <li class="d-inline-block "><a href="">Vị trí</a>	&#8226;</li>
-                  <li class="d-inline-block "><a href="">Tài khoản liên quan nhất</a>	&#8226;</li>
+                  <li class="d-inline-block "><a href="">{{ __('translate.Jobs')}}</a>	&#8226;</li>
+                  <li class="d-inline-block "><a href="">{{ __('translate.Privacy')}}</a>	&#8226;</li>
+                  <li class="d-inline-block "><a href="">{{ __('translate.Terms')}}</a>	&#8226;</li>
+                  <li class="d-inline-block "><a href="">{{ __('translate.Locations')}}</a>	&#8226;</li>
+                  <li class="d-inline-block "><a href="">{{ __('translate.Top Accounts')}}</a>	&#8226;</li>
                   <li class="d-inline-block "><a href="">Hashtag</a>	&#8226;</li>
-                  <li class="d-inline-block "><a href="">Ngôn ngữ</a></li>
+                  <li class="d-inline-block "><a href="{{route('language',['vi']) }}">English</a>	&#8226;</li>
+                  <li class="d-inline-block "><a href="{{route('language',['en']) }}">Tiếng Việt</a></li>
                </ul>
                <br>
             </div>

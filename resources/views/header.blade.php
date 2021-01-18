@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,7 +33,7 @@
          <div class="d-grid">
             <div><a href="{{ url('/')}}"><img src="{{ asset('img/logo.png') }}"  width="103px" height="29px"></a></div>
             <div>
-               <input type="text" name="search" id="input-search" class="input-search" placeholder="Tìm kiếm">
+               <input type="text" name="search" id="input-search" class="input-search" placeholder="{{ __('translate.Search')}}">
                <a>
                <img src="{{ asset('img/search.png') }}" class="w-15 yes search-2 "></a> 
                <a>
@@ -73,7 +73,7 @@
                                     <span>Đã bắt đầu theo dõi bạn</span>
                                     <span class="time">10 tuần</span> 
                                  </a>
-                                 <button>Theo dõi.</button> 
+                                 <button>{{ __('translate.follow')}}</button> 
                               </div>
                            </li>
                            <li class="position-relative">
@@ -86,7 +86,7 @@
                                     <span>Đã bắt đầu theo dõi bạn.</span>
                                     <span class="time">10 tuần</span> 
                                  </a>
-                                 <button>Theo dõi</button> 
+                                 <button>{{ __('translate.follow')}}</button> 
                               </div>
                            </li>
                            <li class="position-relative">
@@ -99,7 +99,7 @@
                                     <span>Đã bắt đầu theo dõi bạn.</span>
                                     <span class="time">10 tuần</span> 
                                  </a>
-                                 <button>Theo dõi</button> 
+                                 <button>{{ __('translate.follow')}}</button> 
                               </div>
                            </li>
                         </ul>
@@ -131,26 +131,26 @@
                            <a href="{{ route('get.home-page',auth()->user()->user) }}">
                               <li>
                                  <i class="fa fa-user-circle"></i>
-                                 <span>Trang cá nhân</span>
+                                 <span>{{ __('translate.Profile')}}</span>
                               </li>
                            </a>
                            <a href="save.html">
                               <li>
                                  <i class="fa fa-lg fa-arrows-alt"></i>
-                                 <span>Đã lưu</span>
+                                 <span>{{ __('translate.saved')}}</span>
                               </li>
                            </a>
                            <a href="edit.html">
                               <li>
                                  <i class="fa fa-lg fa-sun-o"></i>
-                                 <span>Cài đặt</span>
+                                 <span>{{ __('translate.Settings')}}</span>
                               </li>
                            </a>
                            <li>
                               <hr>
                            </li>
                            <a href="{{ route('get.logout') }}" >
-                              <li>Đăng xuất</li>
+                              <li>{{ __('translate.Log Out')}}</li>
                            </a>
                         </ul>
                      </li>

@@ -4,7 +4,7 @@ function likepost(postId){
         url:"/like/post",
         data:{r_post:postId},
         success:function(e){     
-        $('.like'+postId).text(e.p_favourite+' lượt thích');
+        $('.like'+postId).text(e.p_favourite);
         $('.likes'+postId).text(e.p_favourite);
         }
     })

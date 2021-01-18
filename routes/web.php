@@ -67,6 +67,7 @@ Route::group(['namespace'=>'App\Http\Controllers\Activate'], function () {
     Route::get('/like/video','PostVideo@LikeVideo')->name('like.video'); 
     Route::get('/comment/video','PostVideo@CommentVideo')->name('comment.video');  
     Route::get('/share/video','PostVideo@ShareVideo')->name('share.video');  
-
+    //change languge 
+    Route::get('/language/{language}','LanguageController@index')->name('language');  
 });
 
