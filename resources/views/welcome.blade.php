@@ -91,28 +91,32 @@
                   <div class="d-inline-block"><i class="fa fa-15x fa-share-alt"></i></div>
                   <div class="d-inline-block float-right"> <i class="fa fa-15x fa-bookmark-o float-right"></i></div>
                   <br>
-                    <b class="like{{$item->id}} zxm">{{\App\Models\Like::where('r_post',$item->id)->count()}} lượt thích</b>
+                    <b class="zxm"> <b class="like{{$item->id}}">{{\App\Models\Like::where('r_post',$item->id)->count()}}</b> {{ __('translate.likes')}}</b>
                    <div class="d-inline-block w-100">
                      <div class="status">
                         <a href="{{ $item->user->user}}" class="text-black">{{$item->user->c_name}} </a>{{$item->p_content}} <br>    
                         <br>
                      </div>
-                     <a href="" class="text-gray">Xem tất cả 4 bình luận</a> 
                       <div class="hdl{{$key}}">
-                     @foreach(\App\Models\Comment::where('c_post',$item->id)->get() as $list) 
-                     <div class="chat w-100 position-relative">
-                        <a href="{{ $list->user->user}}" class="text-black">{{$list->user->c_name}}</a> {{ $list->c_comment}}
+                      @foreach(\App\Models\Comment::where('c_post',$item->id)->get() as $value=> $list) 
+                   
+                     <div class="chat w-100 position-relative hjk{{$value}}" style="display:none">
+                        <a href="{{ $list->users->user}}" class="text-black">{{$list->users->c_name}}</a> {{ $list->c_comment}}
                         <i class="fa fa-heart-o float-right"></i> 
-                     </div> 
-                     <a href="" class="text-gray" style="font-size:12px;line-height:30px">1 NGÀY TRƯỚC</a><br>
+                     </div>  
                       @endforeach
+                    
                      </div>
+                     <a href="javascript:;" class="text-gray button{{$key}}">{{ __('translate.View more comments')}}</a> 
+                  <br>
+                     <a href="" class="text-gray" style="font-size:12px;line-height:30px">{{ $item->created_at->diffForHumans($now) }} </a>
                      <hr>
                      <form class="position-relative form" action="{{ route('comment.post')}}">
-                        <textarea rows="10"  autocomplete="off" class="textarea-{{$key}} textarea-comment{{$key}}" placeholder="Thêm bình luận..."></textarea>
+                        <textarea rows="10"  autocomplete="off" class="textarea-{{$key}} textarea-comment{{$key}}" placeholder="{{ __('translate.Add a comment')}}..."></textarea>
                         <input type="hidden" value="{{$item->id}}" class="post-comment{{$key}}">
                         <input type="hidden" value="{{\Auth::id()}}" class="user-comment{{$key}}">  
-                        <input type="submit" class="os comment-submit submit-{{$key}} submit-comment{{$key}}" value="Đăng">
+                        <input type="submit" class="os comment-submit submit-{{$key}} submit-comment{{$key}}" value="{{ __('translate.Post')}}">
+                        <img src="{{ asset('img/loading.gif')}}" class="w-30 loading{{$key}}" style="display:none;position: absolute;right: 0;">
                      </form>
                   </div>
                   <div class="d-inline-block"></div>
@@ -120,6 +124,31 @@
             </div>
          </article> 
          <script> 
+         //load comment
+           
+         $('body').on('click','.button{{$key}}',function(){  
+            
+            loadmore({{$key}});
+         }) 
+         currentindex=0;
+         maxindex ="{{\App\Models\Comment::where('c_post',$item->id)->count()}}";
+         function loadmore(id){  
+            if(currentindex+3 >= maxindex){
+               $('.button'+id).hide();
+            }
+            x=  window.scrollY;
+            var maxresult = 3;
+
+            for(var i = 0; i < maxresult; i++)
+               {
+                  $('.hjk'+(currentindex+i)).show();
+               }
+          
+              window.scrollTo(0,x);
+               currentindex += maxresult;
+      }
+
+           loadmore({{$key}});
          //yêu thích
          $(function(){ $('.heart{{$item->id}}').on('click',function(){
                $(this).toggleClass('text-red');
@@ -145,16 +174,24 @@
          var c_comment=$('.textarea-comment{{$key}}').val();
          var c_post=$('.post-comment{{$key}}').val();
          var c_user_id=$('.user-comment{{$key}}').val(); 
+         
          $.get({ 
             url:URL,
-            data:{c_comment:c_comment,c_post:c_post,c_user_id:c_user_id}
+            data:{c_comment:c_comment,c_post:c_post,c_user_id:c_user_id},
+            beforeSend:function(){
+               $('.loading{{$key}}').show();
+               $('.submit-{{$key}}').addClass('os');
+            },
+            complete:function(){
+               $('.loading{{$key}}').hide();
+               $('.submit-{{$key}}').removeClass('os');
+            }
          }).done(function(e){
             $(".hdl{{$key}}").append(`
             <div class="chat w-100 position-relative">
                         <a href="/${e.user.user}" class="text-black">${e.user.c_name}</a> ${c_comment}
                         <i class="fa fa-heart-o float-right"></i> 
-                     </div> 
-                     <a href="" class="text-gray" style="font-size:12px;line-height:30px">1 NGÀY TRƯỚC</a><br>
+                     </div>  
          `);
          $('.textarea-comment{{$key}}').val('');
          $('.submit-comment{{$key}}').addClass('disabled');

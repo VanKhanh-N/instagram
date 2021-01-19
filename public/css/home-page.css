@@ -496,7 +496,15 @@ h2{
 .zx .os{
     padding-left: 60px;
 } 
-
+.buttons{
+    width: 100%;
+    text-align: center;}
+.buttons button{
+    
+    border: 1px solid #bdbdbd;
+    padding: 0px 5px;
+    border-radius: 50%;
+    font-size: 150%;}
 @media only screen and (max-width: 670px){
     .sd,.posts{width: 100%;}
     section img.user{
@@ -518,5 +526,4 @@ h2{
     .posts .csd{width: 90%;
         grid-gap: 20px;}
     .cse{width: 50%;}
-    }
-    
+    } 

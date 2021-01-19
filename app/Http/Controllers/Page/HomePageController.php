@@ -39,7 +39,7 @@ class HomePageController extends Controller
         //đang theo dõi ai
         $userFollow =Follow::where('followed',$user['id'])->orderBy('created_at','desc')->get();
         $viewData=[  
-            'now'        => Carbon::now('Asia/Ho_Chi_Minh'),
+            'now'        => Carbon::now(),
             'user'       => $user,
             'post'       => $post, 
             'title'      => $user['c_name'],
@@ -52,7 +52,7 @@ class HomePageController extends Controller
     } 
     public function saveProfile(Request $request){   
         $data=$request->except('_token','profiles','stories');  
-        $data['created_at']=Carbon::now('Asia/Ho_Chi_Minh');
+        $data['created_at']=Carbon::now();
         $data['p_user']=\Auth::id(); 
         if($request->profiles){
             $image =upload_image('profiles',"profile");

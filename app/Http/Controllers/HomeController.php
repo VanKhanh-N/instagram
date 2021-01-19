@@ -9,6 +9,7 @@ use App\Models\Follow;
 use App\Models\Comment;
 use App\Models\Post;
 use App\Models\Like;
+use Carbon\Carbon;
 class HomeController extends Controller
 {
      
@@ -30,6 +31,7 @@ class HomeController extends Controller
         $user =User::where('users.id','!=',\Auth::id())->take(5)->inRandomOrder()->get();  
         
         $data=[
+            'now'   => Carbon::now(),
             'posts' => $posts, 
             'user'  => $user,     
             'title' => 'Instagram'

@@ -5,7 +5,7 @@
 <br> 
 <body>
    <section class="sd">
-      <div class="img">
+      
       @if(!$user->avatar) 
       <label for="upload_user_avatar"> <img src="/img/no-user.png" class="rounded-circle user cs avatar_user_uploaded"></label>
      
@@ -201,9 +201,9 @@
    
    <div class="posts">
    <div class="d-gri csd">
-   <button id="first" class="bt"><i class="fa fa-table"></i> {{ strtoupper(__('translate.posts'))}}</button>
+   <button id="first" class="bt" style="text-transform: uppercase;"><i class="fa fa-table"></i> {{ __('translate.posts')}}</button>
    <button id="second"><i class="fa fa-television"></i> IGTV</button>
-   <button id="third"><i class="fa  fa-arrows-alt"></i> {{ strtoupper(__('translate.saved'))}}</button>
+   <button id="third"  style="text-transform: uppercase;"><i class="fa  fa-arrows-alt"></i> {{ __('translate.saved')}}</button>
    <button id="fourst"><i class="fa fa-user"></i> {{ __('translate.TAGGED')}}</button> 
    </div> 
    <!-- modal upload profile and story -->
@@ -278,18 +278,47 @@
                         </div>
                        
                      </div>  
-                     @endif  
-                     @foreach(\App\Models\Comment::where('c_post',$val->id)->get() as $cmt)  
-                      
-                     <div class="clr het">
-                        <div class="hew"><a href="{{ route('get.home-page',$cmt->users->user)}}"><img src="{{ pare_url_file($cmt->users->avatar,'user') }}" class="{{ $cmt->c_user_id ==\Auth::id() ? 'avatar_user_uploaded' :''}}"></a> </div>
+                    
+                     @endif   
+                    <div class="list-comment{{$val->id}}">
+                    @foreach(\App\Models\Comment::where('c_post',$val->id)->orderBy('created_at','desc')->get() as $value => $cmt)  
+                     <div class="clr het hjk{{$value}} "  style="display:none">
+                      <div class="hew"><a href="{{ route('get.home-page',$cmt->users->user)}}"><img src="{{ pare_url_file($cmt->users->avatar,'user') }}" class="{{ $cmt->c_user_id ==\Auth::id() ? 'avatar_user_uploaded' :''}}"></a> </div>
                         <div class="hep">
                            <p><b><a href="{{ route('get.home-page',$cmt->users->user)}}">{{$cmt->users->c_name}}</a> </b> {{$cmt->c_comment}}</p>
                         </div>
                         <i class="fa fa-ellipsis-h"></i>
-                        <div class="os heo">12h</div>
+                        <div class="os heo">{{ $cmt->created_at->diffForHumans($now) }} </div>
                      </div> 
+                     
                      @endforeach
+                     </div>
+                     <div class="buttons"><button class="button{{$val->id}} ">+</button> </div>
+                     <script>
+                     
+                     $('.button{{$val->id}}').on('click',function(){  
+                           loadmore(); 
+                     }) 
+                     currentindex=0;
+                     maxindex ="{{\App\Models\Comment::where('c_post',$val->id)->count()}}";
+                     function loadmore(){ 
+                     x=  window.scrollY;
+                     var maxresult = 5;
+
+                     for(var i = 0; i < maxresult; i++)
+                     {
+                        $(".hjk"+(currentindex+i)).show();
+                     }
+                     if(currentindex+5>=maxindex){
+                        $('.button{{$val->id}}').hide();
+                     }
+                     window.scrollTo(0,x);
+                     currentindex += maxresult;
+
+                  }
+
+                  loadmore();
+                     </script>
                   </div>
                   @php
                   $class=" fa-heart-o ";
@@ -325,10 +354,11 @@
             </div>
          </div>
          <script>   
-            $('body').on('click','#myBtnn{{$val->id}}',function(){
-               var $div = $("#hell"); 
-               $div.scrollTop($div[0].scrollHeight);
-            })
+         //click để scroll đến cuối trang
+            // $('body').on('click','#myBtnn{{$val->id}}',function(){
+            //    var $div = $("#hell"); 
+            //    $div.scrollTop($div[0].scrollHeight);
+            // })
             //không cho người dùng đăng khi chưa comment
             $('.textarea-{{$val->id}}').on('keyup',function(){
                if(!$('.textarea-{{$val->id}}').val())
@@ -388,19 +418,19 @@
                   img ='/img/no-user.png';
                }
             $('.comment{{$val->id}}').text(e.count.p_comment);
-            $(".hdl{{$val->id}}").append(`
+            $(".list-comment{{$val->id}}").prepend(`
             <div class="clr het">
             <div class="hew"><a href="/${e.user.user}"><img src="${img}" class="avatar_user_uploaded"></a> </div>
             <div class="hep"><p><b><a href="/${e.user.user}">${e.user.c_name}</a> </b>${c_comment}</p></div>
             <i class="fa fa-ellipsis-h"></i>
-            <div class="os heo">2h</div>
+            <div class="os heo">1 giây trước </div>
             </div>
             `);
             $('.textarea-comment{{$val->id}}').val('');
             $('.submit-comment{{$val->id}}').addClass('disabled');
 
-            var $div = $("#hell"); 
-            $div.scrollTop($div[0].scrollHeight); 
+            // var $div = $("#hell"); 
+            // $div.scrollBottom($div[0].scrollHeight); 
             });
             })
             

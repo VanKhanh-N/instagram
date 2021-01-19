@@ -66,6 +66,7 @@ return [
     'Send Message'=>'Send Message',
     'To' =>'To',
     'New Message'=>'New Message',
-    'Suggested'=>'Suggested'
+    'Suggested'=>'Suggested',
+    'View more comments'=>'View more comments'
 ];
 ?>

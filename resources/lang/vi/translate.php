@@ -2,7 +2,7 @@
 return [
     //home page
     'Edit Profile'                    => 'Chỉnh sửa trang cá nhân',
-    'posts'                           => 'bài viết',
+    'posts'                           => 'Bài viết',
     'followers'                       => 'người theo dõi',
     'following'                       => ' người dùng',
     'folowing'                        => 'Đang theo dõi ',
@@ -63,6 +63,7 @@ return [
     'Send Message'=>'Gửi tin nhắn',
     'To' =>'Đến',
     'New Message'=>'Tin nhắn mới',
-    'Suggested'=>'Được đề xuất'
+    'Suggested'=>'Được đề xuất',
+    'View more comments'=>'Xem thêm bình luận'
 ];
 ?>

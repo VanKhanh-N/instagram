@@ -17,12 +17,13 @@ class PostImage extends Controller
     public function CommentPost(Request $request){  
         $data=$request->all();
         $data['created_at']=Carbon::now();
-        $data['updated_at']=Carbon::now();
+        $data['updated_at']=Carbon::now(); 
         $id=Comment::InsertGetId($data);
         Post::where('id',$data['c_post'])->increment('p_comment');
         return response([
             'count'=> Post::find($data['c_post']),
-            'user'=>\Auth::user()]);
+            'user'=>\Auth::user(), 
+            ]);
     }
 
     public function LikePost(Request $request){
