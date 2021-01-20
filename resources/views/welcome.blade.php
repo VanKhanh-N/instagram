@@ -76,7 +76,8 @@
                </li>
             </ul>
          </section>
-         @foreach($posts as $key => $item)  
+     <div class="postss conntent" data-next-page="{{$posts->nextPageUrl()}}">
+     @foreach($posts as $key => $item)  
          <article class="border-gray position-relative">
             <div class="header ">
                <a class="text-black" href="{{ $item->user->user}}"><img src="{{ pare_url_file($item->user->avatar,'user') }}" class="rounded-circle  d-inline-block img-user">{{ $item->user->c_name}}</a>
@@ -201,6 +202,11 @@
  
          </script>     
          @endforeach
+        
+         </div>
+         <div class="loading" style="text-align:center">
+         <img src="{{asset('img/loadingg.gif')}}"style="width:250px;height:250px">
+         </div>
       </div>
       <div class="d-inline-block right" >
          <div class="d-block">
@@ -277,6 +283,30 @@
    <script src="{{ asset('js/style.js') }}"></script>
    <script src="{{ asset('js/post.js') }}"></script>
    <script src="https://use.fontawesome.com/452826394c.js"></script>
-    
+    <script>
+    $(document).ready(function(){
+       $('.loading').hide();
+       $(window).scroll(fetchPost);
+       function fetchPost(){
+          var page=$('.conntent').data('next-page');
+          if(page !== null){
+             $('.loading').show()   
+             clearTimeout($.data(this),"scrollCheck");
+             $.data(this,"scrollCheck",setTimeout(function(){
+                var scroll_position =$(window).height()+$(window).scrollTop()+100;
+                if(scroll_position>=$(document).height()){
+                   $.get(page,function(data){
+                     $('.postss').append(data.posts);
+                     $('.conntent').data('next-page',data.next_page);
+                   })
+                   $('.loading').hide()
+                }
+             },2000))
+          }else{
+            $('.loading').hide()
+          }
+       }
+    })
+    </script>
 </body>
 </html>

@@ -19,19 +19,23 @@ class HomeController extends Controller
     }
 
      
-    public function index()
+    public function index(Request $request)
     {    
         //tất cả bài viết của những người bạn theo dõi
         $posts =Post::join('follows','follows.followed','posts.p_user')
                     ->where('follows.user_id',\Auth::id())
                     ->where('posts.p_type','profile')
                     ->select('posts.*')
-                    ->limit(5)
-                    ->get(); 
+                    ->orderby('created_at','desc')
+                    ->paginate(5); 
+        $now =Carbon::now();
+        if($request->ajax()){
+        return ['posts'=>view('layout.welcome')->with(compact('posts','now'))->render(),'next_page'=>$posts->nextPageUrl()];
+        }
         $user =User::where('users.id','!=',\Auth::id())->take(5)->inRandomOrder()->get();  
         
         $data=[
-            'now'   => Carbon::now(),
+            'now'   => $now,
             'posts' => $posts, 
             'user'  => $user,     
             'title' => 'Instagram'

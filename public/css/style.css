@@ -60,7 +60,7 @@ button{outline: none;background-color: transparent;border:none;}
     right: 0
 }
 article{
-    background-color:white; box-sizing: border-box;
+    background-color:white; box-sizing: border-box; 
     margin-bottom: 60px;
 }
 .img-user{

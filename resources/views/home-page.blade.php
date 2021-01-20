@@ -248,7 +248,7 @@
                <i class="fa fa-heart"></i> <p class="likes{{$val->id}}">{{ $val->p_favourite}}</p>
                <i class="fa fa-comment"></i> <p class="comment{{$val->id}}"> {{$val->p_comment }}</p>
             </div>
-            <img src="{{ pare_url_file($val->p_image,'profile') }}"> 
+            <img data-img="{{ pare_url_file($val->p_image,'profile') }}" class="lazyload" id="image{{$key}}">  
          </div>
          <div id="myModall{{$val->id}}" class="modal hei">
             <div class="csg">
@@ -472,6 +472,30 @@
 <script src="{{ asset('js/post.js') }}"></script> 
 <script src="{{ asset('js/avatar.js') }}"></script> 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>  
+<script>
+//lazy load img
+let id="{{count($post)}}";
+let options={
+   root:null,
+   rootMargin:'0px',
+   threshold:0.25
+};
+let callback =(entries,observer)=>{
+   entries.forEach(entry=>{
+      if(entry.isIntersecting && entry.target.className === 'lazyload'){
+         let imageUrl = entry.target.getAttribute('data-img');
+         if(imageUrl){
+            entry.target.src =imageUrl;
+            observer.unobserve(entry.target);
+         }
+      }
+   })
+} 
+let observer =new IntersectionObserver(callback,options);
+for( var i=0;i<id;i++) { 
+observer.observe(document.querySelector('#image'+i)); 
+} 
+</script>
 <script type="text/javascript"> 
    //add to profile
       $('#profiles').on('change',function(ev){ 
