@@ -14,7 +14,7 @@ class PostVideo extends Controller
     }
     public function UploadVideo(){
         $viewData=[
-            'title'=>'Upload Video'
+            'title'=>'Upload a Video'
         ] ;
         return view('upload.video',$viewData);
     }

@@ -4,6 +4,7 @@
     box-sizing: border-box;
     scroll-behavior: smooth;
     outline: none;
+    user-select: none;
 }
 li{list-style: none;} 
 img{object-fit: contain;}
@@ -19,7 +20,10 @@ input{outline: 0;}
 .w-30{width: 25px;height: 25px;cursor: pointer;}
 .w-35{width: 35px;height: 35px;cursor: pointer;}
 .w-15{width: 13px;height: 13px;cursor: pointer;}
+.w-80{width: 80%;}
+.w-90{width: 90%;margin: 0 auto;}
 .w-100{width: 100%;}
+.p-15{padding: 15px;}
 .cs,i,button,input[type="submit"]{cursor:pointer}
 .fs-11{font-size: 11px;}
 .fs-14{font-size: 14px;}
@@ -38,11 +42,12 @@ input{outline: 0;}
 .text-gray{color:gray}
 .text-blue{color:#0095f6}
 .text-red{color:#ed4956}
+.text-center{text-align:center}
 .float-right{float: right;}
 .float-left{float: left;}
 .float-center{float: center;}
-.mr-20{ 
-    margin-right: 20px;}
+.mr-20{margin-right: 20px;}
+.f-11{font-size: 11px;}
 .position-relative{position: relative;}
 .position-absolute{position: absolute;}
 .border-gray{
@@ -56,7 +61,7 @@ header{
     background-color: white !important;
     z-index: 99;
 }
-body{
+body,.background-gray{
     background-color: #f3f3f3b5;
 }
 .container{

@@ -243,7 +243,7 @@
                   @endif
                </div>
                <div class="d-inline-block" style="position: absolute; top: 0;right: 0;margin-top: 10px;">
-                  <p class="cs follow{{$list->id}}  text-blue" onclick="follow('{{$list->id}}')">{{ __('translate.follow')}}</p>
+                  <p class="cs follow{{$list->id}}  text-blue" onclick="follow('{{$list->id}}')">{{ ucwords(__('translate.follow'))}}</p>
                   <div class="load{{$list->id}}" style="margin-top:-10px;display:none">
                   <img src="{{ asset('img/loading.gif')}}">
                   </div>
@@ -270,8 +270,8 @@
                   <li class="d-inline-block "><a href="">{{ __('translate.Locations')}}</a>	&#8226;</li>
                   <li class="d-inline-block "><a href="">{{ __('translate.Top Accounts')}}</a>	&#8226;</li>
                   <li class="d-inline-block "><a href="">Hashtag</a>	&#8226;</li>
-                  <li class="d-inline-block "><a href="{{route('language',['vi']) }}">English</a>	&#8226;</li>
-                  <li class="d-inline-block "><a href="{{route('language',['en']) }}">Tiếng Việt</a></li>
+                  <li class="d-inline-block "><a href="{{route('language',['en']) }}">English</a>	&#8226;</li>
+                  <li class="d-inline-block "><a href="{{route('language',['vi']) }}">Tiếng Việt</a></li>
                </ul>
                <br>
             </div>

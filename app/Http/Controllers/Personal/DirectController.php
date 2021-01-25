@@ -23,7 +23,7 @@ class DirectController extends Controller
                 ->get();       
         $viewData=[ 
             'chat' =>$chat,
-            'title'=>'Nhắn tin'
+            'title'=>'Message'
         ];
         return view('direct',$viewData);
     }
@@ -84,5 +84,8 @@ class DirectController extends Controller
        $output= '<p class="pq os">Không có người dùng</p>';
        }
     return $output;
+    }
+    public function video(){
+        return view('direct.videocall');
     }
 }

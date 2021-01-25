@@ -21,9 +21,16 @@ class CreateUsersTable extends Migration
             $table->integer('picture')->default(0);
             $table->integer('story')->default(0);
             $table->string('email')->nullable();
+            $table->string('website')->nullable();
+            $table->string('bio')->nullable();
+            $table->integer('gender')->default(4);
+            $table->string('phone')->nullable();
             $table->string('provider')->nullable();
             $table->string('provider_id')->nullable();
+            $table->integer('is_active')->default(0);
+            $table->integer('code_otp')->nullable();
             $table->string('password')->nullable();
+            $table->rememberToken();
             $table->timestamps();
         });
     }

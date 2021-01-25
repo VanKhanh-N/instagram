@@ -42,7 +42,7 @@ class HomePageController extends Controller
             'now'        => Carbon::now(),
             'user'       => $user,
             'post'       => $post, 
-            'title'      => $user['c_name'],
+            'title'      => '',
             'video'      => $video, 
             'followed'   => $isFollow,
             'areFollow'  => $areFollow,
@@ -108,6 +108,9 @@ class HomePageController extends Controller
                 'user'      => User::find($data['followed']),
                 'auth'      => \Auth::user(),
                 'followed'  => Follow::where('user_id',\Auth::id())->count(), 
+                'text_follow' =>ucwords(__('translate.follow')),
+                'user_follow' =>ucwords(__('translate.followers')),
+                'see_user_follow' =>__("translate.You'll see all the people who follow you here.")
                 ]);
         }
         else{
@@ -117,7 +120,10 @@ class HomePageController extends Controller
                 'action'    => 'them',
                 'user'      => User::find($data['followed']),
                 'auth'      => \Auth::user(),
-                'followed'  => Follow::where('user_id',\Auth::id())->count()
+                'followed'  => Follow::where('user_id',\Auth::id())->count(),
+                'text_follow' =>ucwords(__('translate.folowing')),
+                'see_user_follow' =>__('translate.Message'),
+
                 ]);
         } 
     }

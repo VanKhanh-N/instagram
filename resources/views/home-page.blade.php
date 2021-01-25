@@ -1,3 +1,4 @@
+<title>{{\Auth::user()->c_name}}</title>
 @include('header')
 <style>.user{margin-left:150px}</style>
 <br> 
@@ -40,7 +41,7 @@
          <div class="clr csb">
             <span class="os" style="float:left">{{ $user->user }}</span>
             @if($user->user === \Auth::user()->user)
-            <a href="">{{ __('translate.Edit Profile')}}</a>
+            <a href="{{ route('profile.edit') }}">{{ __('translate.Edit Profile')}}</a>
             <i class="fa fa-2x fa-sun-o" id="myBtn-2"></i> 
             <span class="fa-stack fa-lg cs" id="myBtn"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-plus fa-stack-1x"></i></span> 
             @else  
@@ -63,7 +64,7 @@
          <!-- modal setting -->
          <div id="myModal-2" class="modal ">
             <div class="modal-content setting animate__animated animate__zoomIn" >
-               <li><a href="">{{ __('translate.Change Password')}}</a></li>
+               <li><a href="{{route('password.edit')}}">{{ __('translate.Change Password')}}</a></li>
                <li><a href="">{{ __('translate.Nametag')}}</a></li>
                <li><a href="">{{ __('translate.Apps and Websites')}}</a></li>
                <li><a href="">{{ __('translate.Notifications')}}</a></li>
@@ -99,10 +100,10 @@
                      @if($list->user_id!=\Auth::id())
                      @if(\App\Models\Follow::checkFollow(\Auth::id(),$list->user_id))
                       @if($user->id != \Auth::id())
-                     <button class="followss zc{{$list->user_id}}" onclick="follows('{{$list->user_id}}')" ><cen class="cen{{$list->user_id}}">{{ __('translate.folowing')}}</cen>
+                     <button class="followss zc{{$list->user_id}}" onclick="follows('{{$list->user_id}}')" ><cen class="cen{{$list->user_id}}">{{ ucwords(__('translate.folowing'))}}</cen>
                      <img src="{{ asset('img/loading.gif')}}" class="w-30 load{{$list->user_id}}" style="display:none;margin-top: -11px;">
                      @else
-                     <button class="followss zc{{$list->user_id}}" onclick="followss('{{$list->user_id}}')" ><cen class="cen{{$list->user_id}}">{{ __('translate.folowing')}}</cen>
+                     <button class="followss zc{{$list->user_id}}" onclick="followss('{{$list->user_id}}')" ><cen class="cen{{$list->user_id}}">{{ ucwords(__('translate.folowing'))}}</cen>
                      <img src="{{ asset('img/loading.gif')}}" class="w-30 load{{$list->user_id}}" style="display:none;margin-top: -11px;">
                      @endif
                   </button>
@@ -469,9 +470,9 @@
 </body>
 <p class="os" style="text-align:center">&copy; 2020 INSTAGRAM FROM FACEBOOK</p>
 <br>
+<script src="{{ asset('js/modal.js') }}"></script> 
 <script src="{{ asset('js/post.js') }}"></script> 
 <script src="{{ asset('js/avatar.js') }}"></script> 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>  
 <script>
 //lazy load img
 let id="{{count($post)}}";
@@ -495,33 +496,7 @@ let observer =new IntersectionObserver(callback,options);
 for( var i=0;i<id;i++) { 
 observer.observe(document.querySelector('#image'+i)); 
 } 
-</script>
-<script type="text/javascript"> 
-   //add to profile
-      $('#profiles').on('change',function(ev){ 
-        var reader=new FileReader(); 
-        reader.onload=function(ev){
-          $('#image-post').attr('src',ev.target.result).css('width','350px').css('height','350px').css('margin-bottom','50px'); 
-        }
-        reader.readAsDataURL(this.files[0]);   
-            $('#myModal').hide();   
-            $('.image').removeClass('d-none');
-         
-      });
-   //add to stories
-      $('#stories').on('change',function(ev){ 
-        var reader=new FileReader(); 
-        reader.onload=function(ev){
-          $('#image-post').attr('src',ev.target.result).css('width','350px').css('height','350px').css('margin-bottom','50px'); 
-        }
-        reader.readAsDataURL(this.files[0]);   
-            $('#myModal').hide();   
-            $('.image').removeClass('d-none');
-         
-      });
-   
-   
-</script>
+</script> 
 <script>
    $('#first').on('click',function(e){
       e.preventDefault();
@@ -559,81 +534,7 @@ observer.observe(document.querySelector('#image'+i));
          $(this).hide();
          $('.nos').show();
       })
-   })
-   
-   var modal6 = document.getElementById("myModal-6");
-   var btn6 = document.getElementById("myBtn-6");
-   var exit6 = document.getElementById("exit6");
-   
-   btn6.onclick = function() {
-      modal6.style.display = "block";
-   } 
-   exit6.onclick = function() {
-      modal6.style.display = "none";
-   } 
-   
-   var modal7 = document.getElementById("myModal-7");
-   var btn7 = document.getElementById("myBtn-7");
-   var exit7 = document.getElementById("exit7");
-   
-   btn7.onclick = function() {
-      modal7.style.display = "block";
-   } 
-   exit7.onclick = function() {
-      modal7.style.display = "none";
-   } 
-
-  
-   window.onclick = function(event) { 
-      if (event.target == modal) {    
-      modal.style.display = "none";
-      }
-   
-      if (event.target == modal2) {    
-      modal2.style.display = "none";
-      }
-    
-      if (event.target == modal5) {    
-      modal5.style.display = "none";
-      }
-      if (event.target == modal6) {    
-      modal6.style.display = "none";
-      }
-      if (event.target == modal7) {    
-      modal7.style.display = "none";
-      }
-      }
-   var modal = document.getElementById("myModal"); 
-   var btn = document.getElementById("myBtn"); 
-   btn.onclick = function() {
-   modal.style.display = "block";
-   }  
-   
-   
-   var modal2 = document.getElementById("myModal-2");
-   var btn2 = document.getElementById("myBtn-2");
-   var exit = document.getElementById("exit");
-   
-   btn2.onclick = function() {
-      modal2.style.display = "block";
-   } 
-   exit.onclick = function(event) {
-      event.preventDefault();    
-      modal2.style.display = "none";
-   }
-   var modal5 = document.getElementById("myModal-5");
-   
-   
-   
-   
-</script>
-<script>
-   $('body').on('click','#myBtn-5',function(){
-      $('#myModal-5').show();
-   })
-   $('body').on('click','#exit5',function(){
-      $('#myModal-5').hide();
-   })
-</script>
+   }) 
+</script> 
 </body>
 </html>

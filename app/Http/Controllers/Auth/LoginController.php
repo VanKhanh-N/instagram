@@ -8,17 +8,26 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\RequestLogin;
-class LoginController extends Controller
+class LoginController extends Controller 
 {
     public function getFormLogin(){
         return view('auth.login');
     }
     public function postLogin(RequestLogin $request){
         $data =$request->only('email','password');
-        if(Auth::attempt($data)){
-          
-        return redirect()->to('/');
-        }
+        if(Auth::attempt($data)){ 
+            if(Auth::user()->is_active ==1){
+                return redirect()->to('/');
+            }
+            else{
+                Auth::logout();
+                \Session::flash('toastr',[
+                    'type'=>'error',
+                    'messages'=>'Tài khoản chưa được xác thực . Vui lòng kiểm tra lại gmail !'
+                ]);
+                return redirect()->route('get.login');
+            }
+}
         else{
             \Session::flash('toastr',[
                 'type'=>'error',

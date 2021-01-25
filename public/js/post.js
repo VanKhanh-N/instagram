@@ -39,12 +39,12 @@ function follow(followed){
             $('.follower').text(data.user.follower);
             if(data.action =='bot'){
             //welcome (Gợi ý cho bạn)
-            $('.follow'+followed).text('Theo dõi');
+            $('.follow'+followed).text(data.text_follow);
            //button gần user
            $('.list-follow').prepend(` 
            <button class="follow" onclick="follow('${data.user.id}')">
                  <img src="img/loading.gif" class="w-30 load${data.user.id}" style="display:none">
-                 <p class="text-follows${data.user.id}">Theo dõi</p>
+                 <p class="text-follows${data.user.id}">${data.text_follow}</p>
             </button>  
            `);
            //hiện user trong số người theo dõi
@@ -52,17 +52,17 @@ function follow(followed){
                $('.settingss').empty();
                $('.settingss').prepend(`
                <li class="k-none"><i class="fa fa-lg fa-user-plus"></i></li>
-               <li class="k-none two">Người theo dõi</li>
-               <li class="k-none three">Bạn sẽ thấy tất cả những người theo dõi bạn ở đây.</li>
+               <li class="k-none two">${data.user_follow}</li>
+               <li class="k-none three">${data.see_user_follow}</li>
                `);
            }else    $('.user'+data.auth.id).remove();  
             }
             else{
             //welcome(gợi ý cho bạn)
-            $('.follow'+followed).text('Đang theo dõi');
+            $('.follow'+followed).text(data.text_follow);
              //button gần user
             $('.list-follow').prepend(` 
-            <a href="/direct/${data.user.id}" class="message">Nhắn tin</a>
+            <a href="/direct/${data.user.id}" class="message">${data.see_user_follow}</a>
             <a class="unfollow follows${data.user.id} "href="javascript:;"  onclick="follow('${data.user.id}')"><i class="fa fa-user-times"></i>
             <img src="img/loading.gif" class="w-30 load${data.user.id}" style="display:none;margin-top: -11px;">
             </a>
@@ -107,10 +107,10 @@ function follows(followed){
             $('.zc'+followed).toggleClass('follows');
             $('.zc'+followed).toggleClass('followss'); 
             if(data.action=='bot'){ 
-                $('.cen'+followed).text('Theo dõi');
+                $('.cen'+followed).text(data.text_follow);
             }
             else{ 
-            $('.cen'+followed).text('Đang theo dõi');
+            $('.cen'+followed).text(data.text_follow);
             }
         }
     })
@@ -140,19 +140,19 @@ function followss(followed){
             $('.zc'+followed).toggleClass('follows');
             $('.zc'+followed).toggleClass('followss'); 
             if(data.action=='bot'){ 
-                $('.cen'+followed).text('Theo dõi');
+                $('.cen'+followed).text(data.text_follow);
                 if(!data.followed){
                     $('.list').empty();
                     $('.list').prepend(`
                     <li><i class="fa fa-lg fa-user-plus"></i></li>
-                    <li class="two">Người đang theo dõi</li>
-                    <li class="three">Bạn sẽ thấy tất cả những người bạn đang theo dõi ở đây.</li>
+                    <li class="two">${data.user_follow}</li>
+                    <li class="three">${data.see_user_follow}</li>
                     `);
                 }
                 else  $('.users'+followed).remove(); 
             }
             else{ 
-            $('.cen'+followed).text('Đang theo dõi');
+            $('.cen'+followed).text(data.text_follow);
             if(data.followed==1) $('.list').empty();
             $('.list').prepend(`
             <li class="clr users${followed}" style="height: 50px;">
@@ -161,7 +161,7 @@ function followss(followed){
             <b class="zz">${data.user.user}</b><br>
             <b class="os">${data.user.c_name}</b>
             </a>
-            <button class="followss zc${followed}" onclick="followss('${followed}')" ><cen class="cen${followed}">Đang theo dõi</cen>
+            <button class="followss zc${followed}" onclick="followss('${followed}')" ><cen class="cen${followed}">${data.text_follow}</cen>
             <img src="img/loading.gif" class="w-30 load${followed}" style="display:none;margin-top: -11px;">
             `);
             }

@@ -27,7 +27,7 @@
         <form action="" method="POST">
         @csrf
             <div class="username">
-                <input type="text" class="username" id="username" name="email" placeholder="Số điện thoại, tên người dùng hoặc email" >
+                <input type="email" class="username" id="username" name="email" placeholder="Số điện thoại, tên người dùng hoặc email" >
                 @if($errors->first('email'))    
                 <span class="text-danger">{{$errors->first('email') }}</span>
                 @endif

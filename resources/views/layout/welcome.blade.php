@@ -73,7 +73,7 @@
 
            loadmore({{$key}});
          //yêu thích
-         $(function(){ $('.heart{{$item->id}}').on('click',function(){
+        $('.heart{{$item->id}}').on('click',function(){
                $(this).toggleClass('text-red');
                $(this).toggleClass('fa-heart-o ');
                $(this).toggleClass('fa-heart');
@@ -119,8 +119,7 @@
          $('.textarea-comment{{$key}}').val('');
          $('.submit-comment{{$key}}').addClass('disabled');
          });
-      })
-})
+      }) 
  
          </script>     
          @endforeach

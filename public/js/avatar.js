@@ -1,4 +1,28 @@
+//upload into avatar
+$('#profiles').on('change',function(ev){ 
+  var reader=new FileReader(); 
+  reader.onload=function(ev){
+    $('#image-post').attr('src',ev.target.result).css('width','350px').css('height','350px').css('margin-bottom','50px'); 
+  }
+  reader.readAsDataURL(this.files[0]);   
+      $('#myModal').hide();   
+      $('.image').removeClass('d-none');
+   
+});
+//add to stories
+$('#stories').on('change',function(ev){ 
+  var reader=new FileReader(); 
+  reader.onload=function(ev){
+    $('#image-post').attr('src',ev.target.result).css('width','350px').css('height','350px').css('margin-bottom','50px'); 
+  }
+  reader.readAsDataURL(this.files[0]);   
+      $('#myModal').hide();   
+      $('.image').removeClass('d-none');
+   
+});
+
 //  add and update avatar  
+
 function uploadUserAvatar(input,form){ 
    UpdateUserAvatar(form); 
 }
@@ -69,3 +93,30 @@ $('#myModal-5').hide();
     }
  })
 }) 
+     
+//update gender
+  
+$('.update_gender').on('click',function(e){
+  e.preventDefault();
+  let URL =$(this).parents('form').attr('action');    
+   $.ajax({
+      url:URL,
+      method:"POST",
+      headers:{
+        'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')
+    },
+      data:$('.form-question').serialize(),
+      beforeSend:function(){
+        $('.uploadavatars').show();
+        $('.update_gender').addClass('os');
+      },
+      complete:function(){
+        $('.uploadavatars').hide();
+        $('.update_gender').removeClass('os');
+      },success:function(data){
+        $('#myBtn-6').val(data);
+      $('#myModal-6').hide();    
+      
+      }
+   })
+  }) 
