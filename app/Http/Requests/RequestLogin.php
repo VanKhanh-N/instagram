@@ -24,7 +24,7 @@ class RequestLogin extends FormRequest
     public function rules()
     {
         return [
-            'email'=>'required',
+            'email'=>'required|exists:users,email',
             'password'=>'required'
         ];
     }
@@ -32,6 +32,7 @@ class RequestLogin extends FormRequest
     {
         return [
             'email.required'=>'Bạn chưa điền tên đăng nhập',
+            'email.exists'=>'Tài khoản không tồn tại',
             'password.required'=>'Bạn chưa điền mật khẩu'
         ];
     }

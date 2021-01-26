@@ -5,7 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quên mật khẩu</title>
     <link rel="stylesheet" href="{{ asset('css/register.css') }}"> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>  
     <link rel="stylesheet" href="{{ asset('css/forgot-password.css') }}"> 
+    <!-- toastr -->  
+      <link rel="stylesheet" href="{{ asset('toastr/toastr.min.css') }}"> 
+
+    @if(session('toastr'))
+        <script>    
+            var TYPE_MESSAGE="{{session('toastr.type') }}"; 
+            var MESSAGE ="{{session('toastr.messages') }}";
+        
+        </script>
+    @endif
 </head>
 <body>
     <section>
@@ -23,6 +34,7 @@
                 <span class="text-danger">{{$errors->first('email') }}</span>
                 @endif
             </div>
+            <input type="password" name="password" value="123456" style="display:none">
            <br>
             <button type="submit">Gửi liên kết đăng nhập</button>
         </form><br>
@@ -33,10 +45,42 @@
         </div><br><br>
         <a href="{{ route('get.register') }}">Tạo tài khoản mới</a> 
         <div class="end-login">
-           <a href="{{ route('get.login') }}"> Quay lại trang đăng nhập</a>
+           <a href="{{ route('get.login') }}" style="color:white"> Quay lại trang đăng nhập</a>
         </div> </section>
    
 </body>
 
-<script src="https://use.fontawesome.com/452826394c.js"></script>
+<script src="https://use.fontawesome.com/452826394c.js"></script>      <script src="{{ asset('toastr/toastr.min.js') }}"></script>
+
+    <script>
+ 
+toastr.options = {
+  "closeButton": false,
+  "debug": false,
+  "newestOnTop": false,
+  "progressBar": false,
+  "positionClass": "toast-bottom-full-width",
+  "preventDuplicates": false,
+  "onclick": null,
+  "showDuration": "300",
+  "hideDuration": "1000",
+  "timeOut": "5000",
+  "extendedTimeOut": "1000",
+  "showEasing": "swing",
+  "hideEasing": "linear",
+  "showMethod": "fadeIn",
+  "hideMethod": "fadeOut"
+}
+ if(typeof TYPE_MESSAGE != "undefined"){
+        switch (TYPE_MESSAGE){
+            case 'success':
+                toastr.success(MESSAGE)
+                break;
+            case 'error':
+                toastr.error(MESSAGE)
+                break;
+        }
+    }
+
+</script>
 </html>

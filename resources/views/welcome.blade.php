@@ -283,6 +283,22 @@
    <script src="{{ asset('js/style.js') }}"></script>
    <script src="{{ asset('js/post.js') }}"></script>
    <script src="https://use.fontawesome.com/452826394c.js"></script>
+   <script src="{{ asset('toastr/toastr.min.js') }}"></script>
+    <script>
+
+    if(typeof TYPE_MESSAGE != "undefined"){
+        switch (TYPE_MESSAGE){
+            case 'success':
+                toastr.success(MESSAGE)
+                break;
+            case 'error':
+                toastr.error(MESSAGE)
+                break;
+        }
+    }
+
+    
+</script>
     <script>
     $(document).ready(function(){
        $('.loading').hide();

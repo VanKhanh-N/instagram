@@ -127,7 +127,15 @@ button{
     color: white;
     cursor:pointer
 }
+.click{ 
+    position: absolute;
+    top: 25%;
+    right: 0;
+    z-index: 2;
+    cursor: pointer;
+}
 @media only screen and (max-width:850px){
     .login-left{display: none;}
     section{left: 50%;}
+    .login-right {width: 80%;}
 }

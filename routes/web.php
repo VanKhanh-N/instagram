@@ -23,12 +23,15 @@ Route::get('/','App\Http\Controllers\HomeController@index')->name('home');
 
     Route::get('verify/{user}','RegisterController@getVerifyAccount')->name('user.verify.gmail');//xác thực qua email
     Route::get('verify-phone','RegisterController@getVerifyMessage')->name('user.verify.message');//xác thực qua tin nhắn
+    Route::post('verify-phone','RegisterController@postVerifyMessage');//xác thực qua tin nhắn
 
     Route::get('login','LoginController@getFormLogin')->name('get.login'); // đăng nhập
     Route::post('login','LoginController@postLogin'); // xử lý đăng nhập
     
-    Route::get('forgot-password','ResetPasswordController@getFormPassword')->name('get.forgot-password'); // đăng ký
-    Route::post('forgot','ResetPasswordController@postPassword'); // xử lý đăng ký
+    Route::get('forgot-password','ResetPasswordController@getFormPassword')->name('get.forgot-password'); // quên mật khẩu
+    Route::post('forgot-password','ResetPasswordController@postPassword'); // xử lý quên mật khẩu
+    Route::get('accounts/password/reset','ResetPasswordController@changePassword')->name('user.change.password'); // thay đổi mật khẩu
+    Route::post('accounts/password/reset','ResetPasswordController@StorePassword'); // thay đổi mật khẩu
 
     Route::get('logout','LoginController@getLogout')->name('get.logout'); // đăng xuất
 

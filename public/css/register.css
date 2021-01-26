@@ -106,3 +106,12 @@ button{
     text-decoration: none;
     color:#0095f6
 }
+
+.click{ 
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 10px;
+    z-index: 2;
+    cursor: pointer;
+}

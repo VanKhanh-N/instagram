@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đăng ký</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>  
     <link rel="stylesheet" href="{{ asset('css/register.css') }}"> 
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
 </head>
 <body>
-    <section>
+    <section><br>
         <img src="{{ asset('img/logo.png') }}">
         <p class="dw">Đăng ký để xem ảnh và video từ bạn bè.</p>
         <a href="" class="faa"><i class="fa fa-facebook-square"></i> ĐĂNG NHẬP BẰNG FACEBOOK</a><br><br>
@@ -17,7 +18,7 @@
             <div class="bar"></div> 
             <div class="content">Hoặc</div>  
             <div class="bar"></div> 
-        </div> 
+        </div> <br>
         <form action="" method="POST">
         @csrf
             <div class="username">
@@ -41,10 +42,11 @@
                
             </div> 
             <div class="username">
-                <input type="password"  name="password"  placeholder="Mật khẩu" > 
+                <input type="password"  name="password" id="password" placeholder="Mật khẩu" > 
                 @if($errors->first('password'))    
                 <span class="text-danger">{{$errors->first('password') }}</span>
                 @endif
+                <i class="fa fa-lg fa-eye-slash click"></i>     
             </div><br>
             <button type="submit">Đăng ký</button>
         </form><br>
@@ -58,4 +60,18 @@
 </body>
 
 <script src="https://use.fontawesome.com/452826394c.js"></script>
+<script>
+
+$(".click").on("click",function(){
+        $(this).toggleClass("fa-eye-slash");
+        $(this).toggleClass("fa-eye");
+        if($(this).hasClass("fa-eye-slash")){
+            $('#password').attr('type', 'password');
+        }
+        if($(this).hasClass("fa-eye")){
+            $('#password').attr('type', 'text');
+}
+    })
+ 
+</script>  
 </html>

@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ asset('css/login.css') }}"> 
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>   
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>  
+    <title>Đăng nhập</title> 
     <!-- toastr -->
     <link rel="stylesheet" href="{{ asset('toastr/toastr.min.css') }}"> 
-    <title>Đăng nhập</title>
     @if(session('toastr'))
         <script>    
-            var TYPE_MESSAGE="{{session('toastr.type') }}";
+            var TYPE_MESSAGE="{{session('toastr.type') }}"; 
             var MESSAGE ="{{session('toastr.messages') }}";
         
         </script>
@@ -27,7 +27,7 @@
         <form action="" method="POST">
         @csrf
             <div class="username">
-                <input type="email" class="username" id="username" name="email" placeholder="Số điện thoại, tên người dùng hoặc email" >
+                <input type="text" class="username" id="username" name="email" placeholder="Số điện thoại, tên người dùng hoặc email" >
                 @if($errors->first('email'))    
                 <span class="text-danger">{{$errors->first('email') }}</span>
                 @endif
@@ -38,6 +38,7 @@
                 @if($errors->first('password'))    
                 <span class="text-danger">{{$errors->first('password') }}</span>
                 @endif
+                <i class="fa fa-lg fa-eye-slash click"></i>     
             </div> 
             <button type="submit">Đăng nhập</button>
         </form><br>
@@ -116,5 +117,18 @@
     }
 
     
+</script>
+<script>
+    $(".click").on("click",function(){
+        $(this).toggleClass("fa-eye-slash");
+        $(this).toggleClass("fa-eye");
+        if($(this).hasClass("fa-eye-slash")){
+            $('#password').attr('type', 'password');
+        }
+        if($(this).hasClass("fa-eye")){
+            $('#password').attr('type', 'text');
+}
+    })
+ 
 </script>
 </html>
