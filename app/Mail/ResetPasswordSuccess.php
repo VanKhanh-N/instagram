@@ -30,7 +30,9 @@ class ResetPasswordSuccess extends Mailable
      */
     public function build()
     {
-        return $this->view('mail.reset_password')->with([
+        return $this
+            ->subject('Đặt lại mật khẩu')
+            ->view('mail.reset_password')->with([
             'name' =>$this->name,
             'user' =>$this->user
 

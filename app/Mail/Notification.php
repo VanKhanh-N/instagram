@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class RegisterSuccess extends Mailable
+class Notification extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -16,9 +16,10 @@ class RegisterSuccess extends Mailable
      *
      * @return void
      */
-    private $name,$user;
-    public function __construct($name,$user)
+    private $name,$user,$id;
+    public function __construct($id,$name,$user)
     {
+        $this->id =$id;
         $this->name =$name;
         $this->user =$user;
     }
@@ -31,10 +32,11 @@ class RegisterSuccess extends Mailable
     public function build()
     {
         return $this
-        ->subject('Xác thực tài khoản')
-        ->view('mail.register')->with([
+        ->subject('Người dùng mới')
+        ->view('mail.notification')->with([
             'name' =>$this->name,
-            'user' =>$this->user
+            'id' =>$this->id,
+            'user' =>$this->user,
 
         ]);
     }
