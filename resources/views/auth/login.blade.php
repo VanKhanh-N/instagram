@@ -22,7 +22,7 @@
         <img src="{{ asset('img/login.png') }}" >
     </div>
     <div class="login-right">
-    <div class="login ">
+    <div class="login">
         <div class="logo"><img src="{{ asset('img/logo.png') }}" ></div>
         <form action="" method="POST">
         @csrf
@@ -32,7 +32,7 @@
                 <span class="text-danger">{{$errors->first('email') }}</span>
                 @endif
                
-            </div><br>
+            </div>
             <div class="username">
                 <input type="password" class="password" id="password" name="password" placeholder="Mật khẩu" > 
                 @if($errors->first('password'))    
@@ -41,7 +41,7 @@
                 <i class="fa fa-lg fa-eye-slash click"></i>     
             </div> 
             <button type="submit">Đăng nhập</button>
-        </form><br>
+        </form>
         <div class="or" >
             <div class="bar"></div> 
             <div class="content">Hoặc</div>  

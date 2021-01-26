@@ -2,60 +2,48 @@
     padding: 0;
     margin: 0; 
     margin-top: 1vw; 
-}
+    outline: none;
+} 
+
 a{text-decoration: none;color:black}
 body{
-    background-color: #fafafa;
-    width: 0;
-    margin: 0 auto;
-    position: relative;
+    background-color: #fafafa; 
+    content: "";
+    display: table;
+    clear: both; 
+    width: 100%;
+    margin-top:30px;
 } 
 button{ outline:none}
 .login-left{ 
-    position: absolute;
-    width: 35vw;
-    right: 0;
+    float:left;
+    width: 50%;
+    text-align: right;
 }  
-.login-right{
-    
-    background: white;
-    width: 30vw;
-    height: 500px;
+.login-right,.register{
+    float: left; 
+    width: 30%;
     text-align: center;
-    border:1px solid #bdbdbd;  
-} 
-section{ 
-    position: absolute;
-    top: 40%;
-    left: 65%;
-    transform: translate(-50%,-50%); 
-    border: 1px solid #bdbdbd;
-    height: 450px;
-    width: 350px;
-    background-color: white;
-    text-align: center;
-} 
-
-.username{
-    height: 53px;
-    position: relative;
-    font-family: sans-serif;
-    width: 70%;
-    margin: auto;
+}  
+.login-right .logo{
+    margin-bottom: 20px;
 }
+.login-right{
+    border-radius: 2px;
+    border: 1px solid #bdbdbd;
+    padding: 25px 0px;
+}
+.username {position: relative;}
 .username input{
     height: 30px;
-    position: absolute;
-    display: block;
     border: 1px solid #bdbdbd;
-    width: 100%;
-    z-index: 2;
     font-size: 14px;
     padding-left: 5px;
-    bottom: 0;
+    border-radius: 3px;
+    width: 70%;
     color: #1e2d48;
+    margin-bottom: 10px;
     background-color: #bababa14;  
-    outline: none;
 }
 .username span{
      
@@ -68,8 +56,7 @@ section{
 }  
 .or{
     display: flex;
-    height: 5px;
-    position: relative;
+    height: 5px; 
     width: 70%;
     margin: auto; 
     opacity: 0.5;
@@ -108,8 +95,7 @@ section{
 .register{ 
     background-color: #fff; 
     border: 1px solid #bdbdbd;
-    width: 27vw;
-    text-align: center; 
+    width: 27vw;  
     padding: 20px;
     margin-top: 45px;
 }
@@ -125,17 +111,18 @@ button{
     background-color: #0095f6; 
     border-radius: 5px;
     color: white;
+    margin-bottom: 15px;
+    margin-top: 15px;
     cursor:pointer
 }
 .click{ 
     position: absolute;
-    top: 25%;
     right: 0;
-    z-index: 2;
+    width: 40%;
+    top: 15%;
     cursor: pointer;
 }
 @media only screen and (max-width:850px){
-    .login-left{display: none;}
-    section{left: 50%;}
-    .login-right {width: 80%;}
+    .login-left{display: none;} 
+    .login-right {width: 100%;border:none}
 }
