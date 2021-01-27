@@ -17,6 +17,7 @@ class LoginController extends Controller
         $data =$request->only('email','password');
         if(Auth::attempt($data)){ 
             if(Auth::user()->is_active ==1){
+                 
                 return redirect()->to('/');
             }
             else{

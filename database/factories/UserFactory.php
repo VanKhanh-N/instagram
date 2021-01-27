@@ -24,13 +24,9 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'c_name' => $this->faker->unique()->name,
-            'user' => $this->faker->userName,
-            'avatar' =>'thanh-huyen.jpg',
+            'name' => $this->faker->unique()->name,  
             'email' => $this->faker->unique()->safeEmail, 
-            'password' => Hash::make('123456'),
-            'created_at'=>now(),
-            'updated_at'=>now(),
+            'password' => Hash::make('123456'), 
         ];
     }
 }

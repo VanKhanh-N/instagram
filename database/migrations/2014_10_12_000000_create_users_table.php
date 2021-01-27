@@ -28,6 +28,7 @@ class CreateUsersTable extends Migration
             $table->string('provider')->nullable();
             $table->string('provider_id')->nullable();
             $table->integer('is_active')->default(0);
+            $table->integer('is_admin')->default(0);
             $table->integer('code_otp')->nullable();
             $table->string('password')->nullable();
             $table->rememberToken();

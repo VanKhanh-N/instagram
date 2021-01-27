@@ -26,7 +26,8 @@
          'avatar'           => $getInfo->avatar,
          'user'             => $getInfo->name,
          'provider'         => $provider,
-         'provider_id'      => $getInfo->id
+         'provider_id'      => $getInfo->id,
+         'is_active'        => 1
      ]);
    }
    return $user;

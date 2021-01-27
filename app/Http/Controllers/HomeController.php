@@ -9,7 +9,8 @@ use App\Models\Follow;
 use App\Models\Comment;
 use App\Models\Post;
 use App\Models\Like;
-use Carbon\Carbon;
+use Illuminate\Support\Facades\Gate;
+use Carbon\Carbon;  
 class HomeController extends Controller
 {
      
@@ -21,6 +22,9 @@ class HomeController extends Controller
      
     public function index(Request $request)
     {    
+        if(Gate::allows('is-admin')){
+            return view('admin.index');
+        }
         //tất cả bài viết của những người bạn theo dõi
         $posts =Post::join('follows','follows.followed','posts.p_user')
                     ->where('follows.user_id',\Auth::id())
