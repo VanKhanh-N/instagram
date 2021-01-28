@@ -82,6 +82,8 @@ if (!function_exists('get_client_ip')) {
 if (!function_exists('pare_url_file')) {
     function pare_url_file($image, $folder = '')
     {    
+        if(substr($image,0,4)=='http')
+            return $image;
         if (!$image) {
             return '/img/no-user.png';
         } 

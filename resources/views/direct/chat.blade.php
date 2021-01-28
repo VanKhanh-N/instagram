@@ -1,7 +1,7 @@
-
 <meta name="friendId" content="{{ $friend->id }}">
-@include('header') 
-<div id="app">
+
+@extends('header') 
+@section('content') 
       <div class="messages  d-block">
         <div class="left d-inline-block" style="height: 100%;width:35%; ">
             <div class="top-left  position-relative">
@@ -59,12 +59,6 @@
             <chat v-bind:chats="chats" v-bind:userid="{{ Auth::user()->id }}" v-bind:friendid="{{ $friend->id }}"></chat>
            
         </div>
-      </div>
-      </div> 
-    </section>
-      
-</body>
-
-<script src="{{ asset('js/app.js') }}"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>  
-</html> 
+      </div>  
+       
+@endsection

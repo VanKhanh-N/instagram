@@ -20,6 +20,7 @@ class CreatePostsTable extends Migration
             $table->string('p_image')->nullable();;
             $table->string('p_type')->nullable();;
             $table->integer('p_favourite')->default(0);
+            $table->integer('p_view')->default(0);
             $table->integer('p_comment')->default(0);
             $table->integer('p_share')->default(0); 
             $table->timestamps();

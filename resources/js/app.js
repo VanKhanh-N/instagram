@@ -22,6 +22,7 @@ window.Vue = require('vue').default;
 Vue.component('chat', require('./components/Chat.vue').default);
 
 Vue.component('chat-composer', require('./components/ChatComposer.vue').default);
+Vue.component('notification', require('./components/Notification.vue').default);
 Vue.component('onlineuser', require('./components/OnlineUser.vue').default);
 
 /**
@@ -33,10 +34,19 @@ Vue.component('onlineuser', require('./components/OnlineUser.vue').default);
 const app = new Vue({
     el: '#app',
     data: {
+        notifications:'',
         chats: '',
         onlineUsers: ''     
     },
     created() {
+        //notification
+        axios.post('/notification/get').then(response =>{
+            this.notifications =response.data;
+             
+        });
+
+
+        //chat
         const userId = $('meta[name="userId"]').attr('content');
         const friendId = $('meta[name="friendId"]').attr('content');
 

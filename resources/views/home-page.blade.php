@@ -9,10 +9,7 @@
       
       @if(!$user->avatar) 
       <label for="upload_user_avatar"> <img src="/img/no-user.png" class="rounded-circle user cs avatar_user_uploaded"></label>
-     
-      @elseif(substr($user->avatar,0,4)=='http')
-      <img src="{{ $user->avatar }}" class="rounded-circle user cs avatar_user_uploaded" id="myBtn-5">
-      @else
+     @else 
       <img src="{{ pare_url_file($user->avatar,'user') }}" class="rounded-circle user cs avatar_user_uploaded" id="myBtn-5">
       @endif
       <img src="{{ asset('img/loading.gif')}}" class=" uploadavatar imguser" style="display:none;">
@@ -412,16 +409,11 @@
                $('.submit-{{$val->id}}').show();
             }
             }).done(function(e){
-               if(e.user.avatar){
-                  var img ="/uploads/user/"+e.user.avatar;
-               }
-               else{
-                  img ='/img/no-user.png';
-               }
+               
             $('.comment{{$val->id}}').text(e.count.p_comment);
             $(".list-comment{{$val->id}}").prepend(`
             <div class="clr het">
-            <div class="hew"><a href="/${e.user.user}"><img src="${img}" class="avatar_user_uploaded"></a> </div>
+            <div class="hew"><a href="/${e.user.user}"><img src="${e.avatar}" class="avatar_user_uploaded"></a> </div>
             <div class="hep"><p><b><a href="/${e.user.user}">${e.user.c_name}</a> </b>${c_comment}</p></div>
             <i class="fa fa-ellipsis-h"></i>
             <div class="os heo">1 giây trước </div>

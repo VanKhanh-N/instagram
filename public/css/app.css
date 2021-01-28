@@ -4237,7 +4237,7 @@ input[type=button].btn-block {
 }
 
 .custom-range:focus {
-  
+  outline: none;
 }
 
 .custom-range:focus::-webkit-slider-thumb {

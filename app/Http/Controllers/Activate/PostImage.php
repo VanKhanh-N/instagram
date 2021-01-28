@@ -7,7 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\Comment;
 use App\Models\Like;
 use App\Models\Post;
+use App\Models\User;
 use Carbon\Carbon;
+use App\Notifications\CommentPost;
 class PostImage extends Controller
 {
     public function __construct()
@@ -20,9 +22,12 @@ class PostImage extends Controller
         $data['updated_at']=Carbon::now(); 
         $id=Comment::InsertGetId($data);
         Post::where('id',$data['c_post'])->increment('p_comment');
+        $post=Post::find($data['c_post']);
+        User::find($post->user->id)->notify(new CommentPost($post));
         return response([
             'count'=> Post::find($data['c_post']),
             'user'=>\Auth::user(), 
+            'avatar' =>pare_url_file(\Auth::user()->avatar,'user')
             ]);
     }
 

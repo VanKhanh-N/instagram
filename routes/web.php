@@ -66,7 +66,11 @@ Route::group(['namespace'=>'App\Http\Controllers\Activate'], function () {
     Route::get('/comment/video','PostVideo@CommentVideo')->name('comment.video');  
     Route::get('/share/video','PostVideo@ShareVideo')->name('share.video');  
     //change languge 
-    Route::get('/language/{language}','LanguageController@index')->name('language');  
+    Route::get('/language/{language}','LanguageController@index')->name('language');
+    //notification
+    Route::post('/notification/get','NotificationController@index'); 
+    Route::post('/notification/read','NotificationController@read'); 
+
 });
 
 Route::group(['prefix'=>'accounts','namespace'=>'App\Http\Controllers\Account'], function () {   

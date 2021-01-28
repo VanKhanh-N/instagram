@@ -36,6 +36,7 @@
    elseif($title=='Message' ||$title=='Chat') $direct="img/direct-active.png"; 
    else  $home="img/home-active.png";
 @endphp
+<div id="app">
 <header> 
       <div class="container">
          <div class="d-grid">
@@ -65,75 +66,23 @@
                         <img class="mr-20 rounded-circle w-30" src="{{ asset($explore)  }}" >
                         </a>
                      </li>
-                     <li class="d-inline-block position-relative noti">
-                        <a href="javascript:;">
-                        <img class="mr-20 rounded-circle w-30" src="{{ asset(
-                           'img/heart.png') }}" class="heart" >
-                        </a>
-                        <ul class="notification  d-none set-noti-width">
-                           <li class="position-relative">
-                              <div class="noti-img">
-                                 <img src="{{ asset('img/be-giang.png') }}" class="rounded-circle">
-                              </div>
-                              <div class="noti-content">
-                                 <a href="">
-                                    <p>26.imei</p>
-                                    <span>Đã bắt đầu theo dõi bạn</span>
-                                    <span class="time">10 tuần</span> 
-                                 </a>
-                                 <button>{{ __('translate.follow')}}</button> 
-                              </div>
-                           </li>
-                           <li class="position-relative">
-                              <div class="noti-img">
-                                 <img src="{{ asset('img/be-giang.png') }}" class="rounded-circle">
-                              </div>
-                              <div class="noti-content">
-                                 <a href="">
-                                    <p>26.imei</p>
-                                    <span>Đã bắt đầu theo dõi bạn.</span>
-                                    <span class="time">10 tuần</span> 
-                                 </a>
-                                 <button>{{ __('translate.follow')}}</button> 
-                              </div>
-                           </li>
-                           <li class="position-relative">
-                              <div class="noti-img">
-                                 <img src="{{ asset('img/be-giang.png') }}" class="rounded-circle">
-                              </div>
-                              <div class="noti-content ">
-                                 <a href="">
-                                    <p>26.imei</p>
-                                    <span>Đã bắt đầu theo dõi bạn.</span>
-                                    <span class="time">10 tuần</span> 
-                                 </a>
-                                 <button>{{ __('translate.follow')}}</button> 
-                              </div>
-                           </li>
-                        </ul>
-                     </li>
+                     <notification v-bind:notifications="notifications"></notification>
                      <script>
-                     $(function(){
-                        $('.noti').on('click',function(){
-                           $('.set-noti-width').toggleClass("d-none");
-                           $('.set-user-width').addClass("d-none");
+                        $(function(){
+                           $('.noti').on('click',function(){
+                              $('.set-noti-width').toggleClass("d-none");
+                              $('.set-user-width').addClass("d-none");
+                           })
+                           $('.set-user').on('click',function(){
+                              $('.set-noti-width').addClass("d-none");
+                              $('.set-user-width').toggleClass("d-none");
+                           })
+                           
                         })
-                        $('.set-user').on('click',function(){
-                           $('.set-noti-width').addClass("d-none");
-                           $('.set-user-width').toggleClass("d-none");
-                        })
-                         
-                     })
-                  </script>
+                    </script>
                      <li class="d-inline-block position-relative set-user">
-                        <a>
-                        @if(substr(auth()->user()->avatar,0,4)=='http')
-                        <img src="{{ auth()->user()->avatar }}" class="mr-20 rounded-circle w-30 avatar_user_uploaded">
-                        @else
+                        <a> 
                         <img src="{{ pare_url_file(auth()->user()->avatar,'user') }}" class="mr-20 rounded-circle w-30 avatar_user_uploaded" style="object-fit:cover">
-                        @endif  
-
-     
                         </a>
                         <ul class="notification set-user-width d-none">
                            <a href="{{ route('get.home-page',auth()->user()->user) }}">
@@ -168,3 +117,25 @@
          </div>
       </div>
    </header>
+   @yield('content')
+</div>
+<script src="{{ asset('js/style.js') }}"></script>
+<script src="{{ asset('js/post.js') }}"></script>
+<script src="https://use.fontawesome.com/452826394c.js"></script>
+<script src="{{ asset('toastr/toastr.min.js') }}"></script>
+<script src="{{ asset('js/app.js') }}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>  
+
+<script>
+      if(typeof TYPE_MESSAGE != "undefined"){
+          switch (TYPE_MESSAGE){
+              case 'success':
+                  toastr.success(MESSAGE)
+                  break;
+              case 'error':
+                  toastr.error(MESSAGE)
+                  break;
+          }
+      }
+   </script>
+</html> 
