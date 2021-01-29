@@ -199,7 +199,7 @@
    
    <div class="posts">
    <div class="d-gri csd">
-   <button id="first" class="bt" style="text-transform: uppercase;"><i class="fa fa-table"></i> {{ __('translate.posts')}}</button>
+   <button  class="bt" id="first"  style="text-transform: uppercase;"><i class="fa fa-table"></i> {{ __('translate.posts')}}</button>
    <button id="second"><i class="fa fa-television"></i> IGTV</button>
    <button id="third"  style="text-transform: uppercase;"><i class="fa  fa-arrows-alt"></i> {{ __('translate.saved')}}</button>
    <button id="fourst"><i class="fa fa-user"></i> {{ __('translate.TAGGED')}}</button> 

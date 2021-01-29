@@ -24,7 +24,7 @@ class CommentPost extends Notification
      */
     public function via($notifiable)
     {
-        return ['database'];
+        return ['database','broadcast'];
     }
 
     /**
@@ -39,7 +39,14 @@ class CommentPost extends Notification
            'post'=> $this->post
         ];
     }
-
+    public function toBroadCast($notifiable)
+    {
+        return [
+           'data'=> [
+               'post' =>$this->post
+           ]
+        ];
+    }
     /**
      * Get the array representation of the notification.
      *

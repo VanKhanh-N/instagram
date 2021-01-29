@@ -45,11 +45,16 @@ const app = new Vue({
              
         });
 
-
         //chat
         const userId = $('meta[name="userId"]').attr('content');
         const friendId = $('meta[name="friendId"]').attr('content');
 
+        //notification
+        Echo.private('App.Models.User.' + userId).notification((notification)=>{
+            this.notifications.push(notification);
+        })
+         
+        //chat
         if (friendId != undefined) {
             axios.post('/chat/getChat/' + friendId).then((response) => {
                 this.chats = response.data;
@@ -61,6 +66,7 @@ const app = new Vue({
                 });
         }
 
+        //online
         if (userId != 'null') {
             Echo.join('Online')
                 .here((users) => {

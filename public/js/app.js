@@ -1959,6 +1959,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['notifications'],
   methods: {
@@ -2056,7 +2060,11 @@ var app = new Vue({
     }); //chat
 
     var userId = $('meta[name="userId"]').attr('content');
-    var friendId = $('meta[name="friendId"]').attr('content');
+    var friendId = $('meta[name="friendId"]').attr('content'); //notification
+
+    Echo["private"]('App.Models.User.' + userId).notification(function (notification) {
+      _this.notifications.push(notification);
+    }); //chat
 
     if (friendId != undefined) {
       axios.post('/chat/getChat/' + friendId).then(function (response) {
@@ -2065,7 +2073,8 @@ var app = new Vue({
       Echo["private"]('Chat.' + friendId + '.' + userId).listen('BroadcastChat', function (e) {
         _this.chats.push(e.chat);
       });
-    }
+    } //online
+
 
     if (userId != 'null') {
       Echo.join('Online').here(function (users) {
@@ -44430,57 +44439,67 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("li", { staticClass: "d-inline-block position-relative noti" }, [
-    _vm._m(0),
+    _c(
+      "a",
+      { staticClass: "position-relative", attrs: { href: "javascript:;" } },
+      [
+        _c("img", {
+          staticClass: "mr-20 rounded-circle w-30 heart",
+          attrs: { src: "/img/heart.png" }
+        }),
+        _vm._v(" "),
+        _c("span", { staticClass: "count-action" }, [
+          _vm._v(_vm._s(_vm.notifications.length))
+        ])
+      ]
+    ),
     _vm._v(" "),
     _c(
       "ul",
       { staticClass: "notification  d-none set-noti-width" },
-      _vm._l(_vm.notifications, function(notification) {
-        return _c("li", { staticClass: "position-relative" }, [
-          _c(
-            "div",
-            {
-              on: {
-                click: function($event) {
-                  return _vm.MarkAsRead(notification)
+      [
+        _vm._l(_vm.notifications, function(notification) {
+          return _c("li", { staticClass: "position-relative" }, [
+            _c(
+              "a",
+              {
+                attrs: { href: "#" },
+                on: {
+                  click: function($event) {
+                    return _vm.MarkAsRead(notification)
+                  }
                 }
-              }
-            },
-            [
-              _c("div", { staticClass: "noti-img" }),
-              _vm._v(" "),
-              _c("div", { staticClass: "noti-content" }, [
-                _c("p", [
-                  _vm._v(_vm._s(JSON.parse(notification.data).post.p_content))
-                ]),
+              },
+              [
+                _c("div", { staticClass: "noti-img" }),
                 _vm._v(" "),
-                _c("span", [_vm._v("Đã bắt đầu theo dõi bạn")]),
-                _vm._v(" "),
-                _c("span", { staticClass: "time" }, [_vm._v("10 tuần")]),
-                _vm._v(" "),
-                _c("button", [_vm._v("Theo doi")])
+                _c("div", { staticClass: "noti-content" }, [
+                  _c("p", [_vm._v(_vm._s(notification.data.post.p_content))]),
+                  _vm._v(" "),
+                  _c("span", [_vm._v("Đã bắt đầu theo dõi bạn")]),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "time" }, [_vm._v("10 tuần")]),
+                  _vm._v(" "),
+                  _c("button", [_vm._v("Theo doi")])
+                ])
+              ]
+            )
+          ])
+        }),
+        _vm._v(" "),
+        _vm.notifications.length == 0
+          ? _c("li", [
+              _c("div", { staticClass: "no-action" }, [
+                _vm._v("  Bạn không có hoạt động mới nào ")
               ])
-            ]
-          )
-        ])
-      }),
-      0
+            ])
+          : _vm._e()
+      ],
+      2
     )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("a", { attrs: { href: "javascript:;" } }, [
-      _c("img", {
-        staticClass: "mr-20 rounded-circle w-30 heart",
-        attrs: { src: "/img/heart.png" }
-      })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

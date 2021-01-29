@@ -161,6 +161,14 @@ body,.background-gray{
     padding-top: 10px;
     border-bottom: 1px solid #dbdbdb;
 }
+.no-action{
+    padding: 15px;
+    text-align: center;
+}
+.count-action{
+    position: absolute;
+    left: 0;
+    background: white;}
 .notification p{font-weight: 600;}
 .notification .time{opacity: 0.5; }
 .notification li button{

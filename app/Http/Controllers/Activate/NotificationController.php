@@ -10,7 +10,7 @@ class NotificationController extends Controller
     public function index()
     {
         $notification =\Auth::user()->unreadNotifications;
-       return Notification::all();
+       return $notification;
     }
     public function read(Request $request)
     {   
