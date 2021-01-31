@@ -31,7 +31,8 @@ if (!function_exists('upload_image')) {
 
         // Tên file mới
         $nameFile = trim(str_replace('.' . $ext, '', strtolower($info->getFilename())));
-        $filename =  \Illuminate\Support\Str::slug($nameFile) . '.' . $ext;;
+        $filename = date('Y-m-d__') . \Illuminate\Support\Str::slug($nameFile) . '.' . $ext;
+
 
         // thu muc goc de upload
         $path = public_path() . '/uploads/';
@@ -84,9 +85,7 @@ if (!function_exists('pare_url_file')) {
     {    
         if(substr($image,0,4)=='http')
             return $image;
-        if (!$image) {
-            return '/img/no-user.png';
-        } 
+          
         if($folder!='')
             return '/uploads/' . $folder . '/' . $image;
         else

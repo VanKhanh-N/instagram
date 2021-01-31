@@ -1971,7 +1971,7 @@ __webpack_require__.r(__webpack_exports__);
         id: notification.id
       };
       axios.post('/notification/read', data).then(function (res) {
-        window.location.href = "/post/" + notification.data.post.id;
+        window.location.href = "/p/" + notification.data.post.id;
       });
     }
   }
@@ -44471,16 +44471,21 @@ var render = function() {
                 }
               },
               [
-                _c("div", { staticClass: "noti-img" }),
+                _c("div", { staticClass: "noti-img" }, [
+                  _c("img", {
+                    staticClass: "rounded-circle",
+                    attrs: {
+                      src: "uploads/user/" + notification.data.post.user.avatar
+                    }
+                  })
+                ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "noti-content" }, [
-                  _c("p", [_vm._v(_vm._s(notification.data.post.p_content))]),
+                  _c("p", [_vm._v(_vm._s(notification.data.post.user.c_name))]),
                   _vm._v(" "),
-                  _c("span", [_vm._v("Đã bắt đầu theo dõi bạn")]),
+                  _c("span", [_vm._v("Đã bình luận về bài viết của bạn")]),
                   _vm._v(" "),
-                  _c("span", { staticClass: "time" }, [_vm._v("10 tuần")]),
-                  _vm._v(" "),
-                  _c("button", [_vm._v("Theo doi")])
+                  _c("span", { staticClass: "time" }, [_vm._v("10 tuần trước")])
                 ])
               ]
             )

@@ -9,13 +9,13 @@
          <li class="position-relative" v-for="notification in notifications" >
             <a href="#" v-on:click="MarkAsRead(notification)">
                <div class="noti-img">
-                  <!-- <img src="img/be-giang.png" class="rounded-circle"> -->
+                  <img :src="'uploads/user/'+notification.data.post.user.avatar" class="rounded-circle">
                </div>
                <div class="noti-content" > 
-                     <p>{{notification.data.post.p_content}}</p>
-                     <span>Đã bắt đầu theo dõi bạn</span>
-                     <span class="time">10 tuần</span>  
-                  <button>Theo doi</button> 
+                     <p>{{notification.data.post.user.c_name}}</p>
+                     <span>Đã bình luận về bài viết của bạn</span>
+                     <span class="time">10 tuần trước</span>  
+                  <!-- <button>Theo doi</button>  -->
                </div>   
             </a>
          </li> 
@@ -33,8 +33,10 @@
             var data ={
                id:notification.id
             };
+            
             axios.post('/notification/read',data).then(res =>{
-               window.location.href ="/post/"+notification.data.post.id
+               window.location.href ="/p/"+notification.data.post.id;
+
             })
          }
       },

@@ -36,6 +36,7 @@ class RegisterController extends Controller
     public function create(RequestRegister $request)
     { 
         $data =$request->except('_token');  
+        $data['avatar'] ='img/no-user.png';
         $data['password']=Hash::make($data['password']);
         $data['created_at']=Carbon::now(); 
         

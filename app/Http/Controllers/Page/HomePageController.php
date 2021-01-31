@@ -105,7 +105,8 @@ class HomePageController extends Controller
 
     public function deleteProfile(Request $request){ 
         $user =  User::find(\Auth::user()->id); 
-        $user->avatar='';  
+        unlink(public_path('uploads/user/'.$user->avatar));
+        $user->avatar='no-user.png';  
         if($user->update()){
             echo 200;
         }else{
