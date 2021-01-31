@@ -56,6 +56,10 @@ return [
     'See All'=>'Xem tất cả',
     'Press'=>'Báo chí',
     'Message'=>'Nhắn tin',
+    'Report'=>'Báo cáo',
+    'Go to post'=>'Đi tới bài viết',
+    'Share to...'=>'Chia sẻ lên...',
+    'Copy Link'=>'Sao chép đường dẫn',
     //direct
     'Your Messages'=>'Tin nhắn của bạn',
     'Send private photos and messages to a friend or group.'=>'Gửi ảnh và tin nhắn riêng tư cho bạn bè hoặc nhóm.',

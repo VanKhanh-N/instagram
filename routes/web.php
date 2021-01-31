@@ -42,6 +42,7 @@ Route::group(['namespace'=>'App\Http\Controllers\Personal'], function () {
 //home page
 Route::group(['namespace'=>'App\Http\Controllers\Page'], function () { 
     //follow user
+    Route::get('/p/{slug}','HomePageController@view_post')->name('post.view'); 
     Route::get('/incre-view','HomePageController@incre_view')->name('post.increview'); 
     Route::get('/follow','HomePageController@follow'); 
     Route::post('/upload_user','HomePageController@uploadProfile')->name('upload.user'); 

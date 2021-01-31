@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="{{ asset('css/reponsive.css') }}"> 
     <link rel="stylesheet" href="{{ asset('css/explore.css') }}"> 
     <link rel="stylesheet" href="{{ asset('css/home-page.css') }}"> 
-    <link rel="stylesheet" type="text/css" href="{{ asset('slick/slick/slick.css') }}"/>  
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <link rel="icon" href="{{ asset('img/favicon.ico') }}" type="image/x-icon"/>
@@ -119,12 +118,13 @@
    </header>
    @yield('content')
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>  
+</html> 
+<script src="{{ asset('js/app.js') }}"></script>
+
 <script src="{{ asset('js/style.js') }}"></script>
 <script src="{{ asset('js/post.js') }}"></script>
 <script src="https://use.fontawesome.com/452826394c.js"></script>
 <script src="{{ asset('toastr/toastr.min.js') }}"></script>
-<script src="{{ asset('js/app.js') }}"></script>
 
 <script>
       if(typeof TYPE_MESSAGE != "undefined"){
@@ -138,4 +138,3 @@
           }
       }
    </script>
-</html> 

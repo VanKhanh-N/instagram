@@ -1,5 +1,6 @@
 @extends('header') 
 @section('content')
+    <link rel="stylesheet" type="text/css" href="{{ asset('slick/slick/slick.css') }}"/>  
 <body>
    <br>
    <br>
@@ -82,7 +83,16 @@
             <article class="border-gray position-relative">
                <div class="header ">
                   <a class="text-black" href="{{ $item->user->user}}"><img src="{{ pare_url_file($item->user->avatar,'user') }}" class="rounded-circle  d-inline-block img-user">{{ $item->user->c_name}}</a>
-                  <div class="float-right"><a><img src="{{ asset('img/edit.png') }}" class="img-edit"></a></div>
+                  <div class="float-right cs" id="Btn{{$item->id}}"  ><img src="{{ asset('img/edit.png') }}" class="img-edit"></div>
+                  <div id="Modal{{$item->id}}" class="modal">
+                        <div class="modal-content setting animate__animated animate__zoomIn" >
+                           <li><a href="javascript:;" class="text-red">{{ __('translate.Report')}}</a></li>
+                           <li><a href="{{route('post.view',$item->p_slug)}}" >{{ __('translate.Go to post')}}</a> </li>
+                           <li><a href="javascript:;" >{{ __('translate.Share to...')}}</a></li>
+                           <li><a href="javascript:;" >{{ __('translate.Copy Link')}}</a></li>
+                           <li class="cs" id="exits{{$item->id}}"><a href="javascript:;" >{{ __('translate.Cancel')}}</a></li>
+                        </div>
+                     </div> 
                </div>
                <img src="{{pare_url_file($item->p_image,'profile') }}" class="article-img">
                <div class="attractive">
@@ -123,6 +133,21 @@
                </div>
             </article>
             <script> 
+            //modal
+            $(function(){
+            
+            var modal{{$item->id}} = document.getElementById("Modal{{$item->id}}"); 
+            var btn{{$item->id}} = document.getElementById("Btn{{$item->id}}");
+            var exits{{$item->id}} = document.getElementById("exits{{$item->id}}"); 
+            btn{{$item->id}}.onclick = function() {
+            modal{{$item->id}}.style.display = "block";
+            }   
+            //ẩn modal trong bài viết
+           
+            exits{{$item->id}}.onclick = function() {   
+               modal{{$item->id}}.style.display = "none";
+            }
+             
                //load comment
                  
                $('body').on('click','.button{{$key}}',function(){  
@@ -197,7 +222,7 @@
                });
                })
                })
-               
+            })
             </script>     
             @endforeach
          </div>
@@ -306,5 +331,6 @@
          }
       })
    </script>
+  
 </body>
 @endsection

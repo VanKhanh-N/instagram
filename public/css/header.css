@@ -55,6 +55,7 @@ input{outline: 0;}
 }
 header{
     position: fixed;
+    top:0;
     height: 55px;
     width: 100%;
     border-bottom:1px solid #8080804d;

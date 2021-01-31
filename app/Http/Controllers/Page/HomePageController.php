@@ -11,6 +11,7 @@ use App\Models\Post;
 use App\Models\Comment;
 use App\Models\Follow;
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 Carbon::setLocale('vi');
 class HomePageController extends Controller
 { public function __construct()
@@ -54,6 +55,7 @@ class HomePageController extends Controller
         $data=$request->except('_token','profiles','stories');  
         $data['created_at']=Carbon::now();
         $data['p_user']=\Auth::id(); 
+        $data['p_slug'] =Str::random(15);
         if($request->profiles){
             $image =upload_image('profiles',"profile");
             if($image['code']==1)
@@ -86,6 +88,21 @@ class HomePageController extends Controller
     }
 }
     
+    public function view_post(Request $request,$slug){ 
+        $post=Post::where('p_slug',$slug)->first();
+        $related_post=Post::where('id','!=',$post->id)
+                           ->where('p_user',$post->p_user)
+        ->orderby('id','desc')->limit(6)->get();
+        $viewData=[
+            'post' =>$post,
+            'related_post' =>$related_post,
+            'title'=>'',
+            'now'  => Carbon::now(),
+
+        ];
+        return view('view_post',$viewData);
+    }
+
     public function deleteProfile(Request $request){ 
         $user =  User::find(\Auth::user()->id); 
         $user->avatar='';  

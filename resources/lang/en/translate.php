@@ -59,6 +59,10 @@ return [
     'See All'=>'See All',
     'Press'=>'Press',
     'Message'=>'Message',
+    'Report'=>'Report',
+    'Go to post'=>'Go to post',
+    'Share to...'=>'Share to...',
+    'Copy Link'=>'Copy Link',
     //direct
     'Your Messages'=>'Your Messages',
     'Send private photos and messages to a friend or group.'=>'Send private photos and messages to a friend or group.',

@@ -17,7 +17,7 @@ class PostImage extends Controller
         $this->middleware('auth');
     }
     public function CommentPost(Request $request){  
-        $data=$request->all();
+        $data=$request->except('_token');
         $data['created_at']=Carbon::now();
         $data['updated_at']=Carbon::now(); 
         $id=Comment::InsertGetId($data);

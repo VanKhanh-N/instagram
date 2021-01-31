@@ -227,6 +227,7 @@ footer ul{
     height: 300px;
     max-height: 300px; 
     position: relative;
+    text-align: center;
 }
 .cse .clr{
     position: absolute;
