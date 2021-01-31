@@ -305,6 +305,7 @@
       </div>
    </div>
 <script type="text/javascript" src="{{ asset('slick/slick/slick.js') }}"></script>
+<script src="{{ asset('js/style.js') }}"></script>
    
    <script>
       $(document).ready(function(){

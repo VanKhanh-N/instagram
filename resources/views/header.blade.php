@@ -120,8 +120,6 @@
 </div>
 </html> 
 <script src="{{ asset('js/app.js') }}"></script>
-
-<script src="{{ asset('js/style.js') }}"></script>
 <script src="{{ asset('js/post.js') }}"></script>
 <script src="https://use.fontawesome.com/452826394c.js"></script>
 <script src="{{ asset('toastr/toastr.min.js') }}"></script>
