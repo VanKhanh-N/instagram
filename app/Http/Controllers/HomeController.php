@@ -36,8 +36,24 @@ class HomeController extends Controller
         if($request->ajax()){
         return ['posts'=>view('layout.welcome')->with(compact('posts','now'))->render(),'next_page'=>$posts->nextPageUrl()];
         }
-        $user =User::where('users.id','!=',\Auth::id())->take(5)->inRandomOrder()->get();  
-        
+        $areFollow =Follow::where(['user_id'=>\Auth::id()])->get();
+        $user=[];
+        if(!count($areFollow)){
+            $user =User::where('id','!=',\Auth::id())
+            ->orderBy('picture','desc')
+            ->limit(5)
+            ->get(); 
+} 
+        else{
+        foreach($areFollow as $list){
+        $user =User::where('id','!=',$list->id)
+                    ->where('id','!=',\Auth::id())
+                    ->orderBy('picture','desc')
+                    ->inRandomOrder()
+                    ->limit(5)
+                    ->get(); 
+        } 
+    }
         $data=[
             'now'   => $now,
             'posts' => $posts, 

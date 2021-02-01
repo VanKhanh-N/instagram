@@ -1,4 +1,3 @@
-$(function(){
   $('.mySlides').slick({
     infinite: true,
     slidesToShow: 8,
@@ -37,4 +36,3 @@ $(function(){
 
 
   });
-})

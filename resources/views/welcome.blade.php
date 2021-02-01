@@ -79,6 +79,12 @@
             </ul>
          </section>
          <div class="postss conntent" data-next-page="{{$posts->nextPageUrl()}}">
+         @if(!count($posts))
+         <div class="d-block text-center" style="margin-top:30%">
+         <i class="fa fa-lg fa-plus-square-o text-blue" style="font-size:400%"></i>
+         <p>Bắt đầu <b class="text-blue">theo dõi</b> những người khác để cùng chia sẻ những kỷ niệm</p>
+      </div>
+      @endif
             @foreach($posts as $key => $item)  
             <article class="border-gray position-relative">
                <div class="header ">
@@ -231,6 +237,7 @@
          </div>
       </div>
       <div class="d-inline-block right" >
+      
          <div class="d-block">
             <div class="d-inline-block"><a href="{{\Auth::user()->user}}">  
                @if(substr(auth()->user()->avatar,0,4)=='http')
@@ -276,11 +283,7 @@
                   </div>
                </div>
             </div>
-            <script>
-               $(".follow{{$list->id}}").on("click",function(){ 
-                  $(this).toggleClass("text-blue");
-               })
-            </script>
+            
             @endif
             @endforeach
             <div class="about-us">

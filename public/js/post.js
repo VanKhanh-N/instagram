@@ -59,6 +59,7 @@ function follow(followed){
             }
             else{
             //welcome(gợi ý cho bạn)
+            $('.follow'+followed).removeClass('text-blue');
             $('.follow'+followed).text(data.text_follow);
              //button gần user
             $('.list-follow').prepend(` 
