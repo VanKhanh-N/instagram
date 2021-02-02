@@ -35,6 +35,9 @@
    elseif($title=='Message' ||$title=='Chat') $direct="img/direct-active.png"; 
    else  $home="img/home-active.png";
 @endphp
+<div class="loader hidden ">
+<div class="loading-first"></div>
+</div>
 <div id="app">
 <header> 
       <div class="container">

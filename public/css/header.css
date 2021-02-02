@@ -183,3 +183,26 @@ body,.background-gray{
     padding: 5px;
     border-radius: 5px;
 }  
+.loader{
+    position: fixed;
+    z-index: 999999; 
+    background: white;
+    width: 100%;
+    height: 100%;
+    left: 0;
+} 
+.loading-first{
+    background: url('/img/tenor.gif') no-repeat fixed center;
+    width: 100%;
+    height: 100%;
+}
+.hidden{
+    animation: faceOut 2s;
+    animation-fill-mode: forwards;
+}
+@keyframes faceOut{
+    100%{
+        display: none;
+        visibility: hidden;
+    }
+}

@@ -1,4 +1,3 @@
- 
     @foreach($posts as $key => $item)  
          <article class="border-gray position-relative">
             <div class="header ">

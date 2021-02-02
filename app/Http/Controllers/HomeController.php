@@ -50,7 +50,7 @@ class HomeController extends Controller
                     ->where('id','!=',\Auth::id())
                     ->orderBy('picture','desc')
                     ->inRandomOrder()
-                    ->limit(5)
+                    ->limit(6)
                     ->get(); 
         } 
     }

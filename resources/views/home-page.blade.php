@@ -5,6 +5,7 @@
 <br>
 <br> 
 <body>
+
    <section class="sd">
       
       @if(!$user->avatar) 
