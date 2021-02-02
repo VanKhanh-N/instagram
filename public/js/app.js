@@ -1873,6 +1873,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['chats', 'userid', 'friendid']
 });
+var vue_det = new Vue({
+  el: '#intro',
+  data: {
+    timestamp: ""
+  },
+  created: function created() {
+    setInterval(this.getNow, 1000);
+  },
+  methods: {
+    getNow: function getNow() {
+      var today = new Date();
+      var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+      var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+      var dateTime = date + ' ' + time;
+      this.timestamp = dateTime;
+    }
+  }
+});
 
 /***/ }),
 
@@ -44306,42 +44324,48 @@ var render = function() {
           staticClass: "bottom-right position-relative",
           attrs: { id: "hihi" }
         },
-        _vm._l(_vm.chats, function(chat) {
-          return _vm.chats.length != 0
-            ? _c("div", [
-                chat.user_id == _vm.userid
-                  ? _c(
-                      "div",
-                      { staticClass: "my-messages position-relative" },
-                      [
-                        _c("div", { staticClass: "time" }, [
-                          _vm._v("24 Tháng 7 2019 15:10")
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "me-messages" }, [
-                          _c("p", [_vm._v(" " + _vm._s(chat.chat))])
-                        ])
-                      ]
-                    )
-                  : _c(
-                      "div",
-                      { staticClass: "friend-messages position-relative" },
-                      [
-                        _c("div", { staticClass: "time" }, [
-                          _vm._v("24 Tháng 7 2019 15:10")
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "your-messages" }, [
-                          _c("p", [_vm._v(_vm._s(chat.chat))])
-                        ])
-                      ]
-                    )
-              ])
-            : _c("div", { staticClass: "no-message" }, [
+        [
+          _vm._l(_vm.chats, function(chat) {
+            return _vm.chats.length != 0
+              ? _c("div", [
+                  chat.user_id == _vm.userid
+                    ? _c(
+                        "div",
+                        { staticClass: "my-messages position-relative" },
+                        [
+                          _c("div", { staticClass: "time" }, [
+                            _vm._v(_vm._s(_vm.timestamp))
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "me-messages" }, [
+                            _c("p", [_vm._v(" " + _vm._s(chat.chat))])
+                          ])
+                        ]
+                      )
+                    : _c(
+                        "div",
+                        { staticClass: "friend-messages position-relative" },
+                        [
+                          _c("div", { staticClass: "time" }, [
+                            _vm._v(_vm._s(_vm.timestamp))
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "your-messages" }, [
+                            _c("p", [_vm._v(_vm._s(chat.chat))])
+                          ])
+                        ]
+                      )
+                ])
+              : _vm._e()
+          }),
+          _vm._v(" "),
+          _vm.chats.length == 0
+            ? _c("div", { staticClass: "no-message" }, [
                 _vm._v("\n        There are no messages\n    ")
               ])
-        }),
-        0
+            : _vm._e()
+        ],
+        2
       ),
       _vm._v(" "),
       _c("chat-composer", {

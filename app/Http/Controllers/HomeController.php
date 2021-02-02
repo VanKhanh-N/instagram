@@ -31,11 +31,9 @@ class HomeController extends Controller
                     ->where('posts.p_type','profile')
                     ->select('posts.*')
                     ->orderby('created_at','desc')
-                    ->paginate(5); 
+                    ->get(); 
         $now =Carbon::now();
-        if($request->ajax()){
-        return ['posts'=>view('layout.welcome')->with(compact('posts','now'))->render(),'next_page'=>$posts->nextPageUrl()];
-        }
+        
         $areFollow =Follow::where(['user_id'=>\Auth::id()])->get();
         $user=[];
         if(!count($areFollow)){
@@ -50,7 +48,7 @@ class HomeController extends Controller
                     ->where('id','!=',\Auth::id())
                     ->orderBy('picture','desc')
                     ->inRandomOrder()
-                    ->limit(6)
+                    ->limit(5)
                     ->get(); 
         } 
     }

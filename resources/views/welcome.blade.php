@@ -78,11 +78,11 @@
                </li>
             </ul>
          </section>
-         <div class="postss conntent" data-next-page="{{$posts->nextPageUrl()}}">
+         <div class="postss conntent">
          @if(!count($posts))
          <div class="d-block text-center" style="margin-top:30%">
-         <i class="fa fa-lg fa-plus-square-o text-blue" style="font-size:400%"></i>
-         <p>Bắt đầu <b class="text-blue">theo dõi</b> những người khác để cùng chia sẻ những kỷ niệm</p>
+         <i class="fa fa-lg fa-plus-square-o" style="font-size:400%"></i>
+         <p>Bắt đầu theo dõi những người khác để cùng chia sẻ những kỷ niệm</p>
       </div>
       @endif
             @foreach($posts as $key => $item)  
@@ -232,9 +232,9 @@
             </script>     
             @endforeach
          </div>
-         <div class="loading" style="text-align:center">
+         <!-- <div class="loading" style="text-align:center">
             <img src="{{asset('img/loadingg.gif')}}"style="width:250px;height:250px">
-         </div>
+         </div> -->
       </div>
       <div class="d-inline-block right" >
       
@@ -310,31 +310,6 @@
 <script type="text/javascript" src="{{ asset('slick/slick/slick.js') }}"></script>
 <script src="{{ asset('js/style.js') }}"></script>
    
-   <script>
-      $(document).ready(function(){
-         $('.loading').hide();
-         $(window).scroll(fetchPost);
-         function fetchPost(){
-            var page=$('.conntent').data('next-page');
-            if(page !== null){
-               $('.loading').show()   
-               clearTimeout($.data(this),"scrollCheck");
-               $.data(this,"scrollCheck",setTimeout(function(){
-                  var scroll_position =$(window).height()+$(window).scrollTop()+100;
-                  if(scroll_position>=$(document).height()){
-                     $.get(page,function(data){
-                       $('.postss').append(data.posts);
-                       $('.conntent').data('next-page',data.next_page);
-                     })
-                     $('.loading').hide()
-                  }
-               },2000))
-            }else{
-              $('.loading').hide()
-            }
-         }
-      })
-   </script>
   
 </body>
 @endsection

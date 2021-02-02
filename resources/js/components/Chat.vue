@@ -3,19 +3,19 @@
     <div class="bottom-right position-relative" id="hihi">
         <div v-if="chats.length != 0"  v-for="chat in chats">
             <div class="my-messages position-relative" v-if="chat.user_id == userid">
-                <div class="time">24 Tháng 7 2019 15:10</div>
+                <div class="time">{{ timestamp }}</div>
                     <div class="me-messages"> 
                         <p> {{ chat.chat }}</p>
                     </div>
             </div>
             <div class="friend-messages position-relative" v-else>
-                <div class="time">24 Tháng 7 2019 15:10</div>
+                <div class="time">{{ timestamp }}</div>
                     <div class="your-messages"> 
                         <p>{{ chat.chat }}</p>
                     </div>
             </div>
         </div>
-        <div v-else class="no-message">
+        <div v-if="chats.length == 0"  class="no-message">
             There are no messages
         </div>
     </div>
@@ -27,4 +27,22 @@
     export default {
         props: ['chats', 'userid', 'friendid']
     }
+      var vue_det = new Vue({
+            el: '#intro',
+            data: {
+               timestamp: ""
+            },
+            created() {
+                setInterval(this.getNow, 1000);
+            },
+            methods: {
+                getNow: function() {
+                    const today = new Date();
+                    const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+                    const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+                    const dateTime = date +' '+ time;
+                    this.timestamp = dateTime;
+                }
+            }
+         });
 </script>
