@@ -336,3 +336,10 @@
     padding-right: 12px;
     border: 1px solid black;
     border-radius: 50%;}
+.friend-img{
+    position: absolute;
+    margin: 8px 8px;
+    height: 30px;
+    width: 30px;
+    object-fit: cover;
+}

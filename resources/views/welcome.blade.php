@@ -1,3 +1,4 @@
+
 @extends('header') 
 @section('content')
     <link rel="stylesheet" type="text/css" href="{{ asset('slick/slick/slick.css') }}"/>  

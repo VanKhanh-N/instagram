@@ -56,7 +56,7 @@
                <a href="" style="float:right;padding:25px"><i class="fa fa-lg fa-video-camera"></i></a>
             </div> 
            
-            <chat v-bind:chats="chats" v-bind:userid="{{ Auth::user()->id }}" v-bind:friendid="{{ $friend->id }}"></chat>
+            <chat v-bind:chats="chats" v-bind:userid="{{ Auth::user()->id }}" v-bind:friendid="{{ $friend->id }}" ></chat>
            
         </div>
       </div>  

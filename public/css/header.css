@@ -166,6 +166,7 @@ body,.background-gray{
     padding: 15px;
     text-align: center;
 }
+.slick-arrow{z-index: 1 !important;}
 .count-action{
     position: absolute;
     left: 0;

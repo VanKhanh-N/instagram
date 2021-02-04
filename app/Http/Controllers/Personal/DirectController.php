@@ -16,8 +16,8 @@ class DirectController extends Controller
     public function index(){ 
       
        
-        $chat =Chat:: where('repeats',0)->where(function($user){
-            $user ->where('user_id',\Auth::id())
+        $chat =Chat::where('repeats',0)->where(function($user){
+            $user->where('user_id',\Auth::id())
                 ->orwhere('friend_id',\Auth::id());
         })
                 ->get();       
@@ -48,8 +48,12 @@ class DirectController extends Controller
         })->orWhere(function ($query) use ($id) {
             $query->where('user_id', '=', $id)->where('friend_id', '=', \Auth::user()->id);
         })->get();
-
-        return $chats;
+        $friend=User::find($id);
+    $data=[
+        'chat' =>$chats,
+        'friend'=>$friend
+    ];
+        return $data;
     }
 
     public function sendChat(Request $request) { 

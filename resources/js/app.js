@@ -30,14 +30,14 @@ Vue.component('onlineuser', require('./components/OnlineUser.vue').default);
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-
+import moment from 'moment';
 const app = new Vue({
     el: '#app',
     data: {
         notifications:'',
         chats: '',
         onlineUsers: ''     
-    },
+    }, 
     created() {
         //notification
         axios.post('/notification/get').then(response =>{
@@ -54,7 +54,7 @@ const app = new Vue({
             this.notifications.push(notification);
         })
          
-        //chat
+        //chat 
         if (friendId != undefined) {
             axios.post('/chat/getChat/' + friendId).then((response) => {
                 this.chats = response.data;
@@ -62,7 +62,7 @@ const app = new Vue({
 
             Echo.private('Chat.' + friendId + '.' + userId)
                 .listen('BroadcastChat', (e) => { 
-                    this.chats.push(e.chat);
+                    this.chats.chat.push(e.chat);
                 });
         }
 
@@ -79,5 +79,10 @@ const app = new Vue({
                     this.onlineUsers = this.onlineUsers.filter((u) => {u != user});
                 });
         }
+    }
+});
+Vue.filter('formatDate', function(value) {
+    if (value) {
+        return moment(String(value)).format('MM/DD/YYYY hh:mm')
     }
 });
