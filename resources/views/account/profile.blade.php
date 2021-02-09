@@ -1,5 +1,5 @@
 @extends('layout.accounts')
-@section('content')
+@section('contents')
         <div class="w-80">
             <div class="clr">
                 <div class="edit-form__title">

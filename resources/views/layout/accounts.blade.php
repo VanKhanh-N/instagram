@@ -1,8 +1,8 @@
-@include('header') 
 <link rel="stylesheet" href="{{asset('css/accounts.css')}}">
+@include('header') 
 <body>
-    <div class="content ">
-    <div class="edit-form clr">
+    <div class="content">
+    <div class="edit-form clr" >
     <div class="edit-form__left">
         <ul class="cs">
             <li class="{{$title == 'Edit Profile' ? 'activate' : 'noactivate'}}"><a href="{{route('profile.edit')}}">{{__('translate.Edit Profile')}}</a></li>
@@ -18,11 +18,11 @@
     </div>
     
     <div class="edit-form__right">
-        @yield('content')
+        @yield('contents')
     </div><br>
     </div>
     </form>
-    </div>   
+    </div>     
 </div><br>
  
     <footer style="width:80%;">
