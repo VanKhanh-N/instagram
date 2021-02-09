@@ -13,7 +13,7 @@
     <meta name="keywords"
           content="unique login form,leamug login form,boostrap login form,responsive login form,free css html login form,download login form">
     <meta name="author" content="leamug">
-    <title>Đăng nhập</title>
+    <title>Đăng ký</title>
     <link href="css/style.css" rel="stylesheet" id="style">
     <!-- Bootstrap core Library -->
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -92,15 +92,22 @@ h4 {
                 <h1>Instagram</h1><hr>
                 </br>
                 <input type="text" name="email" class="form-control input-sm chat-input" placeholder="username"/>
+                @if($errors->first('email'))    
+                <span class="text-danger">{{$errors->first('email') }}</span>
+                @endif
                 </br></br>
                 <input type="password" name="password" class="form-control input-sm chat-input" placeholder="password"/>
+                @if($errors->first('password'))    
+                <span class="text-danger">{{$errors->first('password') }}</span>
+                @endif
                 </br></br>
                 <div class="wrapper">
                         <span class="group-btn">
-                            <button type="submit" class="btn btn-danger btn-md">Đăng nhập <i class="fa fa-sign-in"></i></button>
+                            <button type="submit" class="btn btn-danger btn-md">Đăng ký <i class="fa fa-sign-in"></i></button>
                         </span>
                 </div>
             </div>
+            <a href="{{route('get.login.admin')}}" class="text-primary">Đăng nhập</a>
         </div>
     </div>
     </form>

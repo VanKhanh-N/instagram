@@ -5,67 +5,89 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Role;
+use App\Models\Permission;
+use DB;
 class RoleController extends Controller
 {
+    private $role,$permission;
+    public function __construct(Role $role,Permission $permission)
+    {
+       $this->role=$role;
+       $this->permission=$permission;
+    }
     public function index()
     {
-        $role=Role::all();
+        $role=$this->role->groupBy('name')->orderBy('id','asc')->paginate(10);
+        $role_count=DB::table('role_user')->where('user_id',\Auth::guard('admins')->user()->id)->count();
+         
         $viewData=[
+            'role_count'=>$role_count,
             'role'  => $role,
-            'title' =>'Vai trò',
+            'title' =>'Phân quyền',
         ];
         return view('admin.role.index',$viewData);
     }
     public function create()
     { 
+        $role=$this->role->all();
+        $permissionParent=$this->permission->where('parent_id', null)->get();
         $viewData=[
-        'title' =>'Thêm vai trò',
+            'role'  => $role,
+            'permissionParent'  => $permissionParent,
+            'title' =>'Thêm quyền hạn',
     ];
         return view('admin.role.create',$viewData);
     }
     public function store(Request $request)
     {
-        $role =Role::where('name',$request->name)->first();
         $request->validate([
             'name'=>'required',
             'display_name'=>'required',
         ],[
-            'name.required'=>'Bạn cần nhập tên vai trò', 
-            'display_name.required'=>'Bạn cần nhập mô tả vai trò', 
+            'name.required'=>'Bạn cần nhập tên quyền hạn', 
+            'display_name.required'=>'Bạn cần nhập mô tả quyền hạn', 
         ]); 
-        $user=Role::create([
-            'name' =>$request->name, 
-            'display_name' =>$request->display_name, 
-        ]);  
+        $role=$this->role->create([
+            'name' => $request->name,
+            'display_name' => $request->display_name,
+        ]);
+        $role->permissions()->attach($request->permission_id);
         return redirect()->route('admin.role.index');
     }
     public function update($id)
     { 
-        $role=Role::find($id);
+        $role=$this->role->find($id);
+        $permissionParent=$this->permission->where('parent_id', null)->get();
+        $permissionChecked=$role->permissions;
         $viewData=[
         'role'  =>$role,
-        'title' =>'Thay đổi vai trò',
+        'permissionParent'=>$permissionParent,
+        'permissionChecked'=>$permissionChecked,
+        'title' =>'Thay đổi quyền hạn',
     ];
         return view('admin.role.update',$viewData);
     }
     public function edit(Request $request,$id)
     {
-        $role=Role::find($id);
+        $role=$this->role->find($id);
         $request->validate([
             'name'=>'required',
             'display_name'=>'required',
         ],[
-            'name.required'=>'Bạn cần nhập tên vai trò', 
-            'display_name.required'=>'Bạn cần nhập mô tả vai trò', 
-        ]);  
-        $role->name=$request->name;
-        $role->display_name=$request->display_name;
-        $role->save();
+            'name.required'=>'Bạn cần nhập tên quyền hạn', 
+            'display_name.required'=>'Bạn cần nhập mô tả quyền hạn', 
+        ]);   
+        $role->update([
+            'name' => $request->name,
+            'display_name' => $request->display_name,
+        ]);
+        $role->permissions()->sync($request->permission_id);
         return redirect()->route('admin.role.index');
     }
     public function delete($id)
     {
-        $role=Role::find($id);
+        $role=$this->role->find($id);
+        \DB::table('permission_role')->where('role_id',$id)->delete();
         if($role) $role->delete();
         return redirect()->back();
     }

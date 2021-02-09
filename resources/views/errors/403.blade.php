@@ -8,5 +8,5 @@ img{
     transform: translate(-50%,-50%);
     
 }</style>
-<title>Không tìm thấy trang</title>
-<img src="{{ asset('img/no-result.jpg')}}" alt="">
+<title>Không có quyền truy cập</title>
+<img src="{{ asset('img/no-privileges.png')}}" alt="">

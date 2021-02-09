@@ -7,13 +7,15 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use App\Models\Post;
+use App\Models\User;
 class CommentPost extends Notification
 {
     use Queueable;
-    public $post;
-    public function __construct(Post $post)
+    public $post,$user;
+    public function __construct(Post $post,$user)
     {
          $this->post=$post;
+         $this->user=$user;
     }
 
     /**
@@ -36,14 +38,16 @@ class CommentPost extends Notification
     public function toDatabase($notifiable)
     {
         return [
-           'post'=> $this->post
+           'post'=> $this->post,
+           'user'=> $this->user
         ];
     }
     public function toBroadCast($notifiable)
     {
         return [
            'data'=> [
-               'post' =>$this->post
+               'post' =>$this->post,
+               'user' =>$this->user
            ]
         ];
     }

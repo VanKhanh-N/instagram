@@ -53,6 +53,7 @@ input{outline: 0;}
 .border-gray{
     border:1px solid  #dbdbdb
 }
+.un-seen{background-color: #bdbdbd6e ;}
 header{
     position: fixed;
     top:0;
@@ -112,7 +113,9 @@ body,.background-gray{
 }
 .set-noti-width{
     width: 500px;
-    margin-left: -425px;}
+    margin-left: -425px;
+    max-height: 300px;
+    overflow: auto;}
  .set-user-width{width: 200px;
     margin-left: -163px;}
 .set-user-width li i{

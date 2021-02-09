@@ -8,6 +8,7 @@ use App\Models\Admin;
 use Illuminate\Support\Facades\Hash;
 use DB;
 use App\Models\Role;
+use App\Models\Permission;
 use Carbon\Carbon;
 use PHPUnit\Exception;
 use Illuminate\Support\Facades\Log;
@@ -16,8 +17,10 @@ class EmployeeController extends Controller
      public function index()
     {
         $admin= Admin::paginate(15);
+        $role_count=DB::table('role_user')->where('user_id',\Auth::guard('admins')->user()->id)->count();
         $viewData=[
             'admin' =>$admin,
+            'role_count'=>$role_count,
             'title' =>'Người dùng',
         ];
         return view('admin.employee.index',$viewData);
@@ -25,8 +28,10 @@ class EmployeeController extends Controller
     public function create()
     { 
         $role =Role::all();
+        $permissionparent=Permission::where('parent_id',null)->get();
         $viewData=[
         'role'  =>$role,
+        'permissionparent'=>$permissionparent,
         'title' =>'Thêm người dùng',
     ];
         return view('admin.employee.create',$viewData);
@@ -34,13 +39,14 @@ class EmployeeController extends Controller
     public function store(Request $request)
     {
             $request->validate([
-            'email'=>'email|required',
+            'email'=>'email|required|unique:admins,email',
             'name' =>'required',
             'password' =>'min:6',
             'roles'    =>'required'
         ],[
             'email.required'=>'Bạn cần nhập email',
             'email.email'=>'Email không đúng định dạng',
+            'email.unique'=>'Email đã được đăng ký',
             'name.required'=>'Bạn cần nhập tên người dùng',
             'password.min'=>'Mật khẩu cần nhiều hơn 6 kí tự',
             'roles.required'=>'Bạn cần chọn vai trò của người dùng',
@@ -76,24 +82,27 @@ class EmployeeController extends Controller
     public function update(Request $request,$id)
     {
        $request->validate([
-            'email'=>'email|required',
+            'email'=>'email|required|unique:admins,email',
             'name' =>'required',
-            'password' =>'min:6',
-            'roles'    =>'required'
         ],[
+            'email.unique'=>'Email đã được đăng ký',
             'email.required'=>'Bạn cần nhập email',
             'email.email'=>'Email không đúng định dạng',
             'name.required'=>'Bạn cần nhập tên người dùng',
-            'password.min'=>'Mật khẩu cần nhiều hơn 6 kí tự',
-            'roles.required'=>'Bạn cần chọn vai trò của người dùng',
         ]);
         try{ 
             DB::beginTransaction();
             $admin=Admin::find($id);
+            if($request->password)
             $admin->update([
                 'name' =>$request->name,
                 'email'=>$request->email,
                 'password' =>Hash::make($request->password) 
+            ]); 
+            else
+            $admin->update([
+                'name' =>$request->name,
+                'email'=>$request->email,
             ]); 
             $admin->roles()->sync($request->roles);
             DB::commit();
@@ -108,12 +117,7 @@ class EmployeeController extends Controller
         try{ 
             DB::beginTransaction();
             $admin=Admin::find($id)->delete(); 
-            $admin->update([
-                'name' =>$request->name,
-                'email'=>$request->email,
-                'password' =>Hash::make($request->password) 
-            ]); 
-            $admin->roles()->sync($request->roles);
+            $role_admin =DB::table('role_user')->where('user_id',$id)->delete(); 
             DB::commit();
         return redirect()->back();
     }catch(\Exception $e){

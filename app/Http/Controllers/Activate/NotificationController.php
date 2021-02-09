@@ -11,7 +11,13 @@ class NotificationController extends Controller
     public function index()
     {
         $notification =\Auth::user()->unreadNotifications;
-       return $notification;
+        $notification_readed =\Auth::user()->readNotifications;
+        $data=[
+            'notification'=>$notification,
+            'notification_readed'=>$notification_readed,
+
+        ];
+       return $data;
     }
     public function read(Request $request)
     {   

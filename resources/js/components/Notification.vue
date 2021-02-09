@@ -4,22 +4,41 @@
       <img class="mr-20 rounded-circle w-30 heart" src="/img/heart.png">
       <span class="count-action">{{notifications.length }}</span>
       </a>
-      <ul class="notification  d-none set-noti-width">
-
-         <li class="position-relative" v-for="notification in notifications" >
+      <!-- unseen -->
+      <ul class="notification  d-none set-noti-width ">
+         <li class="position-relative un-seen" v-for="notification in notifications" >
             <a href="#" v-on:click="MarkAsRead(notification)">
                <div class="noti-img">
-                  <img :src="'uploads/user/'+notification.data.post.user.avatar" class="rounded-circle">
+               <img :src="'/uploads/user/'+notification.data.user.avatar" class="friend-img rounded-circle" v-if="notification.data.user.avatar.substr(0,4)!='http'">
+               <img :src="notification.data.user.avatar" class="friend-img rounded-circle" v-if="notification.data.user.avatar.substr(0,4)=='http'">
+              
                </div>
                <div class="noti-content" > 
-                     <p>{{notification.data.post.user.c_name}}</p>
+                     <p>{{notification.data.user.c_name}}</p>
                      <span>Đã bình luận về bài viết của bạn</span>
-                     <span class="time">10 tuần trước</span>  
+                     <span class="time">{{ notification.created_at | formatDate }}</span>  
                   <!-- <button>Theo doi</button>  -->
                </div>   
             </a>
          </li> 
-         <li v-if="notifications.length ==0">
+      <!-- seen --> 
+   
+          <li class="position-relative" v-for="noti in notification_readed" >
+            <a href="#" v-on:click="MarkAsRead(noti)">
+               <div class="noti-img">
+               <img :src="'/uploads/user/'+noti.data.user.avatar" class="friend-img rounded-circle" v-if="noti.data.user.avatar.substr(0,4)!='http'">
+               <img :src="noti.data.user.avatar" class="friend-img rounded-circle" v-if="noti.data.user.avatar.substr(0,4)=='http'">
+              
+               </div>
+               <div class="noti-content" > 
+                     <p>{{noti.data.user.c_name}}</p>
+                     <span>Đã bình luận về bài viết của bạn</span>
+                     <span class="time">{{ noti.created_at | formatDate }}</span>  
+                  <!-- <button>Theo doi</button>  -->
+               </div>   
+            </a>
+         </li> 
+          <li v-if="notifications.length ==0 && notification_readed.length==0">
              <div class="no-action">  Bạn không có hoạt động mới nào </div>
          </li>
       </ul>
@@ -27,7 +46,7 @@
 </template>
 <script>
    export default {
-      props:['notifications'],
+      props:['notifications','notification_readed'],
       methods: {
          MarkAsRead:function(notification) {
             var data ={
@@ -35,7 +54,7 @@
             };
             
             axios.post('/notification/read',data).then(res =>{
-               window.location.href ="/p/"+notification.data.post.id;
+               window.location.href ="/p/"+notification.data.post.p_slug;
 
             })
          }

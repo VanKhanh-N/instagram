@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="{{ asset('css/home-page.css') }}"> 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-    <link rel="icon" href="{{ asset('img/favicon.ico') }}" type="image/x-icon"/>
+    <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon"/>
     <link rel="stylesheet" href="{{ asset('toastr/toastr.min.css') }}"> 
     <script src="https://use.fontawesome.com/452826394c.js"></script>
     @if(session('toastr'))
@@ -68,7 +68,7 @@
                         <img class="mr-20 rounded-circle w-30" src="{{ asset($explore)  }}" >
                         </a>
                      </li>
-                     <notification v-bind:notifications="notifications"></notification>
+                     <notification v-bind:notifications="notifications"  v-bind:notification_readed="notification_readed"></notification>
                      <script>
                         $(function(){
                            $('.noti').on('click',function(){

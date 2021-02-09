@@ -22,7 +22,7 @@
         <div v-if="chats.chat.length == 0"  class="no-message">
             There are no messages
         </div> 
-        <img src="/img/typing.gif" style="height:100px">
+        <!-- <img src="/img/typing.gif" style="height:100px"> -->
     </div>
         <chat-composer v-bind:userid="userid" v-bind:chats="chats.chat" v-bind:friendid="friendid"></chat-composer>
     </div>

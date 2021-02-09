@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Post;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class PostFactory extends Factory
 {
@@ -24,6 +25,7 @@ class PostFactory extends Factory
         return [ 
         'p_user' => 2,
         'p_image' =>'linh.jpg',
+        'p_slug'=>Str::random(15),
         'p_content' =>$this->faker->realText($maxNbChars = 100, $indexSize = 2),
         'p_type' => 'profile',  
         'created_at'=>now(),

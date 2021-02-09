@@ -1968,15 +1968,34 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['notifications'],
+  props: ['notifications', 'notification_readed'],
   methods: {
     MarkAsRead: function MarkAsRead(notification) {
       var data = {
         id: notification.id
       };
       axios.post('/notification/read', data).then(function (res) {
-        window.location.href = "/p/" + notification.data.post.id;
+        window.location.href = "/p/" + notification.data.post.p_slug;
       });
     }
   }
@@ -2058,6 +2077,7 @@ var app = new Vue({
   el: '#app',
   data: {
     notifications: '',
+    notification_readed: '',
     chats: '',
     onlineUsers: ''
   },
@@ -2066,7 +2086,8 @@ var app = new Vue({
 
     //notification
     axios.post('/notification/get').then(function (response) {
-      _this.notifications = response.data;
+      _this.notifications = response.data.notification;
+      _this.notification_readed = response.data.notification_readed;
     }); //chat
 
     var userId = $('meta[name="userId"]').attr('content');
@@ -2074,6 +2095,8 @@ var app = new Vue({
 
     Echo["private"]('App.Models.User.' + userId).notification(function (notification) {
       _this.notifications.push(notification);
+
+      _this.notification_readed.push(notification);
     }); //chat 
 
     if (friendId != undefined) {
@@ -65815,12 +65838,7 @@ var render = function() {
             ? _c("div", { staticClass: "no-message" }, [
                 _vm._v("\n        There are no messages\n    ")
               ])
-            : _vm._e(),
-          _vm._v(" "),
-          _c("img", {
-            staticStyle: { height: "100px" },
-            attrs: { src: "/img/typing.gif" }
-          })
+            : _vm._e()
         ],
         2
       ),
@@ -65941,10 +65959,10 @@ var render = function() {
     _vm._v(" "),
     _c(
       "ul",
-      { staticClass: "notification  d-none set-noti-width" },
+      { staticClass: "notification  d-none set-noti-width " },
       [
         _vm._l(_vm.notifications, function(notification) {
-          return _c("li", { staticClass: "position-relative" }, [
+          return _c("li", { staticClass: "position-relative un-seen" }, [
             _c(
               "a",
               {
@@ -65957,27 +65975,83 @@ var render = function() {
               },
               [
                 _c("div", { staticClass: "noti-img" }, [
-                  _c("img", {
-                    staticClass: "rounded-circle",
-                    attrs: {
-                      src: "uploads/user/" + notification.data.post.user.avatar
-                    }
-                  })
+                  notification.data.user.avatar.substr(0, 4) != "http"
+                    ? _c("img", {
+                        staticClass: "friend-img rounded-circle",
+                        attrs: {
+                          src: "/uploads/user/" + notification.data.user.avatar
+                        }
+                      })
+                    : _vm._e(),
+                  _vm._v(" "),
+                  notification.data.user.avatar.substr(0, 4) == "http"
+                    ? _c("img", {
+                        staticClass: "friend-img rounded-circle",
+                        attrs: { src: notification.data.user.avatar }
+                      })
+                    : _vm._e()
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "noti-content" }, [
-                  _c("p", [_vm._v(_vm._s(notification.data.post.user.c_name))]),
+                  _c("p", [_vm._v(_vm._s(notification.data.user.c_name))]),
                   _vm._v(" "),
                   _c("span", [_vm._v("Đã bình luận về bài viết của bạn")]),
                   _vm._v(" "),
-                  _c("span", { staticClass: "time" }, [_vm._v("10 tuần trước")])
+                  _c("span", { staticClass: "time" }, [
+                    _vm._v(
+                      _vm._s(_vm._f("formatDate")(notification.created_at))
+                    )
+                  ])
                 ])
               ]
             )
           ])
         }),
         _vm._v(" "),
-        _vm.notifications.length == 0
+        _vm._l(_vm.notification_readed, function(noti) {
+          return _c("li", { staticClass: "position-relative" }, [
+            _c(
+              "a",
+              {
+                attrs: { href: "#" },
+                on: {
+                  click: function($event) {
+                    return _vm.MarkAsRead(noti)
+                  }
+                }
+              },
+              [
+                _c("div", { staticClass: "noti-img" }, [
+                  noti.data.user.avatar.substr(0, 4) != "http"
+                    ? _c("img", {
+                        staticClass: "friend-img rounded-circle",
+                        attrs: { src: "/uploads/user/" + noti.data.user.avatar }
+                      })
+                    : _vm._e(),
+                  _vm._v(" "),
+                  noti.data.user.avatar.substr(0, 4) == "http"
+                    ? _c("img", {
+                        staticClass: "friend-img rounded-circle",
+                        attrs: { src: noti.data.user.avatar }
+                      })
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "noti-content" }, [
+                  _c("p", [_vm._v(_vm._s(noti.data.user.c_name))]),
+                  _vm._v(" "),
+                  _c("span", [_vm._v("Đã bình luận về bài viết của bạn")]),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "time" }, [
+                    _vm._v(_vm._s(_vm._f("formatDate")(noti.created_at)))
+                  ])
+                ])
+              ]
+            )
+          ])
+        }),
+        _vm._v(" "),
+        _vm.notifications.length == 0 && _vm.notification_readed.length == 0
           ? _c("li", [
               _c("div", { staticClass: "no-action" }, [
                 _vm._v("  Bạn không có hoạt động mới nào ")

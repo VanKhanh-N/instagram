@@ -28,18 +28,20 @@
         @csrf
             <div class="username">
                 <input type="text" class="username" id="username" name="email" placeholder="Số điện thoại, tên người dùng hoặc email" >
-                @if($errors->first('email'))    
-                <span class="text-danger">{{$errors->first('email') }}</span>
-                @endif
+               
                
             </div>
+            @if($errors->first('email'))    
+                <span class="text-danger">{{$errors->first('email') }}</span>
+                @endif
             <div class="username">
                 <input type="password" class="password" id="password" name="password" placeholder="Mật khẩu" > 
-                @if($errors->first('password'))    
-                <span class="text-danger">{{$errors->first('password') }}</span>
-                @endif
+                
                 <i class="fa fa-lg fa-eye-slash click"></i>     
             </div> 
+            @if($errors->first('password'))    
+                <span class="text-danger">{{$errors->first('password') }}</span>
+                @endif
             <button type="submit">Đăng nhập</button>
         </form>
         <div class="or" >

@@ -35,13 +35,15 @@ const app = new Vue({
     el: '#app',
     data: {
         notifications:'',
+        notification_readed:'',
         chats: '',
         onlineUsers: ''     
     }, 
     created() {
         //notification
         axios.post('/notification/get').then(response =>{
-            this.notifications =response.data;
+            this.notifications =response.data.notification;
+            this.notification_readed =response.data.notification_readed;
              
         });
 
@@ -52,6 +54,7 @@ const app = new Vue({
         //notification
         Echo.private('App.Models.User.' + userId).notification((notification)=>{
             this.notifications.push(notification);
+            this.notification_readed.push(notification);
         })
          
         //chat 
