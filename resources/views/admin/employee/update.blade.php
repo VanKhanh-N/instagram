@@ -3,7 +3,7 @@
 <div class="container-fluid" id="container-wrapper">
 <div class="card mb-4">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Thêm người dùng</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">Thay đổi thông tin người dùng</h6>
                 </div>
                 <div class="card-body">
                   <form method="post">

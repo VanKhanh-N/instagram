@@ -33,10 +33,17 @@
          <li class="nav-item">
             <a class="nav-link collapsed" href="{{ route('admin.employee.index')}}">
             <i class="far fa-user"></i>
-            <span>Người dùng</span>
+            <span>Admin</span>
             </a> 
          </li>
          
+         <li class="nav-item">
+            <a class="nav-link collapsed" href="{{ route('admin.user.list')}}">
+            <i class="fas fa-fw fa-palette"></i>
+            <span>Nguời dùng</span>
+            </a> 
+         </li>
+
          <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTable" aria-expanded="true"
                aria-controls="collapseTable">
@@ -49,13 +56,7 @@
                   <a class="collapse-item" href="{{ route('admin.role.index')}}">Phân quyền</a>
                </div>
             </div>
-         </li>
-         <li class="nav-item">
-            <a class="nav-link" href="ui-colors.html">
-            <i class="fas fa-fw fa-palette"></i>
-            <span>UI Colors</span>
-            </a>
-         </li>
+         </li> 
          <hr class="sidebar-divider">
          <div class="sidebar-heading">
             Examples

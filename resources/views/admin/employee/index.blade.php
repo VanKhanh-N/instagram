@@ -2,7 +2,7 @@
 @section('content') 
 <div class="container-fluid" id="container-wrapper">
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Người dùng</h1>
+            <h1 class="h3 mb-0 text-gray-800">Quản trị viên</h1>
             <small>@if(!$role_count) Hiện tại bạn chỉ có thể xem trang này. Liên hệ admin để thêm quyền hạn @endif</small>
            
           </div>
@@ -13,7 +13,7 @@
               <div class="card">
                 <a href="{{ route('admin.employee.create')}}">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Thêm người dùng</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">Thêm quản trị viên</h6>
                 </div>
                 </a>
                 <div class="table-responsive">

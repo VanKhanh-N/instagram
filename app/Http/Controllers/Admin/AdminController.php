@@ -23,4 +23,17 @@ class AdminController extends Controller
         ];
         return view('admin.index',$viewData);
     }
+    public function list(){
+        $user=User::paginate(15);
+        return view('admin.user.list',compact('user'));
+    }
+    public function block_user($id)
+    {
+        $user=User::find($id);
+        if($user->is_active==1) $user->is_active=2;
+        else if($user->is_active==2)
+        $user->is_active=1;
+        $user->save();
+        return redirect()->back();
+    }
 }

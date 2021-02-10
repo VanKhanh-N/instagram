@@ -1,6 +1,9 @@
 :root {
     --animate-duration: 0.3s !important;
 }
+html{
+    overflow-x: hidden;
+}
 /* *::-webkit-scrollbar {
     display: none;
 } */
@@ -168,6 +171,7 @@ section span{
     color:#0072ffd1; 
 }
 .image{
+    width: 100%;
     transform: translate(35%);
 }
 .title input{

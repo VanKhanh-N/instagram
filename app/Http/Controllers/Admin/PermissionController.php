@@ -6,11 +6,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Permission;
 use DB;
+use Illuminate\Support\Str;
 class PermissionController extends Controller
 {
     public function index()
     {
-        $permission=Permission::groupBy('name')->orderBy('id','asc')->get();
+        $permission=Permission::groupBy('name')->orderBy('parent_id','asc')->get();
         $role_count=DB::table('role_user')->where('user_id',\Auth::guard('admins')->user()->id)->count();
          
         $viewData=[
@@ -41,8 +42,9 @@ class PermissionController extends Controller
         ]); 
         if($request->parent_id){
         foreach($request->parent_id as $val){
-            Permission::insert([
-                'name' =>$request->name, 
+        $parent_permission =Permission::where('id',$val)->value('name');
+        Permission::insert([
+                'name' =>Str::lower($request->name).'-'.Str::lower($parent_permission), 
                 'display_name' =>$request->display_name, 
                 'parent_id' =>$val, 
             ]);  
@@ -81,11 +83,12 @@ class PermissionController extends Controller
         Permission::where('name',$request->name)->delete();
         if($request->parent_id){
         foreach($request->parent_id as $val){
-            Permission::insert([
-                'name' =>$request->name, 
-                'display_name' =>$request->display_name, 
-                'parent_id' =>$val, 
-            ]);  
+        $parent_permission =Permission::where('id',$val)->value('name');
+        Permission::insert([
+            'name' =>Str::lower($request->name).'-'.Str::lower($parent_permission), 
+            'display_name' =>$request->display_name, 
+            'parent_id' =>$val, 
+        ]);  
         }
        
         $permission->save();

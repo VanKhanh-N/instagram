@@ -20,11 +20,19 @@ class LoginController extends Controller
                  
                 return redirect()->to('/');
             }
-            else{
+            else if(Auth::user()->is_active ==0){
                 Auth::logout();
                 \Session::flash('toastr',[
                     'type'=>'error',
                     'messages'=>'Tài khoản chưa được xác thực . Vui lòng kiểm tra lại gmail !'
+                ]);
+                return redirect()->route('get.login');
+            }
+            else if(Auth::user()->is_active ==2){
+                Auth::logout();
+                \Session::flash('toastr',[
+                    'type'=>'error',
+                    'messages'=>'Tài khoản của bạn đã bị khóa do vi phạm chính sách của chúng tôi! '
                 ]);
                 return redirect()->route('get.login');
             }

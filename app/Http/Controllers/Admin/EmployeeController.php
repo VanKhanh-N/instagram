@@ -82,10 +82,9 @@ class EmployeeController extends Controller
     public function update(Request $request,$id)
     {
        $request->validate([
-            'email'=>'email|required|unique:admins,email',
+            'email'=>'email|required',
             'name' =>'required',
         ],[
-            'email.unique'=>'Email đã được đăng ký',
             'email.required'=>'Bạn cần nhập email',
             'email.email'=>'Email không đúng định dạng',
             'name.required'=>'Bạn cần nhập tên người dùng',
