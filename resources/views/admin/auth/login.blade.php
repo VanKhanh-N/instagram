@@ -101,6 +101,7 @@ h4 {
                         </span>
                 </div>
             </div>
+            <a href="{{ route('get.register.admin')}}">Đăng ký</a>
         </div>
     </div>
     </form>
