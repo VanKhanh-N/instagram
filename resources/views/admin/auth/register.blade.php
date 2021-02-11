@@ -91,16 +91,20 @@ h4 {
               @csrf
                 <h1>Instagram</h1><hr>
                 </br>
-                <input type="text" name="email" class="form-control input-sm chat-input" placeholder="username"/>
+                <input type="text" name="name" class="form-control input-sm chat-input" placeholder="username"/>
+                @if($errors->first('name'))    
+                <span class="text-danger">{{$errors->first('name') }}</span>
+                @endif </br>
+                <input type="text" name="email" class="form-control input-sm chat-input" placeholder="email"/>
                 @if($errors->first('email'))    
                 <span class="text-danger">{{$errors->first('email') }}</span>
                 @endif
-                </br></br>
+                </br>
                 <input type="password" name="password" class="form-control input-sm chat-input" placeholder="password"/>
                 @if($errors->first('password'))    
                 <span class="text-danger">{{$errors->first('password') }}</span>
                 @endif
-                </br></br>
+                </br>
                 <div class="wrapper">
                         <span class="group-btn">
                             <button type="submit" class="btn btn-danger btn-md">Đăng ký <i class="fa fa-sign-in"></i></button>

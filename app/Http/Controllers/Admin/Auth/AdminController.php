@@ -32,9 +32,11 @@ class AdminController extends Controller
     public function postRegisterAdmin(Request $request)
 	{
 		$request->validate([
+			'name' =>'required',
             'email'=>'email|required|unique:admins,email',
             'password' =>'min:6',
         ],[
+            'name.required'=>'Bạn cần nhập tên quản trị viên',
             'email.unique'=>'Email đã được đăng ký',
             'email.required'=>'Bạn cần nhập email',
             'email.email'=>'Email không đúng định dạng',

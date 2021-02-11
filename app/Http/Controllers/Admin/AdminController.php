@@ -25,7 +25,8 @@ class AdminController extends Controller
     }
     public function list(){
         $user=User::paginate(15);
-        return view('admin.user.list',compact('user'));
+        $tile='Người dùng';
+        return view('admin.user.list',compact('user','title'));
     }
     public function block_user($id)
     {
