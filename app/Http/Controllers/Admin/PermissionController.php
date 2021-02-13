@@ -11,7 +11,7 @@ class PermissionController extends Controller
 {
     public function index()
     {
-        $permission=Permission::groupBy('name')->orderBy('parent_id','asc')->get();
+        $permission=Permission::orderBy('parent_id','asc')->get();
         $role_count=DB::table('role_user')->where('user_id',\Auth::guard('admins')->user()->id)->count();
          
         $viewData=[

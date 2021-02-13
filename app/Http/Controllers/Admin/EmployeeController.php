@@ -12,6 +12,7 @@ use App\Models\Permission;
 use Carbon\Carbon;
 use PHPUnit\Exception;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Pagination\Paginator;
 class EmployeeController extends Controller
 {
      public function index()

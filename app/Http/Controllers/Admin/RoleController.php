@@ -17,7 +17,7 @@ class RoleController extends Controller
     }
     public function index()
     {
-        $role=$this->role->groupBy('name')->orderBy('id','asc')->paginate(10);
+        $role=$this->role->orderBy('id','asc')->paginate(10);
         $role_count=DB::table('role_user')->where('user_id',\Auth::guard('admins')->user()->id)->count();
          
         $viewData=[
