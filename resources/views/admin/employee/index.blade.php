@@ -1,5 +1,3 @@
-<style>
-.w-5{display:none}</style>
 @extends('admin.layout')
 @section('content') 
 

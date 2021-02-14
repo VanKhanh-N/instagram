@@ -30,7 +30,7 @@ class HomeController extends Controller
                     ->where('follows.user_id',\Auth::id())
                     ->where('posts.p_type','profile')
                     ->select('posts.*')
-                    ->orderby('created_at','desc')
+                    ->orderby('picture','desc')
                     ->get(); 
         $now =Carbon::now();
         

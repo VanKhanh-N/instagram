@@ -41,6 +41,7 @@ input{outline: 0;}
     } 
 .text-gray{color:gray}
 .text-blue{color:#0095f6}
+.bg-blue{background-color:#0095f6}
 .text-red{color:#ed4956}
 .text-center{text-align:center}
 .float-right{float: right;}
@@ -209,4 +210,4 @@ body,.background-gray{
         display: none;
         visibility: hidden;
     }
-}
+} 

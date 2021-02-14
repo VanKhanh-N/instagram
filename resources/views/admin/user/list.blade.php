@@ -42,7 +42,9 @@
                 </div>
                 
               </div>
-              
+              <div class="box-footer">
+                  {{ $user->links() }}
+                  </div>
             </div>
           </div>
           <!--Row-->

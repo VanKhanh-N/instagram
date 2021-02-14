@@ -71,7 +71,7 @@ Route::group(['namespace'=>'App\Http\Controllers\Activate'], function () {
     //notification
     Route::post('/notification/get','NotificationController@index'); 
     Route::post('/notification/read','NotificationController@read'); 
-
+ 
 });
 
 Route::group(['prefix'=>'accounts','namespace'=>'App\Http\Controllers\Account'], function () {   

@@ -53,7 +53,9 @@ a{text-decoration:none}</style>
             </div>
           </div>
           <!--Row-->
-
+          <div class="box-footer">
+                  {{ $permission->links() }}
+                  </div>
         
 
         </div>
