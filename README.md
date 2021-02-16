@@ -1,7 +1,7 @@
 
 ## Trang mạng xã hội (instagram)
 
-Đây là website giúp mọi người có thể chia sẻ những khoảnh khắc ,giúp kết nối mọi người lại với nhau thông qua sự tương tác trên các bài viết .
+Đây là website giúp mọi người có thể chia sẻ những khoảnh khắc ,giúp kết nối mọi người lại với nhau thông qua tương tác trên các bài viết .
 ## Công nghệ   
 - Laravel
 - Jquery
@@ -18,7 +18,7 @@
 - php artisan migrate
 - php artisan db:seed
 - php artisan serve
-Truy cập website :localhost:8000
+- Truy cập website :localhost:8000
 ### Chức năng chính
 + Trang đăng nhập dành cho người dùng
     - Đăng nhập 
