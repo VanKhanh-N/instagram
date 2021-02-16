@@ -60,6 +60,7 @@ return [
     'Go to post'=>'Đi tới bài viết',
     'Share to...'=>'Chia sẻ lên...',
     'Copy Link'=>'Sao chép đường dẫn',
+    'Start following other people to share memories'=>'Bắt đầu theo dõi những người khác để cùng chia sẻ những kỷ niệm',
     //direct
     'Your Messages'=>'Tin nhắn của bạn',
     'Send private photos and messages to a friend or group.'=>'Gửi ảnh và tin nhắn riêng tư cho bạn bè hoặc nhóm.',

@@ -37,7 +37,7 @@
 @endphp
 <div class="loader hidden ">
 <div class="loading-first"></div>
-</div>
+</div>  
 <div id="app">
 <header> 
       <div class="container">
@@ -66,7 +66,7 @@
                      <li class="d-inline-block  position-relative">
                         <a href="{{ url('/explore') }}">
                         <img class="mr-20 rounded-circle w-30" src="{{ asset($explore)  }}" >
-                        </a>
+                        </a>  
                      </li>
                      <notification v-bind:notifications="notifications"  v-bind:notification_readed="notification_readed"></notification>
                      <script>

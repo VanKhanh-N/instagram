@@ -10,6 +10,7 @@ use App\Models\Post;
 use App\Models\User;
 use Carbon\Carbon;
 use App\Notifications\CommentPost;
+use App\Notifications\LikePost;
 class PostImage extends Controller
 {
     public function __construct()
@@ -24,6 +25,7 @@ class PostImage extends Controller
         Post::where('id',$data['c_post'])->increment('p_comment');
         $post=Post::find($data['c_post']);
         $user=User::find(\Auth::id());
+        if($data['c_user_id'] != \Auth::id())
         User::find($post->user->id)->notify(new CommentPost($post,$user));
         return response([
             'count'=> Post::find($data['c_post']),
@@ -43,6 +45,8 @@ class PostImage extends Controller
         $data['r_user_id']=\Auth::user()->id;
         $data['created_at']=Carbon::now();
         $data['updated_at']=Carbon::now();
+        $post=Post::find($data['r_post']);
+        $user=User::find(\Auth::id());
         $id=Like::InsertGetId($data);
         Post::where('id',$data['r_post'])->increment('p_favourite');
         return Post::find($data['r_post']);

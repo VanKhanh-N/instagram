@@ -22,27 +22,27 @@
         <form action="" method="POST">
         @csrf
             <div class="username">
-                <input type="text" name="email" placeholder="Số di động hoặc email" >
+                <input type="text" name="email" placeholder="Số di động hoặc email" autocomplete="off">
              @if($errors->first('email'))    
                 <span class="text-danger">{{$errors->first('email') }}</span>
                 @endif
             </div>
             <div class="username">
-                <input type="text"  name="c_name" placeholder="Tên đầy đủ" >
+                <input type="text"  name="c_name" placeholder="Tên đầy đủ" autocomplete="off">
                  
                 @if($errors->first('c_name'))    
                 <span class="text-danger">{{$errors->first('c_name') }}</span>
                 @endif      
             </div>
             <div class="username"> 
-                <input type="text"  name="user" placeholder="Tên người dùng" >
+                <input type="text"  name="user" placeholder="Tên người dùng" autocomplete="off">
                 @if($errors->first('user'))    
                 <span class="text-danger">{{$errors->first('user') }}</span>
                 @endif 
                
             </div> 
             <div class="username">
-                <input type="password"  name="password" id="password" placeholder="Mật khẩu" > 
+                <input type="password"  name="password" id="password" placeholder="Mật khẩu" autocomplete="off" > 
                 @if($errors->first('password'))    
                 <span class="text-danger">{{$errors->first('password') }}</span>
                 @endif

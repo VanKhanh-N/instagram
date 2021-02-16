@@ -83,7 +83,7 @@
          @if(!count($posts))
          <div class="d-block text-center" style="margin-top:30%">
          <i class="fa fa-lg fa-plus-square-o" style="font-size:400%"></i>
-         <p>Bắt đầu theo dõi những người khác để cùng chia sẻ những kỷ niệm</p>
+         <p>{{ __('translate.Start following other people to share memories')}}</p>
       </div>
       @endif
             @foreach($posts as $key => $item)  
@@ -286,6 +286,7 @@
             </div>
             
             @endif
+             
             @endforeach
             <div class="about-us">
                <ul style="width: 80%;line-height:20px;margin-top: 30px;font-size:12px;opacity: 0.5;">

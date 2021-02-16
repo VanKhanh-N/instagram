@@ -85,11 +85,10 @@ if (!function_exists('pare_url_file')) {
     {    
         if(substr($image,0,4)=='http')
             return $image;
-          
         if($folder!='')
             return '/uploads/' . $folder . '/' . $image;
-        else
-        return '/uploads/' . $image;
+        if($folder=='')
+            return '/uploads/' . $image;
     }
 }
 //kiểm tra giao diện user  sử dụng

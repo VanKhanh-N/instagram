@@ -26,7 +26,7 @@ class UserFactory extends Factory
         return [
             'c_name' => $this->faker->unique()->name,  
             'user' => $this->faker->userName,  
-            'avatar' => 'thanh-huyen.jpg', 
+            'avatar' => 'ninja.jpg', 
             'email' => $this->faker->unique()->safeEmail, 
             'password' => Hash::make('123456'), 
             'is_active' => '1', 

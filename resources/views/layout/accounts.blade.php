@@ -5,15 +5,15 @@
     <div class="edit-form clr" >
     <div class="edit-form__left">
         <ul class="cs">
-            <li class="{{$title == 'Edit Profile' ? 'activate' : 'noactivate'}}"><a href="{{route('profile.edit')}}">{{__('translate.Edit Profile')}}</a></li>
-            <li class="{{$title == 'Change Password' ? 'activate' : 'noactivate'}}"><a href="{{route('password.edit')}}">{{__('translate.Change Password')}}</a></li>
-            <li><a>{{__('translate.Apps and Websites')}}</a></li>
-            <li><a>{{__('translate.Email and SMS')}}</a></li>
-            <li><a>{{__('translate.Notifications')}}</a></li>
-            <li><a>{{__('translate.Manage Contacts')}}</a></li>
-            <li><a>{{__('translate.Privacy and Security')}}</a></li>
-            <li><a>{{__('translate.Login Activity')}}</a></li>
-            <li><a>{{__('translate.Emails from Instagram')}}</a></li>
+        <a href="{{route('profile.edit')}}"><li class="{{$title == 'Edit Profile' ? 'activate' : 'noactivate'}}">{{__('translate.Edit Profile')}}</li></a>
+           <a href="{{route('password.edit')}}"> <li class="{{$title == 'Change Password' ? 'activate' : 'noactivate'}}">{{__('translate.Change Password')}}</li></a>
+            <a href="javascript:;"><li>{{__('translate.Apps and Websites')}}</li></a>
+            <a href="javascript:;"><li>{{__('translate.Email and SMS')}}</li></a>
+            <a href="javascript:;"><li>{{__('translate.Notifications')}}</li></a>
+            <a href="javascript:;"><li>{{__('translate.Manage Contacts')}}</li></a>
+            <a href="javascript:;"><li>{{__('translate.Privacy and Security')}}</li></a>
+            <a href="javascript:;"><li>{{__('translate.Login Activity')}}</li></a>
+            <a href="javascript:;"><li>{{__('translate.Emails from Instagram')}}</li></a>
         </ul>
     </div>
     

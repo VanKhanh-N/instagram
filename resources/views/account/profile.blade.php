@@ -28,7 +28,7 @@
          <div class="modal-content setting animate__animated animate__zoomIn" >
             <li class="hed"><a href="javascript:;" >{{ __('translate.Change Profile Photo')}}</a></li>
             <li>
-               <label for="change_user" class="text-blue change cs">{{ __('translate.Upload photo')}}</label>
+               <label for="change_user" class="text-blue change cs">{{ __('translate.Upload Photo')}}</label>
                <form method="POST" enctype="multipart/form-data" id="form_change_user_avatar">
                   @csrf
                   <input type="file" onchange="uploadUserAvatar(this,'form_change_user_avatar')" accept="image/*"  name="upload_user_avatar" class="d-none" id="change_user">

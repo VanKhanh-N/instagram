@@ -24,4 +24,5 @@ class NotificationController extends Controller
        \Auth::user()->unreadNotifications()->find($request->id)->MarkAsRead();
        return 'success';
     }
+    
 }

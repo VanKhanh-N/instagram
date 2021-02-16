@@ -138,6 +138,7 @@ class HomePageController extends Controller
                 'action'    => 'them',
                 'user'      => User::find($data['followed']),
                 'auth'      => \Auth::user(),
+                'avatar'    => pare_url_file(\Auth::user()->avatar,'user'),
                 'followed'  => Follow::where('user_id',\Auth::id())->count(),
                 'text_follow' =>ucwords(__('translate.folowing')),
                 'see_user_follow' =>__('translate.Message'),

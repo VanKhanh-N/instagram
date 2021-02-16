@@ -340,7 +340,7 @@
                      <i class="fa fa-15x fa-bookmark-o float-right"></i><br>
                      <p class="f-6 "><b class="view{{$val->id}}">{{$val->p_view}}</b> {{ __('translate.views')}}</p>
                      <p class="f-6 "><b class="like{{$val->id}}">{{$val->p_favourite}}</b> {{ __('translate.likes')}}</p> 
-                     <p class="os">4 giờ trước</p>
+                     <p class="os">{{ $val->created_at->diffForHumans($now) }}</p>
                   </div>
                   <script> 
                      $('.heart{{$val->id}}').on('click',function(){

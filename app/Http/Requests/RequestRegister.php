@@ -24,9 +24,9 @@ class RequestRegister extends FormRequest
     public function rules()
     {
         return [
-            'email'=>'required|unique:users,email,'.$this->id,
+            'email'=>'required|unique:users',
             'c_name'=>'required',
-            'user'=>'required|unique:users,user,'.$this->id,
+            'user'=>'required|unique:users',
             'password'=>'min:6'
         ];
     }

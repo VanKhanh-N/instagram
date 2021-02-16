@@ -43,7 +43,9 @@ a{text-decoration:none}</style>
                     </tbody>
                   </table>
                 </div>
-                <div class="card-footer"></div>
+                <div class="box-footer">
+                  {{ $role->links() }}
+                  </div>
               </div>
             </div>
           </div>
