@@ -39,6 +39,7 @@ function follow(followed){
             $('.follower').text(data.user.follower);
             if(data.action =='bot'){
             //welcome (Gợi ý cho bạn)
+            $('.follow'+followed).addClass('text-blue');
             $('.follow'+followed).text(data.text_follow);
            //button gần user
            $('.list-follow').prepend(` 
@@ -74,7 +75,7 @@ function follow(followed){
             $('.settingss').prepend(`
                 <li class="clr user${data.auth.id}" style="height: 50px;">
                      <a href="${data.auth.user}" class="zx position-relative ">
-                     <img src="uploads/user/${data.auth.avatar}" class="w-35 rounded-circle"> 
+                     <img src="${data.avatar}" class="w-35 rounded-circle"> 
                      <b class="zz">${data.auth.user}</b><br>
                      <b class="os">${data.auth.c_name}</b>
                      </a>

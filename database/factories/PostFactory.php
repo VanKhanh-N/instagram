@@ -23,8 +23,8 @@ class PostFactory extends Factory
     public function definition()
     {
         return [ 
-        'p_user' => 2,
-        'p_image' =>'linh.jpg',
+        'p_user' => $this->faker->randomDigit,
+        'p_image' =>'katana.jpg',
         'p_slug'=>Str::random(15),
         'p_content' =>$this->faker->realText($maxNbChars = 100, $indexSize = 2),
         'p_type' => 'profile',  

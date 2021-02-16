@@ -63,6 +63,7 @@ return [
     'Go to post'=>'Go to post',
     'Share to...'=>'Share to...',
     'Copy Link'=>'Copy Link',
+    'Start following other people to share memories'=>'Start following other people to share memories',
     //direct
     'Your Messages'=>'Your Messages',
     'Send private photos and messages to a friend or group.'=>'Send private photos and messages to a friend or group.',

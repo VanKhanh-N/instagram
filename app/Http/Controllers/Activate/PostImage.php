@@ -25,6 +25,7 @@ class PostImage extends Controller
         Post::where('id',$data['c_post'])->increment('p_comment');
         $post=Post::find($data['c_post']);
         $user=User::find(\Auth::id());
+        if($data['c_user_id'] != \Auth::id())
         User::find($post->user->id)->notify(new CommentPost($post,$user));
         return response([
             'count'=> Post::find($data['c_post']),
