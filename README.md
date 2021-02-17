@@ -1,7 +1,7 @@
 
 ## Trang mạng xã hội (instagram)
 
-Đây là website giúp mọi người có thể chia sẻ những khoảnh khắc ,giúp kết nối mọi người lại với nhau thông qua sự tương tác trên các bài viết .
+Đây là website giúp mọi người có thể chia sẻ những khoảnh khắc ,giúp kết nối mọi người lại với nhau thông qua tương tác trên các bài viết .
 ## Công nghệ   
 - Laravel
 - Jquery

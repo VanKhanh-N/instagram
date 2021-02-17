@@ -62,7 +62,7 @@
 </div>
         
     <div class="register">
-        <span>Bạn chưa có tải khoản</span>
+        <span>Bạn chưa có tài khoản</span>
         <a href="{{ route('get.register') }}">Đăng ký</a>
     </div>
     <!-- <footer>
