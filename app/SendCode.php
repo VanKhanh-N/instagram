@@ -7,7 +7,7 @@
          $nexmo->message()->send([
              'to' => '+84'.(int)$phone,
              'from' =>'Insta',
-             'text' =>'Mã xác minh của bạn là: '+$code
+             'text' =>'Mã xác minh của bạn là: '+(string)$code
          ]);
          return $code;
      }

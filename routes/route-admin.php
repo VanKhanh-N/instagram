@@ -29,6 +29,7 @@ Route::group(['prefix'=>'api-admin','namespace'=>'App\Http\Controllers\Admin','m
     Route::group(['prefix'=>'user'],function(){
         Route::get('list-user','AdminController@list')->name('admin.user.list');
         Route::get('block_user/{id}','AdminController@block_user')->name('admin.user.block')->middleware('check_admin_permission:block-user'); 
+        Route::get('delete/{id}','AdminController@delete')->name('admin.user.delete'); 
     });
 
     Route::group(['prefix'=>'permission'],function(){

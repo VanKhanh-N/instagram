@@ -37,4 +37,10 @@ class AdminController extends Controller
         $user->save();
         return redirect()->back();
     }
+    public function delete($id)
+    {
+        $user=User::find($id);
+        $user->delete();
+        return redirect()->back();
+    }
 }

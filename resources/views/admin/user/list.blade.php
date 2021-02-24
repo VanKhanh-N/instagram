@@ -14,17 +14,20 @@
                     <thead class="thead-light">
                       <tr>
                         <th>ID</th>
-                        <th>Admin</th>
-                        <th>Vai trò</th> 
-                        <th>Hành động</th>
+                        <th>Số điện thoại</th>
+                        <th>Email</th> 
+                        <th>Liên kết</th>
+                        <th>Trạng thái</th>
+                        <th></th>
                       </tr>
                     </thead>
                     <tbody>
                     @foreach($user as $list)
                       <tr>
                         <td>{{ $list->user}}</td>
-                        <td>{{ $list->picture}}</td>
+                        <td>{{ $list->phone ?? 'Không có'}}</td>
                         <td>{{ $list->email}}</td>
+                        <td>{{ $list->provider ?? 'Trực tiếp'}}</td>
                         <td>
                         @if($list->is_active==0)
                         <span>Chưa kích hoạt</span>
@@ -34,6 +37,9 @@
                         <a href="{{route('admin.user.block',$list->id) }}" class="text-danger">Đã bị khóa</a>
                         @endif
                         </td>  
+                        <td>
+                        <a href="{{route('admin.user.delete',$list->id) }}" class="text-danger">Xóa</a>
+                        </td>
                       </tr>
                       @endforeach
                        
