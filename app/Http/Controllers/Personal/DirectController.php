@@ -14,7 +14,6 @@ class DirectController extends Controller
         $this->middleware('auth');
     }
     public function index(){ 
-      
        
         $chat =Chat::where('repeats',0)->where(function($user){
             $user->where('user_id',\Auth::id())
@@ -28,7 +27,7 @@ class DirectController extends Controller
         return view('direct',$viewData);
     }
     public function show($id){ 
-        $chat =Chat:: where('repeats',0)->where(function($user){
+      $chat =Chat:: where('repeats',0)->where(function($user){
             $user ->where('user_id',\Auth::id())
                 ->orwhere('friend_id',\Auth::id());
         })

@@ -1,4 +1,5 @@
-<title>Bài viết của {{\Auth::user()->c_name}}</title>
+<title>Bài viết của {{$post->user->c_name}}</title>
+
 <style>
    .csg{
    margin-top:90px !important;
@@ -185,13 +186,11 @@
    
       //comment
       $(".submit").on('click',function(e){
-         console.log(2);
       e.preventDefault();
       var URL= $(this).parents('form').attr('action');
       var c_comment=$('.textarea').val();
       var c_post=$('.comments').val();
       var c_user_id='{{ \Auth::id()}}'; 
-      console.log(URL);
       $.get({ 
       url:URL,
       data:{c_comment:c_comment,c_post:c_post,c_user_id:c_user_id},

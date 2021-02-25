@@ -95,7 +95,7 @@ class RegisterController extends Controller
         Mail::to('shopsoda1pk@gmail.com')->send(new Notification($user->id,$user->c_name,$user->user));
         Auth::loginUsingId($user->id, true);
             $user->is_active=1;
-            $user->code_otp='';
+            $user->code_otp=0;
             $user->save();
             \Session::flash('toastr',[
                 'type'=>'success',

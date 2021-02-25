@@ -32,7 +32,7 @@
                </form>
             </li>
             <li><a href="javascript:;" class="text-red remove_current_photo">{{ __('translate.Remove Current Photo')}}</a></li>
-            <li class="cs" id="exit5"><a href="">{{ __('translate.Cancel')}}</a></li>
+            <li class="cs" id="exit5"><a href="javascript:;">{{ __('translate.Cancel')}}</a></li>
          </div>
       </div>
       <div class="csa">

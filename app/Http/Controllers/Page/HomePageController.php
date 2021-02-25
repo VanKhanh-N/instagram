@@ -19,7 +19,6 @@ class HomePageController extends Controller
         $this->middleware('auth');
     }
     public function index($id){ 
-
         //$id là username có thể là Auth->user hoặc không  
         $user=User::where('user',$id)->first();  
         $post=Post::where(['p_user'=>$user['id'],

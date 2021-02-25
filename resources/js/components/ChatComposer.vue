@@ -25,7 +25,7 @@
                         user_id: this.userid
                     }
                     this.chat = ''; 
-                    axios.post('/chat/sendChat', data).then((response) => {
+                    axios.post('/chat/sendChat',data).then((response) => {
                         this.chats.push(data)
                     })
                 }

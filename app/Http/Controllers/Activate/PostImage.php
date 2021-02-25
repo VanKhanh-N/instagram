@@ -10,7 +10,6 @@ use App\Models\Post;
 use App\Models\User;
 use Carbon\Carbon;
 use App\Notifications\CommentPost;
-use App\Notifications\LikePost;
 class PostImage extends Controller
 {
     public function __construct()

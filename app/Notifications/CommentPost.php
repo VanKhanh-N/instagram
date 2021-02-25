@@ -12,7 +12,7 @@ class CommentPost extends Notification
 {
     use Queueable;
     public $post,$user;
-    public function __construct(Post $post,$user)
+    public function __construct(Post $post,User $user)
     {
          $this->post=$post;
          $this->user=$user;
