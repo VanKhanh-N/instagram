@@ -47,7 +47,7 @@ $('body').on('click','#myBtn-5',function(){
       }
       if (event.target == modal7) {    
       modal7.style.display = "none";
-      }
+      } 
       }
    var modal = document.getElementById("myModal"); 
    var btn = document.getElementById("myBtn"); 

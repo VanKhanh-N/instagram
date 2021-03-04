@@ -15,7 +15,7 @@ button{outline: none;background-color: transparent;border:none;}
     content: "";
     display: table;
     clear: both; 
-    width: 100%;
+    width: 98%;
 }
 .story img{
     margin-top:10px;

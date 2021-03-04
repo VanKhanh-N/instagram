@@ -1,9 +1,6 @@
 <title>{{\Auth::user()->c_name}}</title>
 @include('header')
-<style>.user{margin-left:150px}</style>
-<br> 
-<br>
-<br> 
+<style>.user{margin-left:150px}</style> 
 <body>
 
    <section class="sd">
@@ -263,16 +260,7 @@
                            @endif
                         </p>
                      </div>
-                     <i class="fa fa-ellipsis-h" id="Btn{{$val->id}}"></i>
-                     <div id="Modal{{$val->id}}" class="modal">
-                        <div class="modal-content setting animate__animated animate__zoomIn" >
-                           <li><a href="javascript:;" class="text-red">{{ __('translate.Report')}}</a></li>
-                           <li><a href="{{route('post.view',$val->p_slug)}}" >{{ __('translate.Go to post')}}</a> </li>
-                           <li><a href="javascript:;" >{{ __('translate.Share to...')}}</a></li>
-                           <li><a href="javascript:;" >{{ __('translate.Copy Link')}}</a></li>
-                           <li class="cs" id="exits{{$val->id}}"><a href="javascript:;" >{{ __('translate.Cancel')}}</a></li>
-                        </div>
-                     </div> 
+                  @include('layout.infomation',['value'=>$val->id]);
                   </div>
                   <div class="her hdl{{$val->id}}" id="hell">
                      @if($val->p_content!='')
@@ -399,24 +387,9 @@
               
                }
             }
-            //hiện modal trong bài viết 
-          
-            var modal{{$val->id}} = document.getElementById("Modal{{$val->id}}"); 
-            var btn{{$val->id}} = document.getElementById("Btn{{$val->id}}");
-            var exits{{$val->id}} = document.getElementById("exits{{$val->id}}"); 
-            btn{{$val->id}}.onclick = function() {
-            modal{{$val->id}}.style.display = "block";
-            }   
-            //ẩn modal trong bài viết
-            window.onclick = function(event) {   
-               if (event.target == modal{{$val->id}}) {    
-               modal{{$val->id}}.style.display = "none";
-               }
-            }
-            exits{{$val->id}}.onclick = function(event) {   
-               modal{{$val->id}}.style.display = "none";
-            }
-
+           
+         
+         
             //comment
             $(".submit-comment{{$val->id}}").on('click',function(e){
             e.preventDefault();

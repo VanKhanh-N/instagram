@@ -23,7 +23,7 @@ section{
 section img.user{
     width: 150px;
     height: 150px; 
-    object-fit: cover;
+    
 }
 .imguser{ 
     height: 40px;
@@ -80,7 +80,7 @@ section span{
 .cse img{ 
     width: 75%;
     height: 80%; 
-    object-fit: cover;
+    
 }
 .modal {
     display: none; 
@@ -259,7 +259,7 @@ footer ul{
     position: absolute;
     height: 100%;
     width: 70%; 
-    object-fit: cover;
+    
 } 
 .headcs{
     height: 100%;
@@ -273,9 +273,10 @@ footer ul{
     background: white;
 }
 .heq{ 
+    z-index: 98;
     height: 7%;}
 .heq img,.her img{
-    object-fit: cover;
+    
     width: 40px;
     height: 40px;border-radius: 50%; }
 .hew{
@@ -493,7 +494,7 @@ h2{
     position: absolute;
     top: 0;
     left: 0;
-    object-fit: cover;
+    
     margin-left: 10px;
     margin-top: 5px;}
 .zx .zz{
@@ -506,11 +507,52 @@ h2{
     width: 100%;
     text-align: center;}
 .buttons button{
-    
     border: 1px solid #bdbdbd;
     padding: 0px 5px;
     border-radius: 50%;
     font-size: 150%;}
+    .tooltip {
+        position: relative;
+        display: inline-block;
+      }
+      
+      .tooltip .tooltiptext {
+        visibility: hidden;
+        width: 140px;
+        background-color: #555;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px;
+        position: absolute;
+        z-index: 1;
+        bottom: 150%;
+        left: 50%;
+        margin-left: -75px;
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+      
+      .tooltip .tooltiptext::after {
+        content: "";
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        margin-left: -5px;
+        border-width: 5px;
+        border-style: solid;
+        border-color: #555 transparent transparent transparent;
+      }
+      
+      .tooltip:hover .tooltiptext {
+        visibility: visible;
+        opacity: 1;
+      }
+
+@media only screen and (min-width: 670px )and (max-width: 1030px){
+    .user{margin-left: 100px !important;}
+
+}
 @media only screen and (max-width: 670px){
      .modal-content{
         position: absolute;

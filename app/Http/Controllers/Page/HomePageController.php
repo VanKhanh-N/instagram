@@ -93,7 +93,7 @@ class HomePageController extends Controller
                            ->where('p_user',$post->p_user)
         ->orderby('id','desc')->limit(6)->get();
         $viewData=[
-            'post' =>$post,
+            'val' =>$post,
             'related_post' =>$related_post,
             'title'=>'',
             'now'  => Carbon::now(),

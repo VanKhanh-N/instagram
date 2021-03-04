@@ -3,9 +3,6 @@
 @section('content')
     <link rel="stylesheet" type="text/css" href="{{ asset('slick/slick/slick.css') }}"/>  
 <body>
-   <br>
-   <br>
-   <br>
    <div class="container">
    <div class="d-block">
       <div class="d-inline-block left border-gray">
@@ -86,37 +83,28 @@
          <p>{{ __('translate.Start following other people to share memories')}}</p>
       </div>
       @endif
-            @foreach($posts as $key => $item)  
+            @foreach($posts as $key => $val)  
             <article class="border-gray position-relative">
                <div class="header ">
-                  <a class="text-black" href="{{ $item->user->user}}"><img src="{{ pare_url_file($item->user->avatar,'user') }}" class="rounded-circle  d-inline-block img-user">{{ $item->user->c_name}}</a>
-                  <div class="float-right cs" id="Btn{{$item->id}}"  ><img src="{{ asset('img/edit.png') }}" class="img-edit"></div>
-                  <div id="Modal{{$item->id}}" class="modal">
-                        <div class="modal-content setting animate__animated animate__zoomIn" >
-                           <li><a href="javascript:;" class="text-red">{{ __('translate.Report')}}</a></li>
-                           <li><a href="{{route('post.view',$item->p_slug)}}" >{{ __('translate.Go to post')}}</a> </li>
-                           <li><a href="javascript:;" >{{ __('translate.Share to...')}}</a></li>
-                           <li><a href="javascript:;" >{{ __('translate.Copy Link')}}</a></li>
-                           <li class="cs" id="exits{{$item->id}}"><a href="javascript:;" >{{ __('translate.Cancel')}}</a></li>
-                        </div>
-                     </div> 
+                  <a class="text-black" href="{{ $val->user->user}}"><img src="{{ pare_url_file($val->user->avatar,'user') }}" class="rounded-circle  d-inline-block img-user">{{ $val->user->c_name}}</a>
+                  @include('layout.infomation',['value'=>$val->id]);
                </div>
-               <img src="{{pare_url_file($item->p_image,'profile') }}" class="article-img">
+               <img src="{{pare_url_file($val->p_image,'profile') }}" class="article-img">
                <div class="attractive">
                   <div class="d-block">
-                     <div class="d-inline-block"><i class="fa fa-15x heart{{$item->id}} {{ \App\Models\Like::checkLove($item->id) ? 'fa-heart text-red' :'fa-heart-o' }}" onclick="likepost('{{$item->id}}')"></i> </div>
+                     <div class="d-inline-block"><i class="fa fa-15x heart{{$val->id}} {{ \App\Models\Like::checkLove($val->id) ? 'fa-heart text-red' :'fa-heart-o' }}" onclick="likepost('{{$val->id}}')"></i> </div>
                      <div class="d-inline-block"><i class="fa fa-15x fa-comment-o"></i></div>
                      <div class="d-inline-block"><i class="fa fa-15x fa-share-alt"></i></div>
                      <div class="d-inline-block float-right"> <i class="fa fa-15x fa-bookmark-o float-right"></i></div>
                      <br>
-                     <b class="zxm"> <b class="like{{$item->id}}">{{\App\Models\Like::where('r_post',$item->id)->count()}}</b> {{ __('translate.likes')}}</b>
+                     <b class="zxm"> <b class="like{{$val->id}}">{{\App\Models\Like::where('r_post',$val->id)->count()}}</b> {{ __('translate.likes')}}</b>
                      <div class="d-inline-block w-100">
                         <div class="status">
-                           <a href="{{ $item->user->user}}" class="text-black">{{$item->user->c_name}} </a>{{$item->p_content}} <br>    
+                           <a href="{{ $val->user->user}}" class="text-black">{{$val->user->c_name}} </a>{{$val->p_content}} <br>    
                            <br>
                         </div>
                         <div class="hdl{{$key}}">
-                           @foreach(\App\Models\Comment::where('c_post',$item->id)->get() as $value=> $list) 
+                           @foreach(\App\Models\Comment::where('c_post',$val->id)->get() as $value=> $list) 
                            <div class="chat w-100 position-relative hjk{{$value}}" style="display:none">
                               <a href="{{ $list->users->user}}" class="text-black">{{$list->users->c_name}}</a> {{ $list->c_comment}}
                               <i class="fa fa-heart-o float-right"></i> 
@@ -125,11 +113,11 @@
                         </div>
                         <a href="javascript:;" class="text-gray button{{$key}}">{{ __('translate.View more comments')}}</a> 
                         <br>
-                        <a href="" class="text-gray" style="font-size:12px;line-height:30px">{{ $item->created_at->diffForHumans($now) }} </a>
+                        <a href="" class="text-gray" style="font-size:12px;line-height:30px">{{ $val->created_at->diffForHumans($now) }} </a>
                         <hr>
                         <form class="position-relative form" action="{{ route('comment.post')}}">
                            <textarea rows="10"  autocomplete="off" class="textarea-{{$key}} textarea-comment{{$key}}" placeholder="{{ __('translate.Add a comment')}}..."></textarea>
-                           <input type="hidden" value="{{$item->id}}" class="post-comment{{$key}}">
+                           <input type="hidden" value="{{$val->id}}" class="post-comment{{$key}}">
                            <input type="hidden" value="{{\Auth::id()}}" class="user-comment{{$key}}">  
                            <input type="submit" class="os comment-submit submit-{{$key}} submit-comment{{$key}}" value="{{ __('translate.Post')}}">
                            <img src="{{ asset('img/loading.gif')}}" class="w-30 loading{{$key}}" style="display:none;position: absolute;right: 0;">
@@ -140,21 +128,7 @@
                </div>
             </article>
             <script> 
-            //modal
             $(function(){
-            
-            var modal{{$item->id}} = document.getElementById("Modal{{$item->id}}"); 
-            var btn{{$item->id}} = document.getElementById("Btn{{$item->id}}");
-            var exits{{$item->id}} = document.getElementById("exits{{$item->id}}"); 
-            btn{{$item->id}}.onclick = function() {
-            modal{{$item->id}}.style.display = "block";
-            }   
-            //ẩn modal trong bài viết
-           
-            exits{{$item->id}}.onclick = function() {   
-               modal{{$item->id}}.style.display = "none";
-            }
-             
                //load comment
                  
                $('body').on('click','.button{{$key}}',function(){  
@@ -162,7 +136,7 @@
                   loadmore({{$key}});
                }) 
                currentindex=0;
-               maxindex ="{{\App\Models\Comment::where('c_post',$item->id)->count()}}";
+               maxindex ="{{\App\Models\Comment::where('c_post',$val->id)->count()}}";
                function loadmore(id){  
                   if(currentindex+3 >= maxindex){
                      $('.button'+id).hide();
@@ -181,7 +155,7 @@
                
                  loadmore({{$key}});
                //yêu thích
-               $(function(){ $('.heart{{$item->id}}').on('click',function(){
+               $(function(){ $('.heart{{$val->id}}').on('click',function(){
                      $(this).toggleClass('text-red');
                      $(this).toggleClass('fa-heart-o ');
                      $(this).toggleClass('fa-heart');
