@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="description" content="Website kết nối mọi người với nhau , cùng nhau chia sẻ những khoảnh khắc đáng nhớ">
     <meta name="userId" content="{{ Auth::check() ? Auth::user()->id : 'null' }}">
     <title>{{ __('translate.'.$title) ?? 'Instagram'}}</title>
     <link rel="stylesheet" href="{{ asset('css/header.css') }}">
@@ -63,11 +64,11 @@
                         <img class="mr-20 rounded-circle w-30" src="{{ asset($direct) }}" >
                         </a>
                      </li>
-                     <li class="d-inline-block  position-relative">
+                     <!-- <li class="d-inline-block  position-relative">
                         <a href="{{ url('/explore') }}">
                         <img class="mr-20 rounded-circle w-30" src="{{ asset($explore)  }}" >
                         </a>  
-                     </li>
+                     </li> -->
                      <notification v-bind:notifications="notifications"  v-bind:notification_readed="notification_readed"></notification>
                      <script>
                         $(function(){
@@ -99,7 +100,7 @@
                                  <span>{{ __('translate.saved')}}</span>
                               </li>
                            </a>
-                           <a href="edit.html">
+                           <a href="{{ route('profile.edit') }}">
                               <li>
                                  <i class="fa fa-lg fa-sun-o"></i>
                                  <span>{{ __('translate.Settings')}}</span>

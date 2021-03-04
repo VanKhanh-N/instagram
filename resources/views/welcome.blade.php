@@ -14,67 +14,67 @@
                <li>
                   <a>
                      <img src="{{ asset('img/be-giang.png') }}" class="img-story rounded-circle d-inline-block">
-                     <div>26.imei     </div>
+                     <div>42  </div>
                   </a>
                </li>
                <li>
                   <a>
                      <img src="{{ asset('img/be-giang.png') }}" class="img-story rounded-circle d-inline-block">
-                     <div>26.imei     </div>
+                     <div>42  </div>
                   </a>
                </li>
                <li>
                   <a>
                      <img src="{{ asset('img/be-giang.png') }}" class="img-story rounded-circle d-inline-block">
-                     <div>26.imei     </div>
+                     <div>42  </div>
                   </a>
                </li>
                <li>
                   <a>
                      <img src="{{ asset('img/be-giang.png') }}" class="img-story rounded-circle d-inline-block">
-                     <div>26.imei     </div>
+                     <div>42  </div>
                   </a>
                </li>
                <li>
                   <a>
                      <img src="{{ asset('img/be-giang.png') }}" class="img-story rounded-circle d-inline-block">
-                     <div>26.imei     </div>
+                     <div>42  </div>
                   </a>
                </li>
                <li>
                   <a>
                      <img src="{{ asset('img/be-giang.png') }}" class="img-story rounded-circle d-inline-block">
-                     <div>26.imei     </div>
+                     <div>42  </div>
                   </a>
                </li>
                <li>
                   <a>
                      <img src="{{ asset('img/be-giang.png') }}" class="img-story rounded-circle d-inline-block">
-                     <div>26.imei     </div>
+                     <div>42  </div>
                   </a>
                </li>
                <li>
                   <a>
                      <img src="{{ asset('img/be-giang.png') }}" class="img-story rounded-circle d-inline-block">
-                     <div>26.imei     </div>
+                     <div>42  </div>
                   </a>
                </li>
                <li>
                   <a>
                      <img src="{{ asset('img/be-giang.png') }}" class="img-story rounded-circle d-inline-block">
-                     <div>26.imei     </div>
+                     <div>42  </div>
                   </a>
                </li>
                <li>
                   <a>
                      <img src="{{ asset('img/be-giang.png') }}" class="img-story rounded-circle d-inline-block">
-                     <div>26.imei     </div>
+                     <div>42  </div>
                   </a>
                </li>
                <li>
                   <a>
                      <img src="{{ asset('img/be-giang.png') }}" class="img-story rounded-circle d-inline-block">
-                     <div>26.imei     </div>
+                     <div>42  </div>
                   </a>
                </li>
             </ul>

@@ -18,8 +18,8 @@
                     @csrf
                     <input type="file" onchange="uploadUserAvatar(this,'form_upload_user_avatar')" accept="image/*"  name="upload_user_avatar" class="d-none" id="upload_user_avatar">
                 </form>
-                <div class="edit-form__content">  
-                    <p>{{\Auth::user()->user}}</p><br>
+                <div class="edit-form__content userr">  
+                    <p class="">{{\Auth::user()->user}}</p><br>
                     <p class="text-blue cs" style="padding-left:10px" id="myBtn-5" >{{ __('translate.Change Profile Photo')}}</p>
                 </div>
                 </div>

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đăng ký</title>
+    <meta name="description" content="Website kết nối mọi người với nhau , cùng nhau chia sẻ những khoảnh khắc đáng nhớ">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>  
     <link rel="stylesheet" href="{{ asset('css/register.css') }}"> 
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">

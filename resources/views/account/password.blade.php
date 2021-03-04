@@ -14,7 +14,7 @@
         <img src="{{ asset('img/loading.gif')}}" class=" uploadavatar imguser" style="display:none;">
                 
         </div> 
-        <div class="edit-form__content">  
+        <div class="edit-form__content userr">  
             <p>{{\Auth::user()->user}}</p><br>
                      
         </div>

@@ -102,3 +102,38 @@
 .activate{
     border-left: 2px solid black;
 }
+@media only screen and (max-width: 670px){
+.edit-form__left{
+    display: none;
+}
+.edit-form__right .w-80{
+    width: 125%;
+}
+.edit-form__title {
+    width: 100%;
+    height: 100%;
+    float: right;
+    text-align: left;
+}
+.edit-form__right .clr b {
+    padding-bottom: 0px;
+    float: left;
+}
+.w-80 .clr .edit-form__title,.w-80 .clr .edit-form__content{
+    text-align: center;
+} 
+p#myBtn-5{
+    margin-top: -20px;
+    float: unset;
+}
+.userr p{float: unset !important;}
+.edit-form__content{
+    width:100%;
+}
+.edit-form__content input,.edit-form__content textarea{
+    width: 92% !important;
+}
+.edit-form__right .clr img {
+    margin-left: 15px;
+}
+}
