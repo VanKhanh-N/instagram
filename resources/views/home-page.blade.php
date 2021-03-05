@@ -212,7 +212,7 @@
    <!--file-->
    <input type="file" accept="image/*" name="profiles" accept="image/*" id="profiles" class='d-none'>
    <!--file-->
-   <p>{{ __('translate.or')}}</p>
+   <p class="p">{{ __('translate.or')}}</p>
    </div>
    <div class="label label2">
    <label for="stories" class="cs">{{ __('translate.Add to Stories')}}</label>

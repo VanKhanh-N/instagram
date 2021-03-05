@@ -23,6 +23,7 @@
                       <tr>
                         <th>ID</th>
                         <th>Admin</th>
+                        <th>Email</th> 
                         <th>Vai trò</th> 
                         <th>Hành động</th>
                       </tr>
@@ -32,6 +33,7 @@
                       <tr>
                         <td>{{ $list->id}}</td>
                         <td>{{ $list->name}}</td>
+                        <td>{{ $list->email}}</td>
                         <td>
                         @foreach($list->roles as $val)
                        <a class="btn btn-success text-light" style="cursor:pointer"> {{$val->name}}</a>

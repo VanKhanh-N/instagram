@@ -78,9 +78,40 @@
          </section>
          <div class="postss conntent">
          @if(!count($posts))
-         <div class="d-block text-center" style="margin-top:30%">
+         <div class="d-block text-center cs" style="margin-top:30%" id="myBtn-5">
          <i class="fa fa-lg fa-plus-square-o" style="font-size:400%"></i>
          <p>{{ __('translate.Start following other people to share memories')}}</p>
+      </div>
+       <!-- modal user image -->
+       <div class="suggest-follow">
+       <div id="myModal-5" class="modal">
+         <div class="modal-content setting animate__animated animate__zoomIn" >
+            <li ><label style="width:70%">{{ __('translate.Suggestions For You')}}</label> <div class="float-right cs" style="font-size: 30px;padding: 9px 16px;" id="exit5">&times;</div></li>
+
+
+            @foreach($user as $list)
+            @if(!\App\Models\Follow::where(['user_id'=>\Auth::id(),'followed'=>$list->id])->count())
+            <div class="d-inline-block position-relative suggest" >
+               <div class="d-inline-block text-black">
+                  <a href="{{ route('get.home-page',$list->user) }}"><img src="{{ pare_url_file($list->avatar,'user') }}" class="rounded-circle">
+                  {{ $list->user}}
+               </a>
+                 
+               </div>
+               <div class="d-inline-block float-right" style="padding:10px">
+                  <p class="cs follow{{$list->id}}  text-blue" onclick="follow('{{$list->id}}')">{{ ucwords(__('translate.follow'))}}</p>
+                  <div class="load{{$list->id}}" style="margin-top:-10px;display:none">
+                     <img src="{{ asset('img/loading.gif')}}">
+                  </div>
+               </div>
+            </div>
+            
+            @endif
+             
+            @endforeach
+
+         </div>
+      </div>
       </div>
       @endif
             @foreach($posts as $key => $val)  
@@ -228,29 +259,17 @@
                </div>
             </div>
             <br><br>  
-            <div class="d-flex w-100">
-               <p class="text-gray w-100">{{ __('translate.Suggestions For You')}}</p>
-               <a href="" class="text-black float-right w-100" style="font-size:12px">{{ __('translate.See All')}}</a>
+            <div class="d-flex">
+               <p class="text-gray">{{ __('translate.Suggestions For You')}}</p>
+               <a href="" class="text-black fs-12" style="text-align:right;width:68%">{{ __('translate.See All')}}</a>
             </div>
             @foreach($user as $list)
             @if(!\App\Models\Follow::where(['user_id'=>\Auth::id(),'followed'=>$list->id])->count())
             <div class="d-inline-block position-relative suggest">
-               <div class="d-inline-block">
-                  @if(substr($list->avatar,0,4)=='http')
-                  <a href="{{ route('get.home-page',$list->user) }}"><img src="{{ $list->avatar }}" class="rounded-circle"></a>
-                  @else
-                  <a href="{{ route('get.home-page',$list->user) }}"><img src="{{ pare_url_file($list->avatar,'user') }}" class="rounded-circle"></a>
-                  @endif  
-               </div>
-               <div class="d-inline-block ">
-                  <div class="w-100 user-link"><a href="{{ route('get.home-page',$list->user) }}" class="text-black">{{ $list->user}}</a></div>
-                  <br>
-                  @if(\App\Models\Follow::where(['user_id'=>$list->id,'followed'=>\Auth::id()])->count())
-                  <div class="w-100 user-name">
-                     <p class="text-gray">Theo dõi bạn</p>
-                  </div>
-                  @endif
-               </div>
+               <div class="d-inline-block text-black">
+                  <a href="{{ route('get.home-page',$list->user) }}"><img src="{{ pare_url_file($list->avatar,'user') }}" class="rounded-circle">
+                  {{ $list->user}}</a>
+               </div> 
                <div class="d-inline-block" style="position: absolute; top: 0;right: 0;margin-top: 10px;">
                   <p class="cs follow{{$list->id}}  text-blue" onclick="follow('{{$list->id}}')">{{ ucwords(__('translate.follow'))}}</p>
                   <div class="load{{$list->id}}" style="margin-top:-10px;display:none">
@@ -263,7 +282,7 @@
              
             @endforeach
             <div class="about-us">
-               <ul style="width: 80%;line-height:20px;margin-top: 30px;font-size:12px;opacity: 0.5;">
+               <ul style="line-height:20px;margin-top: 30px;font-size:12px;opacity: 0.5;">
                   <li class="d-inline-block "><a href="">{{ __('translate.About')}}</a>	&#8226;</li>
                   <li class="d-inline-block "><a href="">{{ __('translate.Help')}}</a>	&#8226;</li>
                   <li class="d-inline-block "><a href="">{{ __('translate.Press')}}</a>	&#8226;</li>
@@ -285,6 +304,8 @@
    </div>
 <script type="text/javascript" src="{{ asset('slick/slick/slick.js') }}"></script>
 <script src="{{ asset('js/style.js') }}"></script>
+<script src="{{ asset('js/post.js') }}"></script>
+<script src="{{ asset('js/modal.js') }}"></script>
    
   
 </body>

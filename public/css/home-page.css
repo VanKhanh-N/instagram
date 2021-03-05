@@ -139,7 +139,7 @@ section span{
     border: none;
     padding: 15px;
     border-radius: 5px;
-    width: 45%;
+    width: 42%;
     text-align: center;
 }
 .label2{
@@ -153,12 +153,12 @@ section span{
 .modal-content .button{
     position: absolute;
     bottom: 20px;
-    width: 86%;
+    width: 90%;
 }
-.modal-content p{
+.modal-content .p{
     position: absolute;
     top: 30%;
-    left: 47%;
+    left: 46%;
 }
 .title {
     display: flex;

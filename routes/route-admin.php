@@ -49,4 +49,8 @@ Route::group(['prefix'=>'api-admin','namespace'=>'App\Http\Controllers\Admin','m
         Route::post('update/{id}','RoleController@edit')->middleware('check_admin_permission:edit-role');
         Route::get('delete/{id}','RoleController@delete')->name('admin.role.delete')->middleware('check_admin_permission:del-role'); 
     });
+    Route::group(['prefix'=>'post'],function(){
+        Route::get('','PostController@index')->name('admin.post.index');
+        Route::get('delete/{id}','PostController@delete')->name('admin.post.delete')->middleware('check_admin_permission:del-post'); 
+    });
 });

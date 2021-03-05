@@ -78,7 +78,7 @@ $(function(){
                modal{{$value}}.style.display = "none";
                modal1{{$value}}.style.display = "block";
                $('meta').remove();
-               $('head').preend(`
+               $('head').append(`
                   <meta name="url" property="og:url" content="{{  route('post.view',$val->p_slug) }}">
                   <meta name="type" property="og:type" content="website" />
                   <meta name="description" property="og:description" content="{{$val->p_content}}">
