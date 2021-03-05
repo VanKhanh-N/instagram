@@ -260,7 +260,7 @@
                            @endif
                         </p>
                      </div>
-                  @include('layout.infomation',['value'=>$val->id]);
+                  @include('layout.infomation',['value'=>$val->id])
                   </div>
                   <div class="her hdl{{$val->id}}" id="hell">
                      @if($val->p_content!='')

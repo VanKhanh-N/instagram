@@ -118,7 +118,7 @@
             <article class="border-gray position-relative">
                <div class="header ">
                   <a class="text-black" href="{{ $val->user->user}}"><img src="{{ pare_url_file($val->user->avatar,'user') }}" class="rounded-circle  d-inline-block img-user">{{ $val->user->c_name}}</a>
-                  @include('layout.infomation',['value'=>$val->id]);
+                  @include('layout.infomation',['value'=>$val->id])
                </div>
                <img src="{{pare_url_file($val->p_image,'profile') }}" class="article-img">
                <div class="attractive">
