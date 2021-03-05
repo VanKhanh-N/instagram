@@ -1,4 +1,10 @@
 <title>Bài viết của {{$val->user->c_name}}</title>
+
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <meta name="title" content="{{$val->user->c_name}}">
+   <meta name="description" content="{{$val->p_content}}">
+    
    <meta name="url" property="og:url" content="{{  route('post.view',$val->p_slug) }}">
    <meta name="type" property="og:type" content="website" />
    <meta name="title" property="og:title" content="{{$val->p_content}}">
@@ -7,13 +13,13 @@
    <meta property="twitter:card" content="summary_large_image">
    <meta name="title" property="twitter:title" content="{{$val->p_content}}">
    <meta name="image" property="twitter:image" content="{{$val->p_image}}">
-   <meta name="url" property="twitter:domain" content="{{   route('post.view',$val->p_slug) }}">
+   <meta name="url" property="twitter:domain" content="{{route('post.view',$val->p_slug) }}">
 
    <meta property="zalo:card" content="summary_large_image">
    <meta name="title" property="zalo:title" content="{{$val->p_content}}">
    <meta name="image" property="zalo:image" content="{{$val->p_image}}">
    <meta name="url" property="zalo:domain" content="{{   route('post.view',$val->p_slug) }}">
-<link rel="stylesheet" href="{{ asset('css/view_post.css') }}"> 
+   <link rel="stylesheet" href="{{ asset('css/view_post.css') }}"> 
  
 @include('header')  
    <div class="asd">

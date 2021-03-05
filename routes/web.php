@@ -42,7 +42,6 @@ Route::group(['namespace'=>'App\Http\Controllers\Personal'], function () {
 //home page
 Route::group(['namespace'=>'App\Http\Controllers\Page'], function () { 
     //follow user
-    Route::get('/p/{slug}','HomePageController@view_post')->name('post.view'); 
     Route::get('/incre-view','HomePageController@incre_view')->name('post.increview'); 
     Route::get('/follow','HomePageController@follow'); 
     Route::post('/upload_user','HomePageController@uploadProfile')->name('upload.user'); 
@@ -75,6 +74,7 @@ Route::group(['namespace'=>'App\Http\Controllers\Activate'], function () {
 });
 
 Route::group(['prefix'=>'accounts','namespace'=>'App\Http\Controllers\Account'], function () {   
+    Route::get('/p/{slug}','PostController@view_post')->name('post.view'); 
     Route::get('/edit','ProfileController@edit')->name('profile.edit');  
     Route::post('/edit/store','ProfileController@store')->name('profile.store');    
     Route::get('/edit/password','ProfileController@password')->name('password.edit'); 

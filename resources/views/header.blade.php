@@ -7,7 +7,6 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="url" content="{{url(\Auth::user()->avatar)}}">
     <meta name="title" content="{{ \Auth::user()->c_name}}">
-
     <meta name="description" content="Website kết nối mọi người với nhau , cùng nhau chia sẻ những khoảnh khắc đáng nhớ">
     <meta name="userId" content="{{ Auth::check() ? Auth::user()->id : 'null' }}">
     <title>{{ __('translate.'.$title) ?? 'Instagram'}}</title>

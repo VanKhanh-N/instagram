@@ -41,16 +41,12 @@
    <li><label class="text-red">{{ __('translate.Share to')}}</label></li>
    <li>
       <label >
-         <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-size="large">
-      <a target="_blank" href="{{ route('post.view',$val->p_slug) }}" class="fb-xfbml-parse-ignore"><i class="fa fa-facebook" style="margin-top:0"></i>  {{ __('translate.Share to')}} Facebook </a>
-      </div>
+      <div class="fb-share-button" data-href="{{ route('post.view',$val->p_slug) }}" data-layout="button_count" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fgithub.com%2Fsatosis%2Fwatch&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore"><i class="fa fa-facebook" style="margin-top:0">{{ __('translate.Share to')}} Facebook</a></div>
       </label>
    </li>
-   <li><a class="twitter-sh are-button" href="{{ route('post.view',$val->p_slug) }}"> <i class="fa fa-twitter" style="margin-top:0"></i> {{ __('translate.Share to')}} Twitter</a> </li>
-   <li>
-      <label >
-         <div class="zalo-share-button" data-href="{{ route('post.view',$val->p_slug) }}" data-oaid="579745863508352884"  data-color="blue" data-customize=false> {{ __('translate.Share to')}} Zalo</div>
-      </label>
+   <li><a class="twitter-sh are-button" href="https://twitter.com/intent/tweet"> <i class="fa fa-twitter" style="margin-top:0"></i> {{ __('translate.Share to')}} Twitter</a> </li>
+   <li> 
+         <label class="zalo-share-button" data-href="{{ route('post.view',$val->p_slug) }}" data-layout="1" data-oaid="579745863508352884"  data-color="blue" data-customize=false></label>
    </li>
    <li class="cs" id="exits1{{$value}}"><label >{{ __('translate.Cancel')}}</label></li>
 </div>
@@ -96,8 +92,8 @@ $(function(){
                modal{{$value}}.style.display = "none";
             }
 })
-</script>   
+</script>      
 <div id="fb-root"></div>
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v10.0&appId=286256932921835&autoLogAppEvents=1" nonce="q6VBxwqq"></script>  
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v10.0&appId=286256932921835&autoLogAppEvents=1" nonce="hO6WZe49"></script>
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 <script src="https://sp.zalo.me/plugins/sdk.js"></script>
