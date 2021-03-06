@@ -29,6 +29,7 @@
         </script>
         
     @endif
+    
 </head>
 @php
    $home="img/home.png";

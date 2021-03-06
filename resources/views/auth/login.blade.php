@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{{ asset('css/login.css') }}"> 
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>  
-    <title>Đăng nhập</title> 
+    <title>Instagram</title> 
     <!-- toastr -->
     <link rel="stylesheet" href="{{ asset('toastr/toastr.min.css') }}"> 
     @if(session('toastr'))

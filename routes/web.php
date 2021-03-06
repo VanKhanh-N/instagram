@@ -72,9 +72,8 @@ Route::group(['namespace'=>'App\Http\Controllers\Activate'], function () {
     Route::post('/notification/read','NotificationController@read'); 
  
 });
-
+Route::get('/p/{slug}','App\Http\Controllers\Account\PostController@view_post')->name('post.view'); 
 Route::group(['prefix'=>'accounts','namespace'=>'App\Http\Controllers\Account'], function () {   
-    Route::get('/p/{slug}','PostController@view_post')->name('post.view'); 
     Route::get('/edit','ProfileController@edit')->name('profile.edit');  
     Route::post('/edit/store','ProfileController@store')->name('profile.store');    
     Route::get('/edit/password','ProfileController@password')->name('password.edit'); 

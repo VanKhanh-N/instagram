@@ -1,8 +1,9 @@
-
+ 
 <i class="fa fa-ellipsis-h" id="Btn{{$value}}"></i>
 <!-- modal infomation -->
 <div id="Modal{{$value}}" class="modal">
    <div class="modal-content setting animate__animated animate__zoomIn" >
+  
       @if($val->user->id != \Auth::id())
       <li><label class="text-red">{{ __('translate.Report')}}</label></li>
       @endif
@@ -39,10 +40,10 @@
 <div id="Modal1{{$value}}" class="modal">
 <div class="modal-content setting animate__animated animate__zoomIn" >
    <li><label class="text-red">{{ __('translate.Share to')}}</label></li>
-   <li>
-      <label >
-      <div class="fb-share-button" data-href="{{ route('post.view',$val->p_slug) }}" data-layout="button_count" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fgithub.com%2Fsatosis%2Fwatch&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore"><i class="fa fa-facebook" style="margin-top:0">{{ __('translate.Share to')}} Facebook</a></div>
-      </label>
+   <li> 
+  <div data-href="{{route('post.view',$val->p_slug)}}"  >
+   <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore"><i class="fa fa-facebook" style="margin-top:0;margin-right:5px"></i>{{ __('translate.Share to')}} Facebook</a>
+   </div>
    </li>
    <li><a class="twitter-sh are-button" href="https://twitter.com/intent/tweet"> <i class="fa fa-twitter" style="margin-top:0"></i> {{ __('translate.Share to')}} Twitter</a> </li>
    <li> 

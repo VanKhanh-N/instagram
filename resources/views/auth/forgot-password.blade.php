@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Website kết nối mọi người với nhau , cùng nhau chia sẻ những khoảnh khắc đáng nhớ">
 
-    <title>Quên mật khẩu</title>
+    <title>Instagram</title>
     <link rel="stylesheet" href="{{ asset('css/register.css') }}"> 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>  
     <link rel="stylesheet" href="{{ asset('css/forgot-password.css') }}"> 
