@@ -54,7 +54,7 @@ a{text-decoration:none}</style>
           </div>
           <!--Row-->
           <div class="box-footer">
-                  {{ $permission->links() }}
+                  {!! $permission->links() !!}
                   </div>
         
 

@@ -53,7 +53,7 @@
                     </a>
                </div>
                <a href="" class="info"><i class="fa fa-lg fa-info"></i></a>
-               <a href="" style="float:right;padding:25px"><i class="fa fa-lg fa-video-camera"></i></a>
+               <a href="{{route('chat.video')}}" style="float:right;padding:25px"><i class="fa fa-lg fa-video-camera"></i></a>
             </div> 
            
             <chat v-bind:chats="chats" v-bind:userid="{{ Auth::user()->id }}" v-bind:friendid="{{ $friend->id }}" ></chat>

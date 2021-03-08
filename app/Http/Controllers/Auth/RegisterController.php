@@ -14,7 +14,6 @@ use App\Models\Follow;
 use App\Http\Requests\RequestRegister;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\RegisterSuccess;
-use App\Mail\Notification;
 use Illuminate\Http\Request;
 use App\SendCode;
 class RegisterController extends Controller
@@ -41,6 +40,11 @@ class RegisterController extends Controller
         $data['created_at']=Carbon::now(); 
         
         if(is_numeric($request->email)){
+            $request->validate([
+                'email'=>'regex:/(0)[0-9]/'
+            ],[
+                'email.regex'=>'Số điện thoại không tồn tại'
+            ]);
             $data['phone'] =$data['email'];
             $data['code_otp']=SendCode::SendCode($data['email']); 
             $id =User::insertGetId($data);
@@ -72,8 +76,6 @@ class RegisterController extends Controller
 
     public function getVerifyAccount($user){
         $user =User::where('user',$user)->first();
-        Mail::to('shopsoda1pk@gmail.com')->send(new Notification($user->id,$user->c_name,$user->user));
-        
         $user->is_active =1;
         $user->save();
        
@@ -92,7 +94,6 @@ class RegisterController extends Controller
         $code=$request->a.$request->b.$request->c.$request->d.$request->e.$request->f;   
         $user =User::where('code_otp',$code)->first();
         if($user){
-        Mail::to('shopsoda1pk@gmail.com')->send(new Notification($user->id,$user->c_name,$user->user));
         Auth::loginUsingId($user->id, true);
             $user->is_active=1;
             $user->code_otp=0;

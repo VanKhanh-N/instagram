@@ -14,6 +14,7 @@
                     <thead class="thead-light">
                       <tr>
                         <th>ID</th>
+                        <th>Name</th>
                         <th>Số điện thoại</th>
                         <th>Email</th> 
                         <th>Liên kết</th>
@@ -24,7 +25,8 @@
                     <tbody>
                     @foreach($user as $list)
                       <tr>
-                        <td>{{ $list->user}}</td>
+                        <td>{{$list->id}}</td>
+                        <td><a href="{{route('get.home-page',$list->user)}}">{{ $list->c_name}}</a></td>
                         <td>{{ $list->phone ?? 'Không có'}}</td>
                         <td>{{ $list->email}}</td>
                         <td>{{ $list->provider ?? 'Trực tiếp'}}</td>

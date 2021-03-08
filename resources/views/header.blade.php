@@ -5,7 +5,7 @@
    <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="url" content="{{url(\Auth::user()->avatar)}}">
+    <meta name="url" content="{{url(pare_url_file(\Auth::user()->avatar,'user'))}}">
     <meta name="title" content="{{ \Auth::user()->c_name}}">
     <meta name="description" content="Website kết nối mọi người với nhau , cùng nhau chia sẻ những khoảnh khắc đáng nhớ">
     <meta name="userId" content="{{ Auth::check() ? Auth::user()->id : 'null' }}">
@@ -126,8 +126,8 @@
    @yield('content')
 </div>
 </html> 
-<!-- <script src="{{ asset('js/post.js') }}"></script>
-<script src="{{ asset('js/app.js') }}"></script> -->
+<script src="{{ asset('js/post.js') }}"></script>
+<script src="{{ asset('js/app.js') }}"></script>
 <script src="https://use.fontawesome.com/452826394c.js"></script>
 <script src="{{ asset('toastr/toastr.min.js') }}"></script>
 

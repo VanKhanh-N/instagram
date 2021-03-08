@@ -16,8 +16,8 @@ class CheckAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        if(get_data_user('admins'))
-        {
+    if(get_data_user('admins'))
+    {
         return $next($request);
     }
     return redirect()->to('/');

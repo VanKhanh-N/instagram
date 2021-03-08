@@ -1,4 +1,4 @@
-<title>{{\Auth::user()->c_name}}</title>
+<title>{{ $user->c_name}}</title>
 @include('header')
 <style>.user{margin-left:150px}</style> 
 <body>
@@ -210,7 +210,7 @@
    <div class="label">
    <label for="profiles" class="cs">{{ __('translate.Add to Profile')}}</label>  
    <!--file-->
-   <input type="file" accept="image/*" name="profiles" accept="image/*" id="profiles" class='d-none'>
+   <input type="file" name="profiles"  id="profiles" class='d-none'>
    <!--file-->
    <p class="p">{{ __('translate.or')}}</p>
    </div>

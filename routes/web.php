@@ -33,7 +33,7 @@ Route::group(['namespace'=>'App\Http\Controllers\Personal'], function () {
     Route::get('/direct','DirectController@index')->name('direct');   
     Route::get('/searchmess','DirectController@searchmess')->name('searchmess');  
     Route::get('/direct/{id}', 'DirectController@show')->name('chat.show');
-    Route::get('/home',  'DirectController@show')->name('chat.video');
+    Route::get('/video',  'DirectController@video')->name('chat.video');
     Route::post('/pusher/auth', 'App\Http\Controllers\HomeController@authenticate'); 
     Route::post('/chat/getChat/{id}', 'DirectController@getChat');
     Route::post('/chat/sendChat', 'DirectController@sendChat');

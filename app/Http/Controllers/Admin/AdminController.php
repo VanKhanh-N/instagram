@@ -14,7 +14,8 @@ class AdminController extends Controller
         $month_now = Carbon::now()->month;
         $new_admin=Admin::whereMonth('created_at',$month_now)->count();
         $new_user=User::whereMonth('created_at',$month_now)->count();
-        $new_post=Post::count();
+        $new_post=Post::join('users','posts.p_user','users.id')
+        ->where('p_type','profile')->count();
         $viewData=[
             'new_admin'=>$new_admin,
             'new_user'=>$new_user,
@@ -24,7 +25,7 @@ class AdminController extends Controller
         return view('admin.index',$viewData);
     }
     public function list(){
-        $user=User::paginate(15);
+        $user=User::orderBy('id','desc')->paginate(15);
         $title='Người dùng';
         return view('admin.user.list',compact('user','title'));
     }

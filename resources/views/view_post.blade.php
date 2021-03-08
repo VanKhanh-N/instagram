@@ -112,9 +112,9 @@
          <div class="heu">
             <form action="{{ route('comment.post')}}" method="get">
                @csrf
-               <textarea class="textarea" placeholder="{{ __('translate.Add a comment')}}..."></textarea>
+               <textarea class="textarea"  placeholder="{{ __('translate.Add a comment')}}..."></textarea>
                <input type="hidden" value="{{$val->id}}" class="comments">   
-               <button class="submit disabled">{{ __('translate.Post')}}</button>
+               <button class="submit disabled" type="button">{{ __('translate.Post')}}</button>
                <img src="{{ asset('img/loading.gif')}}" class="w-30 load-comment" style="top: 10px;right: 15px;position: absolute;display:none;">
             </form>
          </div>
@@ -243,6 +243,5 @@
       <li class=" "><a href="{{route('language',['en']) }}">English</a></li>
    </ul>
    <br> 
-</footer>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</footer> 
 <script src="{{ asset('js/post.js') }}"></script> 
