@@ -90,7 +90,7 @@
                      <a href="{{ $list->users->user }}" class="zx position-relative ">
                      <img src="{{ pare_url_file($list->users->avatar,'user') }}" class="w-35 rounded-circle"> 
                      <b class="zz">{{ $list->users->user }}</b><br>
-                     <b class="os">{{ $list->users->c_name }}</b>
+                     <b class="os zpo">{{ $list->users->c_name }}</b>
                      </a>
                      @if($list->user_id!=\Auth::id())
                      @if(\App\Models\Follow::checkFollow(\Auth::id(),$list->user_id))
@@ -139,7 +139,7 @@
                      <a href="{{ $list->friends->user }}" class="zx position-relative">
                      <img src="{{ pare_url_file($list->friends->avatar,'user') }}" class="w-35 rounded-circle"> 
                      <b class="zz">{{ $list->friends->user }}</b><br>
-                     <b class="os">{{ $list->friends->c_name }}</b>
+                     <b class="os zpo">{{ $list->friends->c_name }}</b>
                      </a>
                      @if($list->friends->id!=\Auth::id()) 
                      @if(\App\Models\Follow::checkFollow(\Auth::id(),$list->friends->id))
@@ -327,7 +327,7 @@
                      <i class="fa fa-15x fa-share-alt"></i>
                      <i class="fa fa-15x fa-bookmark-o float-right"></i><br>
                      <p class="f-6 "><b class="view{{$val->id}}">{{$val->p_view}}</b> {{ __('translate.views')}}</p>
-                     <p class="f-6 "><b class="like{{$val->id}}">{{$val->p_favourite}}</b> {{ __('translate.likes')}}</p> 
+                     <p class="f-6 " style="margin-top:-6px"> @include('layout.like',['value'=>$val->id])</p> 
                      <p class="os">{{ $val->created_at->diffForHumans($now) }}</p>
                   </div>
                   <script> 

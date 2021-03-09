@@ -3,8 +3,7 @@
     <div class="bottom-right position-relative" id="hihi">
         <div v-if="chats.chat.length != 0"  v-for="chat in chats.chat">
             <div class="my-messages position-relative" v-if="chat.user_id == userid">
-                <div class="time">{{ chat.created_at | formatDate }}</div>
-                <!-- <div class="time">{{ chats.friend.avatar}}</div> -->
+                <div class="time">{{ chat.created_at | formatDate }}</div>  
                     <div class="me-messages"> 
                         <p> {{ chat.chat }}</p>
                     </div>
@@ -12,8 +11,10 @@
             <div class="friend-messages position-relative" v-else>
                 <div class="time">{{ chat.created_at | formatDate }}</div>
                 
+                <a :href="'/'+chats.friend.user">
                 <img :src="'/uploads/user/'+chats.friend.avatar" class="friend-img rounded-circle" v-if="chats.friend.avatar.substr(0,4)!='http'">
                 <img :src="chats.friend.avatar" class="friend-img rounded-circle" v-if="chats.friend.avatar.substr(0,4)=='http'">
+                </a>
                     <div class="your-messages"> 
                         <p>{{ chat.chat }}</p>
                     </div>

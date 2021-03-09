@@ -129,7 +129,7 @@
                      <div class="d-inline-block"><i class="fa fa-15x fa-share-alt"></i></div>
                      <div class="d-inline-block float-right"> <i class="fa fa-15x fa-bookmark-o float-right"></i></div>
                      <br>
-                     <b class="zxm"> <b class="like{{$val->id}}">{{\App\Models\Like::where('r_post',$val->id)->count()}}</b> {{ __('translate.likes')}}</b>
+                    @include('layout.like',['value'=>$val->id])
                      <div class="d-inline-block w-100">
                         <div class="status">
                            <a href="{{ $val->user->user}}" class="text-black">{{$val->user->c_name}} </a>{{$val->p_content}} <br>    

@@ -39,7 +39,12 @@ class PostImage extends Controller
         if($count){  
             $count->delete();
             Post::where('id',$data['r_post'])->decrement('p_favourite'); 
-            return Post::find($data['r_post']);
+            return response([
+                'action'=>'bot',
+                'post'=> Post::find($data['r_post']),
+                'user'=>\Auth::user(), 
+                'avatar' =>pare_url_file(\Auth::user()->avatar,'user')
+                ]);
         } 
         $data['r_user_id']=\Auth::user()->id;
         $data['created_at']=Carbon::now();
@@ -52,6 +57,12 @@ class PostImage extends Controller
 
         $id=Like::InsertGetId($data);
         Post::where('id',$data['r_post'])->increment('p_favourite');
-        return Post::find($data['r_post']);
+        return response([
+            'action'=>'them',
+            'word' =>__('translate.likes'),
+            'post'=> Post::find($data['r_post']),
+            'user'=>\Auth::user(), 
+            'avatar' =>pare_url_file(\Auth::user()->avatar,'user')
+            ]);
     }
 }

@@ -1875,6 +1875,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['chats', 'userid', 'friendid']
 });
@@ -2126,7 +2127,7 @@ var app = new Vue({
 });
 Vue.filter('formatDate', function (value) {
   if (value) {
-    return moment__WEBPACK_IMPORTED_MODULE_0___default()(String(value)).format('MM/DD/YYYY hh:mm');
+    return moment__WEBPACK_IMPORTED_MODULE_0___default()(value).fromNow();
   }
 });
 
@@ -65810,22 +65811,29 @@ var render = function() {
                             )
                           ]),
                           _vm._v(" "),
-                          _vm.chats.friend.avatar.substr(0, 4) != "http"
-                            ? _c("img", {
-                                staticClass: "friend-img rounded-circle",
-                                attrs: {
-                                  src:
-                                    "/uploads/user/" + _vm.chats.friend.avatar
-                                }
-                              })
-                            : _vm._e(),
-                          _vm._v(" "),
-                          _vm.chats.friend.avatar.substr(0, 4) == "http"
-                            ? _c("img", {
-                                staticClass: "friend-img rounded-circle",
-                                attrs: { src: _vm.chats.friend.avatar }
-                              })
-                            : _vm._e(),
+                          _c(
+                            "a",
+                            { attrs: { href: "/" + _vm.chats.friend.user } },
+                            [
+                              _vm.chats.friend.avatar.substr(0, 4) != "http"
+                                ? _c("img", {
+                                    staticClass: "friend-img rounded-circle",
+                                    attrs: {
+                                      src:
+                                        "/uploads/user/" +
+                                        _vm.chats.friend.avatar
+                                    }
+                                  })
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _vm.chats.friend.avatar.substr(0, 4) == "http"
+                                ? _c("img", {
+                                    staticClass: "friend-img rounded-circle",
+                                    attrs: { src: _vm.chats.friend.avatar }
+                                  })
+                                : _vm._e()
+                            ]
+                          ),
                           _vm._v(" "),
                           _c("div", { staticClass: "your-messages" }, [
                             _c("p", [_vm._v(_vm._s(chat.chat))])

@@ -13,4 +13,7 @@ class Like extends Model
             return '2';
         return '';
     }
+    public function users(){
+        return $this->belongsTo(User::class,"r_user_id");
+    }
 }

@@ -99,8 +99,8 @@
             <i class="fa fa-15x fa-share-alt"></i>
             <i class="fa fa-15x fa-bookmark-o float-right"></i><br>
             <p class="asf "><b class="view">{{$val->p_view}}</b> {{ __('translate.views')}}</p>
-            <p class="asf "><b class="likes{{$val->id}}">{{$val->p_favourite}}</b> {{ __('translate.likes')}}</p>
-            <p class="os">4 giờ trước</p>
+            <p class="asf ">@include('layout.like',['value'=>$val->id])</p>
+            <p class="os">{{ $val->created_at->diffForHumans($now) }} </p>
          </div>
          <script> 
             $('.heart').on('click',function(){
@@ -166,10 +166,12 @@
       exits.onclick = function(event) {   
          modal.style.display = "none";
       }
-   
-      //comment
-      $(".submit").on('click',function(e){
-      e.preventDefault();
+     
+</script>
+<script>
+   $(function(){
+         //comment
+         $(".submit").on('click',function(e){
       var URL= $(this).parents('form').attr('action');
       var c_comment=$('.textarea').val();
       var c_post=$('.comments').val();
@@ -203,8 +205,7 @@
       // $div.scrollBottom($div[0].scrollHeight); 
       });
       })
-      
-      
+   })
 </script>
 <br>
 @if(count($related_post))

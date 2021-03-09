@@ -4,8 +4,29 @@ function likepost(postId){
         url:"/like/post",
         data:{r_post:postId},
         success:function(e){     
-        $('.like'+postId).text(e.p_favourite);
-        $('.likes'+postId).text(e.p_favourite);
+        $('.like'+postId).text(e.post.p_favourite);
+        $('.likes'+postId).text(e.post.p_favourite);
+        if(e.action=='them'){
+            if(e.post.p_favourite==1){
+                $('#myBtn-'+e.post.id).prepend(`
+                  <b class="like${e.post.id}">1</b> ${e.word}
+                `);
+            }
+            $('.posts'+e.post.id).prepend(`
+                <div class="clr users${e.user.id}${e.post.id}" style="height: 50px;">
+                <a href="${e.user.user}" class="zx position-relative" style="width:75%">
+                <img src="${e.avatar}" class="w-35 rounded-circle"> 
+                <b class="zz">${e.user.user}</b><br>
+                <b class="os zpo">${e.user.c_name}</b>
+                </a>
+                </div>
+            `);
+        }
+        if(e.action=='bot'){
+            if(!e.post.p_favourite)
+            $('#myBtn-'+e.post.id).empty();
+            $('.users'+e.user.id+e.post.id).remove();
+        }
         }
     })
  }  

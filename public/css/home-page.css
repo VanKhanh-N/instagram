@@ -160,6 +160,11 @@ section span{
     top: 30%;
     left: 46%;
 }
+.zpo{
+    position: absolute;
+    left: 0;
+    line-height: 30px;
+}
 .title {
     display: flex;
     width: 350px;
@@ -303,7 +308,7 @@ footer ul{
 .het p{margin-bottom: 20px;}
 .f-6{width: 40%;}
 .hey{
-    height: 17%;border-bottom: 1px solid #bdbdbd;
+    height: 20%;border-bottom: 1px solid #bdbdbd;
 }
 .hey i{
     padding: 10px;
