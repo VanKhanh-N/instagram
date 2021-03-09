@@ -13,9 +13,10 @@
                <img :src="notification.data.user.avatar" class="friend-img rounded-circle" v-if="notification.data.user.avatar.substr(0,4)=='http'">
               
                </div>
-               <div class="noti-content" > 
+               <div class="noti-content clr" > 
                      <p>{{notification.data.user.c_name}}</p>
-                     <span>Đã bình luận về bài viết của bạn</span>
+                     <span v-if="notification.data.type=='comment'" class="cons">đã bình luận về bài viết của bạn</span>
+                     <span v-if="notification.data.type=='like'" class="cons">đã thích về bài viết của bạn</span>
                      <span class="time">{{ notification.created_at | formatDate }}</span>  
                   <!-- <button>Theo doi</button>  -->
                </div>   
@@ -30,9 +31,10 @@
                <img :src="noti.data.user.avatar" class="friend-img rounded-circle" v-if="noti.data.user.avatar.substr(0,4)=='http'">
               
                </div>
-               <div class="noti-content" > 
+               <div class="noti-content clr" > 
                      <p>{{noti.data.user.c_name}}</p>
-                     <span>Đã bình luận về bài viết của bạn</span>
+                     <span v-if="notification.data.type=='comment'" class="cons">đã bình luận về bài viết của bạn</span>
+                     <span v-if="notification.data.type=='like'" class="cons">đã thích về bài viết của bạn</span>
                      <span class="time">{{ noti.created_at | formatDate }}</span>  
                   <!-- <button>Theo doi</button>  -->
                </div>   

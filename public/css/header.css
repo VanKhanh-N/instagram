@@ -27,6 +27,7 @@ input{outline: 0;}
 .w-90{width: 90%;margin: 0 auto;}
 .w-100{width: 100%;}
 .p-15{padding: 15px;}
+.p-5{padding: 5px;}
 .cs,i,button,input[type="submit"]{cursor:pointer}
 .fs-11{font-size: 11px;}
 .fs-12{font-size: 12px;}
@@ -121,7 +122,9 @@ body,.background-gray{
     width: 500px;
     margin-left: -425px;
     max-height: 300px;
-    overflow: auto;}
+    overflow: auto;
+    overflow-x: hidden;
+}
  .set-user-width{width: 200px;
     margin-left: -163px;}
 .set-user-width li i{
@@ -175,6 +178,9 @@ body,.background-gray{
     padding: 15px;
     text-align: center;
 }
+.cons{
+    padding: 5px;
+    line-height: 22px;}
 .slick-arrow{z-index: 1 !important;}
 .count-action{
     position: absolute;

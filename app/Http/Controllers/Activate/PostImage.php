@@ -21,11 +21,11 @@ class PostImage extends Controller
         $data['created_at']=Carbon::now();
         $data['updated_at']=Carbon::now(); 
         $id=Comment::InsertGetId($data);
-        Post::where('id',$data['c_post'])->increment('p_comment');
         $post=Post::find($data['c_post']);
         $user=User::find(\Auth::id());
-        if($data['c_user_id'] != \Auth::id())
-        User::find($post->user->id)->notify(new CommentPost($post,$user));
+
+        if($data['c_user_id'] != $post->user->id)
+        User::find($post->user->id)->notify(new CommentPost($post,$user,'comment'));
         return response([
             'count'=> Post::find($data['c_post']),
             'user'=>\Auth::user(), 
@@ -46,6 +46,10 @@ class PostImage extends Controller
         $data['updated_at']=Carbon::now();
         $post=Post::find($data['r_post']);
         $user=User::find(\Auth::id());
+        
+        if($data['r_user_id'] != $post->user->id)
+        User::find($post->user->id)->notify(new CommentPost($post,$user,'like'));
+
         $id=Like::InsertGetId($data);
         Post::where('id',$data['r_post'])->increment('p_favourite');
         return Post::find($data['r_post']);

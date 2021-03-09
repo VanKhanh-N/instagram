@@ -190,7 +190,7 @@
                <button type="submit" class="submit">{{ __('translate.Share')}}</button> 
                <img src="{{asset('img/loading.gif')}}"  class="w-30 nos" style="display:none">
             </div>
-            <textarea name="p_content" class="textarea" placeholder="Write a caption... (max 2000 charaters)"></textarea>
+            <textarea name="p_content" class="textarea p-5" placeholder="Write a caption... (max 2000 charaters)"></textarea>
       </div>
       <img id="image-post" src="{{ asset('img/heart-outline.png') }}" >
    </div>
@@ -443,6 +443,7 @@
       @endif
    </div>
    <footer>
+   
       <ul>
          <li class=" "><a href="">{{ __('translate.About')}}</a></li>
          <li class=" "><a href="">Blog</a></li>

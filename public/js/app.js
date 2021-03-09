@@ -1987,6 +1987,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['notifications', 'notification_readed'],
   methods: {
@@ -65992,10 +65994,20 @@ var render = function() {
                     : _vm._e()
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "noti-content" }, [
+                _c("div", { staticClass: "noti-content clr" }, [
                   _c("p", [_vm._v(_vm._s(notification.data.user.c_name))]),
                   _vm._v(" "),
-                  _c("span", [_vm._v("Đã bình luận về bài viết của bạn")]),
+                  notification.data.type == "comment"
+                    ? _c("span", { staticClass: "cons" }, [
+                        _vm._v("đã bình luận về bài viết của bạn")
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  notification.data.type == "like"
+                    ? _c("span", { staticClass: "cons" }, [
+                        _vm._v("đã thích về bài viết của bạn")
+                      ])
+                    : _vm._e(),
                   _vm._v(" "),
                   _c("span", { staticClass: "time" }, [
                     _vm._v(
@@ -66037,10 +66049,20 @@ var render = function() {
                     : _vm._e()
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "noti-content" }, [
+                _c("div", { staticClass: "noti-content clr" }, [
                   _c("p", [_vm._v(_vm._s(noti.data.user.c_name))]),
                   _vm._v(" "),
-                  _c("span", [_vm._v("Đã bình luận về bài viết của bạn")]),
+                  _vm.notification.data.type == "comment"
+                    ? _c("span", { staticClass: "cons" }, [
+                        _vm._v("đã bình luận về bài viết của bạn")
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.notification.data.type == "like"
+                    ? _c("span", { staticClass: "cons" }, [
+                        _vm._v("đã thích về bài viết của bạn")
+                      ])
+                    : _vm._e(),
                   _vm._v(" "),
                   _c("span", { staticClass: "time" }, [
                     _vm._v(_vm._s(_vm._f("formatDate")(noti.created_at)))

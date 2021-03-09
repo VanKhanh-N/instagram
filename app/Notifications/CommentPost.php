@@ -11,11 +11,12 @@ use App\Models\User;
 class CommentPost extends Notification
 {
     use Queueable;
-    public $post,$user;
-    public function __construct(Post $post,User $user)
+    public $post,$user,$type;
+    public function __construct(Post $post,User $user,$type)
     {
          $this->post=$post;
          $this->user=$user;
+         $this->type=$type;
     }
 
     /**
@@ -39,7 +40,8 @@ class CommentPost extends Notification
     {
         return [
            'post'=> $this->post,
-           'user'=> $this->user
+           'user'=> $this->user,
+           'type'=> $this->type
         ];
     }
     public function toBroadCast($notifiable)
@@ -47,7 +49,9 @@ class CommentPost extends Notification
         return [
            'data'=> [
                'post' =>$this->post,
-               'user' =>$this->user
+               'user' =>$this->user,
+               'type' =>$this->type
+
            ]
         ];
     }
