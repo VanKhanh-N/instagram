@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Follow;
 use App\Models\Chat;
+use App\Models\Group;
+use App\Models\GroupUser;
 use App\Models\User;
 class DirectController extends Controller
 {
@@ -13,6 +15,7 @@ class DirectController extends Controller
     {
         $this->middleware('auth');
     }
+    //chat private
     public function index(){ 
        
         $chat =Chat::where('repeats',0)->where(function($user){
@@ -88,7 +91,49 @@ class DirectController extends Controller
        }
     return $output;
     }
+    public function list_user(Request $request){
+
+        $random_number =rand(0000000000,9999999999);
+        $group = Group::create(['name' => 'Nhóm',
+                                'room' => $random_number
+        ]);
+        if (is_array($request->user) || is_object($request->user))
+{
+        foreach($request->user as $list){
+            if($list !=','){
+                GroupUser::create([
+                    'group_id' => $random_number,
+                    'user_id'  => $list
+                ]);
+            }
+        }
+    }
+        return route('chat.group.show',$random_number);
+    }
     public function video(){
         return view('direct.videocall');
+    }
+    public function index_chat_group($room){ 
+        $room =Group::where('room',$room)->first();
+        $participants =GroupUser::where('group_id',$room->id)->get();
+        $viewData=[ 
+            
+            'title'  => 'Group Chat'
+        ];
+        return view('direct.group_chat',$viewData);
+    }
+    public function chat_group() {
+        $group = Group::create(['name' => request('name'),
+                                'room' =>str_random(12)
+        ]);
+
+        $users = collect(request('users'));
+        $users->push(auth()->user()->id);
+
+        $group->users()->attach($users);
+
+        broadcast(new GroupCreated($group))->toOthers();
+
+        return $group;
     }
 }

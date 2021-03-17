@@ -16,7 +16,7 @@
                 chat: ''
             }
         },
-        methods: {
+        methods: {  
             sendChat: function(e) {
                 if (this.chat != '') {
                     var data = {

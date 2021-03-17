@@ -13,7 +13,11 @@
             if($('.hihi{{$key}}').hasClass('background-blue')){
             $('.hihi{{$key}}').removeClass('background-blue'); 
             $('.pt{{$key}}').remove();
+            if(!$('.pw').children('div').hasClass('pt')){
+                  $('.nexts').addClass('disabled');
+                  }
             }else{  
+               $('.nexts').removeClass('disabled');
             $('.hihi{{$key}}').addClass('background-blue'); 
             $('.pw').append(` 
             <div class="pt pt{{$key}}" id="pt pt{{$key}}">
@@ -51,7 +55,12 @@
                if($('.hihi{{$key}}').hasClass('background-blue')){
                   $('.hihi{{$key}}').removeClass('background-blue'); 
                   $('.pt{{$key}}').remove();
+                  if(!$('.pw').children('div').hasClass('pt')){
+                  $('.nexts').addClass('disabled');
+                  }
                }else{  
+                  $('.nexts').removeClass('disabled');
+
                $('.hihi{{$key}}').addClass('background-blue'); 
                $('.pw').append(` 
                <div class="pt pt{{$key}}" id="pt{{$key}}">

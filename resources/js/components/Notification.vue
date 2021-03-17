@@ -6,7 +6,7 @@
       </a>
       <!-- unseen -->
       <ul class="notification  d-none set-noti-width ">
-         <li class="position-relative un-seen" v-for="notification in notifications" >
+         <li class="position-relative un-seen"   v-for="(notification,index) in notifications" :key="index">
             <a href="#" v-on:click="MarkAsRead(notification)">
                <div class="noti-img">
                <img :src="'/uploads/user/'+notification.data.user.avatar" class="friend-img rounded-circle" v-if="notification.data.user.avatar.substr(0,4)!='http'">
@@ -24,7 +24,7 @@
          </li> 
       <!-- seen --> 
    
-          <li class="position-relative" v-for="noti in notification_readed" >
+          <li class="position-relative"  v-for="(noti,index) in notification_readed" :key="index">
             <a href="#" v-on:click="MarkAsRead(noti)">
                <div class="noti-img">
                <img :src="'/uploads/user/'+noti.data.user.avatar" class="friend-img rounded-circle" v-if="noti.data.user.avatar.substr(0,4)!='http'">

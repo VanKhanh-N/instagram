@@ -7,10 +7,13 @@
       <div class="clr pp">
          <span class="cs closemodal">&times;</span>
          <p>{{ __('translate.New Message')}}</p>
+         <form action="{{route('list_user')}}" method="post">
+         @csrf
+         <input type="hidden" name="user" id="add_user">
          <button class="disabled nexts">{{ __('translate.Next')}}</button>
+         </form>
       </div>
       <div class="pi">
-         <form >
             @csrf
             <p class="pr">{{ __('translate.To')}}:</p>
             <div class="pe">
@@ -18,7 +21,6 @@
                </div>
             </div>
             <input type="text" name="key" placeholder="{{ __('translate.Search')}}..." id="search" autocomplete="off">
-         </form>
       </div>
       <div class="pu ">
          <b class="pq">{{ __('translate.Suggested')}}</b>
@@ -29,14 +31,27 @@
                <b>{{ $list->friends->user}}</b><br>
                <p class="os">{{$list->friends->c_name}}</p>
             </div>
+
             <button class="cs hihi{{$key}}"><i class="fa fa-lg fa-check haha{{$key}}"></i></button>
          </div>
          <script> 
+         var users=new Array();
+          $(function(){ 
             $('.py{{$list->id}}').on('click',function(){
                if($('.hihi{{$key}}').hasClass('background-blue')){
                   $('.hihi{{$key}}').removeClass('background-blue'); 
                   $('.pt{{$key}}').remove();
+                  if(!$('.pw').children('div').hasClass('pt')){
+                  $('.nexts').addClass('disabled');
+                  }
+                  for( var i = 0; i < users.length; i++){ 
+                  if ( users[i] === {{$list->friends->id}}) { 
+                     users.splice(i, 1); 
+                  }
+               }
                }else{  
+                  users.push({{$list->friends->id}});
+                  $('.nexts').removeClass('disabled');
                $('.hihi{{$key}}').addClass('background-blue'); 
                $('.pw').append(` 
                <div class="pt pt{{$key}}" id="pt{{$key}}">
@@ -44,6 +59,8 @@
                </div> 
                `);
                }
+               $('#add_user').val(users);
+
             });  
             $('body').on('click','.close{{$key}}',function(){
             $('.pt{{$key}}').remove();
@@ -54,6 +71,7 @@
             $('.nexts').addClass('disabled');
              }  
             })  
+          })
          </script> 
          @endforeach 
       </div>

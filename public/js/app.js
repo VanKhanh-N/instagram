@@ -65782,66 +65782,55 @@ var render = function() {
           attrs: { id: "hihi" }
         },
         [
-          _vm._l(_vm.chats.chat, function(chat) {
-            return _vm.chats.chat.length != 0
-              ? _c("div", [
-                  chat.user_id == _vm.userid
-                    ? _c(
-                        "div",
-                        { staticClass: "my-messages position-relative" },
+          _vm._l(_vm.chats.chat, function(chat, index) {
+            return _c("div", { key: index }, [
+              chat.user_id == _vm.userid
+                ? _c("div", { staticClass: "my-messages position-relative" }, [
+                    _c("div", { staticClass: "time" }, [
+                      _vm._v(_vm._s(_vm._f("formatDate")(chat.created_at)))
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "me-messages" }, [
+                      _c("p", [_vm._v(" " + _vm._s(chat.chat))])
+                    ])
+                  ])
+                : _c(
+                    "div",
+                    { staticClass: "friend-messages position-relative" },
+                    [
+                      _c("div", { staticClass: "time" }, [
+                        _vm._v(_vm._s(_vm._f("formatDate")(chat.created_at)))
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "a",
+                        { attrs: { href: "/" + _vm.chats.friend.user } },
                         [
-                          _c("div", { staticClass: "time" }, [
-                            _vm._v(
-                              _vm._s(_vm._f("formatDate")(chat.created_at))
-                            )
-                          ]),
+                          _vm.chats.friend.avatar.substr(0, 4) != "http"
+                            ? _c("img", {
+                                staticClass: "friend-img rounded-circle",
+                                attrs: {
+                                  src:
+                                    "/uploads/user/" + _vm.chats.friend.avatar
+                                }
+                              })
+                            : _vm._e(),
                           _vm._v(" "),
-                          _c("div", { staticClass: "me-messages" }, [
-                            _c("p", [_vm._v(" " + _vm._s(chat.chat))])
-                          ])
+                          _vm.chats.friend.avatar.substr(0, 4) == "http"
+                            ? _c("img", {
+                                staticClass: "friend-img rounded-circle",
+                                attrs: { src: _vm.chats.friend.avatar }
+                              })
+                            : _vm._e()
                         ]
-                      )
-                    : _c(
-                        "div",
-                        { staticClass: "friend-messages position-relative" },
-                        [
-                          _c("div", { staticClass: "time" }, [
-                            _vm._v(
-                              _vm._s(_vm._f("formatDate")(chat.created_at))
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c(
-                            "a",
-                            { attrs: { href: "/" + _vm.chats.friend.user } },
-                            [
-                              _vm.chats.friend.avatar.substr(0, 4) != "http"
-                                ? _c("img", {
-                                    staticClass: "friend-img rounded-circle",
-                                    attrs: {
-                                      src:
-                                        "/uploads/user/" +
-                                        _vm.chats.friend.avatar
-                                    }
-                                  })
-                                : _vm._e(),
-                              _vm._v(" "),
-                              _vm.chats.friend.avatar.substr(0, 4) == "http"
-                                ? _c("img", {
-                                    staticClass: "friend-img rounded-circle",
-                                    attrs: { src: _vm.chats.friend.avatar }
-                                  })
-                                : _vm._e()
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "your-messages" }, [
-                            _c("p", [_vm._v(_vm._s(chat.chat))])
-                          ])
-                        ]
-                      )
-                ])
-              : _vm._e()
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "your-messages" }, [
+                        _c("p", [_vm._v(_vm._s(chat.chat))])
+                      ])
+                    ]
+                  )
+            ])
           }),
           _vm._v(" "),
           _vm.chats.chat.length == 0
@@ -65971,65 +65960,70 @@ var render = function() {
       "ul",
       { staticClass: "notification  d-none set-noti-width " },
       [
-        _vm._l(_vm.notifications, function(notification) {
-          return _c("li", { staticClass: "position-relative un-seen" }, [
-            _c(
-              "a",
-              {
-                attrs: { href: "#" },
-                on: {
-                  click: function($event) {
-                    return _vm.MarkAsRead(notification)
+        _vm._l(_vm.notifications, function(notification, index) {
+          return _c(
+            "li",
+            { key: index, staticClass: "position-relative un-seen" },
+            [
+              _c(
+                "a",
+                {
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      return _vm.MarkAsRead(notification)
+                    }
                   }
-                }
-              },
-              [
-                _c("div", { staticClass: "noti-img" }, [
-                  notification.data.user.avatar.substr(0, 4) != "http"
-                    ? _c("img", {
-                        staticClass: "friend-img rounded-circle",
-                        attrs: {
-                          src: "/uploads/user/" + notification.data.user.avatar
-                        }
-                      })
-                    : _vm._e(),
+                },
+                [
+                  _c("div", { staticClass: "noti-img" }, [
+                    notification.data.user.avatar.substr(0, 4) != "http"
+                      ? _c("img", {
+                          staticClass: "friend-img rounded-circle",
+                          attrs: {
+                            src:
+                              "/uploads/user/" + notification.data.user.avatar
+                          }
+                        })
+                      : _vm._e(),
+                    _vm._v(" "),
+                    notification.data.user.avatar.substr(0, 4) == "http"
+                      ? _c("img", {
+                          staticClass: "friend-img rounded-circle",
+                          attrs: { src: notification.data.user.avatar }
+                        })
+                      : _vm._e()
+                  ]),
                   _vm._v(" "),
-                  notification.data.user.avatar.substr(0, 4) == "http"
-                    ? _c("img", {
-                        staticClass: "friend-img rounded-circle",
-                        attrs: { src: notification.data.user.avatar }
-                      })
-                    : _vm._e()
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "noti-content clr" }, [
-                  _c("p", [_vm._v(_vm._s(notification.data.user.c_name))]),
-                  _vm._v(" "),
-                  notification.data.type == "comment"
-                    ? _c("span", { staticClass: "cons" }, [
-                        _vm._v("đã bình luận về bài viết của bạn")
-                      ])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  notification.data.type == "like"
-                    ? _c("span", { staticClass: "cons" }, [
-                        _vm._v("đã thích về bài viết của bạn")
-                      ])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "time" }, [
-                    _vm._v(
-                      _vm._s(_vm._f("formatDate")(notification.created_at))
-                    )
+                  _c("div", { staticClass: "noti-content clr" }, [
+                    _c("p", [_vm._v(_vm._s(notification.data.user.c_name))]),
+                    _vm._v(" "),
+                    notification.data.type == "comment"
+                      ? _c("span", { staticClass: "cons" }, [
+                          _vm._v("đã bình luận về bài viết của bạn")
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    notification.data.type == "like"
+                      ? _c("span", { staticClass: "cons" }, [
+                          _vm._v("đã thích về bài viết của bạn")
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "time" }, [
+                      _vm._v(
+                        _vm._s(_vm._f("formatDate")(notification.created_at))
+                      )
+                    ])
                   ])
-                ])
-              ]
-            )
-          ])
+                ]
+              )
+            ]
+          )
         }),
         _vm._v(" "),
-        _vm._l(_vm.notification_readed, function(noti) {
-          return _c("li", { staticClass: "position-relative" }, [
+        _vm._l(_vm.notification_readed, function(noti, index) {
+          return _c("li", { key: index, staticClass: "position-relative" }, [
             _c(
               "a",
               {
@@ -66060,13 +66054,13 @@ var render = function() {
                 _c("div", { staticClass: "noti-content clr" }, [
                   _c("p", [_vm._v(_vm._s(noti.data.user.c_name))]),
                   _vm._v(" "),
-                  _vm.notification.data.type == "comment"
+                  noti.data.type == "comment"
                     ? _c("span", { staticClass: "cons" }, [
                         _vm._v("đã bình luận về bài viết của bạn")
                       ])
                     : _vm._e(),
                   _vm._v(" "),
-                  _vm.notification.data.type == "like"
+                  noti.data.type == "like"
                     ? _c("span", { staticClass: "cons" }, [
                         _vm._v("đã thích về bài viết của bạn")
                       ])

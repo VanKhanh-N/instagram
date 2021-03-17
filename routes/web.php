@@ -27,16 +27,24 @@ Route::get('/','App\Http\Controllers\HomeController@index')->name('home');
     Route::get('logout','LoginController@getLogout')->name('get.logout'); // đăng xuất
 
 });
-
+//chat
 Route::group(['namespace'=>'App\Http\Controllers\Personal'], function () {   
     Route::get('/explore','ExploreController@index')->name('explore'); 
     Route::get('/direct','DirectController@index')->name('direct');   
-    Route::get('/searchmess','DirectController@searchmess')->name('searchmess');  
+    //tìm kiếm
+    Route::get('/searchmess','DirectController@searchmess')->name('searchmess'); 
+    //lấy người dùng tạo group chat 
+    Route::post('/list_user','DirectController@list_user')->name('list_user'); 
+
+    //chat private
     Route::get('/direct/{id}', 'DirectController@show')->name('chat.show');
-    Route::get('/video',  'DirectController@video')->name('chat.video');
-    Route::post('/pusher/auth', 'App\Http\Controllers\HomeController@authenticate'); 
     Route::post('/chat/getChat/{id}', 'DirectController@getChat');
     Route::post('/chat/sendChat', 'DirectController@sendChat');
+    //call video
+    Route::get('/video',  'DirectController@video')->name('chat.video');
+    // Route::post('/pusher/auth', 'App\Http\Controllers\HomeController@authenticate'); 
+    //chat group
+    Route::get('/chat-group/{room}', 'DirectController@index_chat_group')->name('chat.group.show');
 
 });
 //home page
@@ -72,6 +80,7 @@ Route::group(['namespace'=>'App\Http\Controllers\Activate'], function () {
     Route::post('/notification/read','NotificationController@read'); 
  
 });
+//chi tiết bài viết
 Route::get('/p/{slug}','App\Http\Controllers\Account\PostController@view_post')->name('post.view'); 
 Route::group(['prefix'=>'accounts','namespace'=>'App\Http\Controllers\Account'], function () {   
     Route::get('/edit','ProfileController@edit')->name('profile.edit');  

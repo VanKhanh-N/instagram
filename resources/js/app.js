@@ -68,7 +68,13 @@ const app = new Vue({
                     this.chats.chat.push(e.chat);
                 });
         }
-
+        //chat.group
+        if (friendId != undefined) {
+            Echo.private('users.' + this.user.id)
+            .listen('GroupCreated', (e) => {
+                this.groups.push(e.group);
+            });
+        }
         //online
         if (userId != 'null') {
             Echo.join('Online')

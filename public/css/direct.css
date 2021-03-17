@@ -221,6 +221,7 @@
     height: 100%;
     background-color: rgba(0,0,0,0.4);  
     z-index: 100;
+    top:0
 }
 .w3-modal-content{
     position: absolute;
@@ -280,7 +281,8 @@
 }
 .py img{
     float: left;
-    width: 10%;
+    width: 11%;
+    height: 81%;
 }
 .py div{
     float: left;

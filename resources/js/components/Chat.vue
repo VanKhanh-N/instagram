@@ -1,7 +1,7 @@
  <template>
     <div>
     <div class="bottom-right position-relative" id="hihi">
-        <div v-if="chats.chat.length != 0"  v-for="chat in chats.chat">
+        <div  v-for="(chat,index) in chats.chat" :key="index" >
             <div class="my-messages position-relative" v-if="chat.user_id == userid">
                 <div class="time">{{ chat.created_at | formatDate }}</div>  
                     <div class="me-messages"> 
