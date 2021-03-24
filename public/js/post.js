@@ -59,7 +59,7 @@ function follow(followed){
             $('.list-follow').empty();
             $('.follower').text(data.user.follower);
             if(data.action =='bot'){
-            //welcome (Gợi ý cho bạn)
+            //welcome (Gợi ý cho bạn)   
             $('.follow'+followed).addClass('text-blue');
             $('.follow'+followed).text(data.text_follow);
            //button gần user

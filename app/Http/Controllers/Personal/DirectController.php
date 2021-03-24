@@ -8,7 +8,10 @@ use App\Models\Follow;
 use App\Models\Chat;
 use App\Models\Group;
 use App\Models\GroupUser;
+use App\Models\Conversation;
+use Illuminate\Support\Str;
 use App\Models\User;
+use App\Events\GroupCreated;
 class DirectController extends Controller
 {
     public function __construct()
@@ -22,9 +25,11 @@ class DirectController extends Controller
             $user->where('user_id',\Auth::id())
                 ->orwhere('friend_id',\Auth::id());
         })
-                ->get();       
+                ->get(); 
+        $group=GroupUser::where('user_id',\Auth::id())->join('groups','groups.id','group_user.group_id')->get();
         $viewData=[ 
             'chat' =>$chat,
+            'group' =>$group,
             'title'=>'Message'
         ];
         return view('direct',$viewData);
@@ -36,10 +41,13 @@ class DirectController extends Controller
         })
                 ->get();    
         $friend =User::FindorFail($id);
+        $group=GroupUser::where('user_id',\Auth::id())->join('groups','groups.id','group_user.group_id')->get();
+
         $viewData=[
-            'chat' => $chat,   
-            'friend' => $friend,
-            'title'  => 'Chat'
+            'chat'      => $chat,   
+            'friend'    => $friend,
+            'group'     =>$group,
+            'title'     => 'Chat'
         ];
         return view('direct.chat',$viewData);
     }
@@ -52,22 +60,22 @@ class DirectController extends Controller
         })->get();
         $friend=User::find($id);
     $data=[
-        'chat' =>$chats,
-        'friend'=>$friend
+        'chat'      =>$chats,
+        'friend'    =>$friend
     ];
         return $data;
     }
 
-    public function sendChat(Request $request) { 
+    public function sendChat(Request $request) {  
         $repeats =0;
         if(Chat::where(['user_id'=> $request->user_id, 'friend_id' => $request->friend_id])->count()) $repeats=1;
         if(Chat::where(['user_id' => $request->friend_id,'friend_id'=> $request->user_id ])->count()) $repeats=2;
         Chat::create([
-            'user_id' => $request->user_id,
+            'user_id'   => $request->user_id,
             'friend_id' => $request->friend_id,
-            'chat' => $request->chat,
-            'repeats'=>$repeats
-        ]);
+            'chat'      => $request->chat,
+            'repeats'   =>$repeats
+        ]); 
         
         return [];
     }
@@ -82,7 +90,9 @@ class DirectController extends Controller
             }
          return $output;
         }
-       $val =User::where('c_name','like','%'.$request->value.'%')->orwhere('user','like','%'.$request->value.'%')->limit(5)->get();
+       $val =User::where('id','!=',\Auth::id())
+                ->where('c_name','like','%'.$request->value.'%')
+                ->orwhere('user','like','%'.$request->value.'%')->limit(5)->get();
        $output='';
        if(!$val->isEmpty())
        $output.= view('direct.searchmess',compact('val'))->render();
@@ -91,49 +101,75 @@ class DirectController extends Controller
        }
     return $output;
     }
-    public function list_user(Request $request){
-
-        $random_number =rand(0000000000,9999999999);
-        $group = Group::create(['name' => 'Nhóm',
-                                'room' => $random_number
+    public function create_chat_group(Request $request){
+        $random_number =rand(0000000000,9999999999); 
+        $request->user.=','.\Auth::id();
+        $arr=explode(',',$request->user);
+        $group_name='';
+        foreach($arr as $item){
+            $group_name.=','.User::where('id',$item)->value('user');
+        }
+        $group = Group::create(['name' => mb_substr($group_name,1,20).'...',
+       'room' => $random_number
         ]);
-        if (is_array($request->user) || is_object($request->user))
-{
-        foreach($request->user as $list){
+        foreach($arr as $list){
             if($list !=','){
-                GroupUser::create([
-                    'group_id' => $random_number,
+               $group_user= GroupUser::create([
+                    'group_id' => $group->id,
                     'user_id'  => $list
                 ]);
-            }
         }
     }
-        return route('chat.group.show',$random_number);
+    $viewData=[
+        'title' =>'Group Chat'
+    ];
+        return redirect()->to('/direct/t/'.$group->room);
     }
     public function video(){
         return view('direct.videocall');
     }
-    public function index_chat_group($room){ 
-        $room =Group::where('room',$room)->first();
-        $participants =GroupUser::where('group_id',$room->id)->get();
+    public function index_chat_group($rooms){ 
+        $room_id=Group::where('room',$rooms)->value('id');
+        if(!GroupUser::where('group_id',$room_id)->where('user_id',\Auth::id())->count()){
+            return redirect()->to('direct');
+        }
+        $chat =Chat::where('repeats',0)->where(function($user){
+            $user->where('user_id',\Auth::id())
+                ->orwhere('friend_id',\Auth::id());
+        })
+                ->get();  
+        $group=GroupUser::where('user_id',\Auth::id())->join('groups','groups.id','group_user.group_id')->get();
+        $group_room=Group::where('room',$rooms)->first();
+        $conversation =Conversation::where('group_id',$room_id)->get();
         $viewData=[ 
-            
-            'title'  => 'Group Chat'
+            'chat'              => $chat, 
+            'title'             => 'Instagram',
+            'group'             => $group,    
+            'group_room'        => $group_room,    
+            'conversation'      => $conversation, 
+            'room'              => $room_id ,  
+            'group'             => $group , 
         ];
         return view('direct.group_chat',$viewData);
+    } 
+    public function getGroupChat($room) {
+        $group_chats = Conversation::where([
+            'group_id'=>$room
+        ])->join('users','users.id','conversations.user_id')
+        ->get();
+ 
+    $data=[
+        'group_chats'   => $group_chats,
+        'room'          => $room
+    ];
+        return $data;
     }
-    public function chat_group() {
-        $group = Group::create(['name' => request('name'),
-                                'room' =>str_random(12)
+    public function sendGroupChat(Request $request) { 
+        $conversation=Conversation::create([
+            'user_id'  => $request->user_id,
+            'group_id' => $request->group_id,
+            'message'  => $request->message,
         ]);
-
-        $users = collect(request('users'));
-        $users->push(auth()->user()->id);
-
-        $group->users()->attach($users);
-
-        broadcast(new GroupCreated($group))->toOthers();
-
-        return $group;
+        return [];
     }
 }

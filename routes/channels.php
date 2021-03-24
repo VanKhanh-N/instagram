@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Broadcast;
-
+use App\Models\GroupUser;
 /*
 |--------------------------------------------------------------------------
 | Broadcast Channels
@@ -28,4 +28,8 @@ Broadcast::channel('Online', function ($user) {
 
 Broadcast::channel('users.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
+});
+
+Broadcast::channel('Groups.{group}', function ($user, GroupUser $group) {
+    return $group->hasUser($user->id);
 });

@@ -9,19 +9,21 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
+use App\Models\Conversation;
 
-class GroupCreated
+class NewMessage implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     /**
-     * Create a new event instance.
+     * Create a new event instance. 
      *
      * @return void
      */
-    public function __construct()
+    public $conversation;
+    public function __construct(Conversation $conversation)
     {
-        //
+        $this->conversation=$conversation;
     }
 
     /**
@@ -31,12 +33,6 @@ class GroupCreated
      */
     public function broadcastOn()
     {
-        $channels = [];
-
-        foreach ($this->group->users as $user) {
-            array_push($channels, new PrivateChannel('users.' . $user->id));
-        }
-
-        return $channels;
+        return new PrivateChannel('Groups.' . $this->conversation->group->id);
     }
 }

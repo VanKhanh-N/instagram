@@ -20,8 +20,10 @@ window.Vue = require('vue').default;
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('chat', require('./components/Chat.vue').default);
+Vue.component('chat_group', require('./components/ChatGroup.vue').default);
 
 Vue.component('chat-composer', require('./components/ChatComposer.vue').default);
+Vue.component('chat-group-composer', require('./components/ChatGroupComposer.vue').default);
 Vue.component('notification', require('./components/Notification.vue').default);
 Vue.component('onlineuser', require('./components/OnlineUser.vue').default);
 
@@ -37,6 +39,9 @@ const app = new Vue({
         notifications:'',
         notification_readed:'',
         chats: '',
+        chat_group:'',
+        groups: '',
+        room:'',
         onlineUsers: ''     
     }, 
     created() {
@@ -46,35 +51,36 @@ const app = new Vue({
             this.notification_readed =response.data.notification_readed;
              
         });
-
-        //chat
-        const userId = $('meta[name="userId"]').attr('content');
-        const friendId = $('meta[name="friendId"]').attr('content');
-
-        //notification
         Echo.private('App.Models.User.' + userId).notification((notification)=>{
             this.notifications.push(notification);
             this.notification_readed.push(notification);
         })
-         
-        //chat 
+        //chat
+        const userId = $('meta[name="userId"]').attr('content');
+        const friendId = $('meta[name="friendId"]').attr('content');
+        const roomId = $('meta[name="roomId"]').attr('content');
         if (friendId != undefined) {
             axios.post('/chat/getChat/' + friendId).then((response) => {
                 this.chats = response.data;
             });
 
             Echo.private('Chat.' + friendId + '.' + userId)
-                .listen('BroadcastChat', (e) => { 
+                .listen('BroadcastChat', (e) => {
                     this.chats.chat.push(e.chat);
                 });
-        }
-        //chat.group
-        if (friendId != undefined) {
-            Echo.private('users.' + this.user.id)
-            .listen('GroupCreated', (e) => {
-                this.groups.push(e.group);
+        } 
+         
+        //chat.group 
+        if(roomId != undefined){
+            axios.post('/group_chat/getGroupChat/'+roomId).then((response) => {
+                this.chat_group = response.data;
             });
-        }
+            Echo.private('Groups.' + roomId)
+            .listen('NewMessage', (e) => {
+                console.log(3);
+                this.chat_group.chat.push(e.chat);
+            });
+    } 
         //online
         if (userId != 'null') {
             Echo.join('Online')

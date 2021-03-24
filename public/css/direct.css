@@ -132,26 +132,30 @@
 }
 .friend-messages{float: left;
     width: 100%;
-    margin-top: 15p;
-    margin-bottom:15px;
+    margin-bottom:60px;
 }
 .friend-messages p{
     
+    left:0;
+    top:40px;
     background-color:#fff ;
     border-radius: 20px;
     border: 1px solid gray;
     padding: 10px;
-    margin-left: 40px;
+    margin-left: 57px;
     width: 200px;
     box-sizing: border-box;
 }
 .your-messages{
-    margin-left: 20px;
+    top:0;
+    left:0;
+    padding-left: 70px;
+    padding-top: 18px;
 }
 .your-messages img{
     position: absolute;
     bottom: 0;
-} 
+}   
 .form-chat{
     width: 90%; 
     margin: 15px;
@@ -281,8 +285,8 @@
 }
 .py img{
     float: left;
-    width: 11%;
-    height: 81%;
+    width: 40px;
+    height: 40px;
 }
 .py div{
     float: left;
@@ -340,8 +344,8 @@
     border-radius: 50%;}
 .friend-img{
     position: absolute;
-    margin: 8px 8px;
-    height: 30px;
-    width: 30px;
+    margin: 17px 8px;
+    height: 40px;
+    width: 40px;
     object-fit: cover;
 }

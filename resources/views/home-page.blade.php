@@ -342,7 +342,7 @@
                         @csrf
                         <textarea class="textarea-{{$val->id}} textarea-comment{{$val->id}}" placeholder="{{ __('translate.Add a comment')}}..."></textarea>
                         <input type="hidden" value="{{$val->id}}" class="post-comment{{$val->id}}">   
-                        <button class="submit-{{$val->id}} submit-comment{{$val->id}} disabled">{{ __('translate.Post')}}</button>
+                        <button type="button" class="submit-{{$val->id}} submit-comment{{$val->id}} disabled">{{ __('translate.Post')}}</button>
                         <img src="{{ asset('img/loading.gif')}}" class="w-30 load-comment" style="top: 10px;right: 15px;position: absolute;display:none;">
                      </form>
                   </div>

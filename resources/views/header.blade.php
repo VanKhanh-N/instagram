@@ -15,12 +15,13 @@
     <link rel="stylesheet" href="{{ asset('css/direct.css') }}"> 
     <link rel="stylesheet" href="{{ asset('css/reponsive.css') }}"> 
     <link rel="stylesheet" href="{{ asset('css/explore.css') }}"> 
+      <script src="https://use.fontawesome.com/452826394c.js"></script>
     <link rel="stylesheet" href="{{ asset('css/home-page.css') }}"> 
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon"/>
     <link rel="stylesheet" href="{{ asset('toastr/toastr.min.css') }}"> 
-    <script src="https://use.fontawesome.com/452826394c.js"></script>
     @if(session('toastr'))
         <script>    
             var TYPE_MESSAGE="{{session('toastr.type') }}";

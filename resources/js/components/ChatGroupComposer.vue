@@ -10,7 +10,7 @@
 
 <script>
     export default {
-        props: ['chats', 'userid', 'friendid'],
+        props: ['chat_group', 'userid', 'roomid'],
         data() {
             return {
                 chat: ''
@@ -18,16 +18,17 @@
         },
         methods: {  
             sendChat: function(e) {
+
                 if (this.chat != '') {
                     var data = {
-                        chat: this.chat,
-                        friend_id: this.friendid,
+                        message: this.chat,
+                        group_id: this.roomid,
                         user_id: this.userid,
                         created_at:new Date().toLocaleString()
                     }
                     this.chat = ''; 
-                    axios.post('/chat/sendChat',data).then((response) => {
-                        this.chats.push(data)
+                    axios.post('/group_chat/sendChat',data).then((response) => {
+                        this.chat_group.push(data)
                     })
                 }
             }

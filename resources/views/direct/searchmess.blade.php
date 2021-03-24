@@ -52,6 +52,7 @@
       </div>
       <script> 
             $('.py{{$list->id}}').on('click',function(){
+
                if($('.hihi{{$key}}').hasClass('background-blue')){
                   $('.hihi{{$key}}').removeClass('background-blue'); 
                   $('.pt{{$key}}').remove();
