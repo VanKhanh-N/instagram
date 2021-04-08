@@ -10,6 +10,7 @@ use App\Models\Group;
 use App\Models\GroupUser;
 use App\Models\Conversation;
 use Illuminate\Support\Str;
+use App\Events\NewMessage;
 use App\Models\User;
 use App\Events\GroupCreated;
 class DirectController extends Controller
@@ -153,14 +154,17 @@ class DirectController extends Controller
         return view('direct.group_chat',$viewData);
     } 
     public function getGroupChat($room) {
+        // $group_chats = Conversation::where([
+        //     'group_id'=>$room
+        // ])->join('users','conversations.user_id','users.id')
+        // ->get();
         $group_chats = Conversation::where([
             'group_id'=>$room
-        ])->join('users','users.id','conversations.user_id')
+        ]) 
         ->get();
- 
     $data=[
         'group_chats'   => $group_chats,
-        'room'          => $room
+        'room'     => $room
     ];
         return $data;
     }
@@ -170,6 +174,13 @@ class DirectController extends Controller
             'group_id' => $request->group_id,
             'message'  => $request->message,
         ]);
+        broadcast(new NewMessage($conversation))->toOthers();
+
         return [];
+    }
+    public function deleteConver(){
+        $id=Conversation::where('group_id',3);
+        $id->delete();
+        return redirect()->back();
     }
 }

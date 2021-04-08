@@ -1,17 +1,14 @@
 <title>{{ $user->c_name}}</title>
 @include('header')
-<style>.user{margin-left:150px}</style> 
+<style>.user{margin-left:150px}</style>
 <body>
-
    <section class="sd">
-      
       @if(!$user->avatar) 
       <label for="upload_user_avatar"> <img src="/img/no-user.png" class="rounded-circle user cs avatar_user_uploaded"></label>
-     @else 
+      @else 
       <img src="{{ pare_url_file($user->avatar,'user') }}" class="rounded-circle user cs avatar_user_uploaded" id="myBtn-5">
       @endif
       <img src="{{ asset('img/loading.gif')}}" class=" uploadavatar imguser" style="display:none;">
-      
       </div>
       <form method="POST" enctype="multipart/form-data" id="form_upload_user_avatar">
          @csrf
@@ -41,19 +38,19 @@
             <span class="fa-stack fa-lg cs" id="myBtn"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-plus fa-stack-1x"></i></span> 
             @else  
             <div class="list-follow">
-            @if(!$followed)
-            <button class="follow" onclick="follow('{{$user->id}}')">
+               @if(!$followed)
+               <button class="follow" onclick="follow('{{$user->id}}')">
                   <img src="{{ asset('img/loading.gif')}}" class="w-30 load{{$user->id}}" style="display:none">
                   <p class="text-follows{{$user->id}}">{{ __('translate.follow')}}</p>
-             </button>  
-            @else
-            <a href="{{ route('chat.show', $user->id) }}" class="message">{{ __('translate.Message')}}</a>
-            <a class="unfollow follows{{$user->id}}"href="javascript:;"  onclick="follow('{{$user->id}}')">
-            <i class="fa  fa-user-times"></i>
-            <img src="{{ asset('img/loading.gif')}}" class="w-30 load{{$user->id}}" style="display:none;margin-top: -11px;">
-         </a>
-            @endif
-</div>
+               </button>
+               @else
+               <a href="{{ route('chat.show', $user->id) }}" class="message">{{ __('translate.Message')}}</a>
+               <a class="unfollow follows{{$user->id}}"href="javascript:;"  onclick="follow('{{$user->id}}')">
+               <i class="fa  fa-user-times"></i>
+               <img src="{{ asset('img/loading.gif')}}" class="w-30 load{{$user->id}}" style="display:none;margin-top: -11px;">
+               </a>
+               @endif
+            </div>
             @endif
          </div>
          <!-- modal setting -->
@@ -78,46 +75,49 @@
             <div id="myModal-6" class="modal">
                <div class="modal-content settings animate__animated animate__zoomIn" >
                   <li class="one">{{ ucwords(__('translate.followers'))}} <span class="float-right cs" id="exit6">&times;</span></li>
-                 <div class="settingss">
-                 @if(!count($userFollow)) 
-                  <li class="k-none"><i class="fa fa-lg fa-user-plus"></i></li>
-                  <li class="k-none two">{{ ucwords(__('translate.followers'))}}</li>
-                  <li class="k-none three">{{ __("translate.You'll see all the people who follow you here.")}}</li>
-                  @else
-                  <!-- số người theo dõi mình -->
-                  @foreach($userFollow as $list)  
-                  <li class="clr user{{$list->user_id}}" style="height: 50px;">
-                     <a href="{{ $list->users->user }}" class="zx position-relative ">
-                     <img src="{{ pare_url_file($list->users->avatar,'user') }}" class="w-35 rounded-circle"> 
-                     <b class="zz">{{ $list->users->user }}</b><br>
-                     <b class="os zpo">{{ $list->users->c_name }}</b>
-                     </a>
-                     @if($list->user_id!=\Auth::id())
-                     @if(\App\Models\Follow::checkFollow(\Auth::id(),$list->user_id))
-                      @if($user->id != \Auth::id())
-                     <button class="followss zc{{$list->user_id}}" onclick="follows('{{$list->user_id}}')" ><cen class="cen{{$list->user_id}}">{{ ucwords(__('translate.folowing'))}}</cen>
-                     <img src="{{ asset('img/loading.gif')}}" class="w-30 load{{$list->user_id}}" style="display:none;margin-top: -11px;">
+                  <div class="settingss">
+                     @if(!count($userFollow)) 
+                     <li class="k-none"><i class="fa fa-lg fa-user-plus"></i></li>
+                     <li class="k-none two">{{ ucwords(__('translate.followers'))}}</li>
+                     <li class="k-none three">{{ __("translate.You'll see all the people who follow you here.")}}</li>
                      @else
-                     <button class="followss zc{{$list->user_id}}" onclick="followss('{{$list->user_id}}')" ><cen class="cen{{$list->user_id}}">{{ ucwords(__('translate.folowing'))}}</cen>
-                     <img src="{{ asset('img/loading.gif')}}" class="w-30 load{{$list->user_id}}" style="display:none;margin-top: -11px;">
+                     <!-- số người theo dõi mình -->
+                     @foreach($userFollow as $list)  
+                     <li class="clr user{{$list->user_id}}" style="height: 50px;">
+                        <a href="{{ $list->users->user }}" class="zx position-relative ">
+                        <img src="{{ pare_url_file($list->users->avatar,'user') }}" class="w-35 rounded-circle"> 
+                        <b class="zz">{{ $list->users->user }}</b><br>
+                        <b class="os zpo">{{ $list->users->c_name }}</b>
+                        </a>
+                        @if($list->user_id!=\Auth::id())
+                        @if(\App\Models\Follow::checkFollow(\Auth::id(),$list->user_id))
+                        @if($user->id != \Auth::id())
+                        <button class="followss zc{{$list->user_id}}" onclick="follows('{{$list->user_id}}')" >
+                           <cen class="cen{{$list->user_id}}">{{ ucwords(__('translate.folowing'))}}</cen>
+                           <img src="{{ asset('img/loading.gif')}}" class="w-30 load{{$list->user_id}}" style="display:none;margin-top: -11px;">
+                           @else
+                        <button class="followss zc{{$list->user_id}}" onclick="followss('{{$list->user_id}}')" >
+                           <cen class="cen{{$list->user_id}}">{{ ucwords(__('translate.folowing'))}}</cen>
+                           <img src="{{ asset('img/loading.gif')}}" class="w-30 load{{$list->user_id}}" style="display:none;margin-top: -11px;">
+                           @endif
+                        </button>
+                        @else  
+                        @if($user->id != \Auth::id())
+                        <button class="follows zc{{$list->user_id}}" onclick="follows('{{$list->user_id}}')" >
+                           <cen class="cen{{$list->user_id}}">{{ __('translate.follow')}}</cen>
+                           <img src="{{ asset('img/loading.gif')}}"  style="display:none;"class="w-30 load{{$list->user_id}}">
+                        </button>
+                        @else
+                        <button class="follows zc{{$list->user_id}}" onclick="followss('{{$list->user_id}}')" >
+                           <cen class="cen{{$list->user_id}}">{{ __('translate.follow')}}</cen>
+                           <img src="{{ asset('img/loading.gif')}}"  style="display:none;"class="w-30 load{{$list->user_id}}">
+                        </button>
+                        @endif
+                        @endif
+                        @endif
+                     </li>
+                     @endforeach
                      @endif
-                  </button>
-                     @else  
-                     @if($user->id != \Auth::id())
-                     <button class="follows zc{{$list->user_id}}" onclick="follows('{{$list->user_id}}')" ><cen class="cen{{$list->user_id}}">{{ __('translate.follow')}}</cen>
-                      <img src="{{ asset('img/loading.gif')}}"  style="display:none;"class="w-30 load{{$list->user_id}}">
-                  </button> 
-                     @else
-                     <button class="follows zc{{$list->user_id}}" onclick="followss('{{$list->user_id}}')" ><cen class="cen{{$list->user_id}}">{{ __('translate.follow')}}</cen>
-                      <img src="{{ asset('img/loading.gif')}}"  style="display:none;"class="w-30 load{{$list->user_id}}">
-                     </button> 
-                     @endif
-                     @endif
-                     @endif
-                  </li> 
-                 
-                  @endforeach
-                  @endif
                   </div>
                </div>
             </div>
@@ -127,47 +127,50 @@
             <div id="myModal-7" class="modal">
                <div class="modal-content settings animate__animated animate__zoomIn" >
                   <li class="one">{{ ucwords(__('translate.followers'))}} <span class="float-right cs" id="exit7">&times;</span></li>
-                 <div class="list">
-                 @if(!count($areFollow))
-                  <li><i class="fa fa-lg fa-user-plus"></i></li>
-                  <li class="two">{{ ucwords(__('translate.folowing'))}}</li>
-                  <li class="three">{{ __("translate.You'll see all the people who follow you here.")}}</li>
-                  @else
-                  <!-- đang theo dõi -->
-                  @foreach($areFollow as $key=> $list)   
-                  <li class="clr users{{$list->friends->id}}" style="height: 50px;">
-                     <a href="{{ $list->friends->user }}" class="zx position-relative">
-                     <img src="{{ pare_url_file($list->friends->avatar,'user') }}" class="w-35 rounded-circle"> 
-                     <b class="zz">{{ $list->friends->user }}</b><br>
-                     <b class="os zpo">{{ $list->friends->c_name }}</b>
-                     </a>
-                     @if($list->friends->id!=\Auth::id()) 
-                     @if(\App\Models\Follow::checkFollow(\Auth::id(),$list->friends->id))
-                     @if($user->id != \Auth::id())
-                     <button class="followss zc{{$list->friends->id}}" onclick="follows('{{$list->friends->id}}')" ><cen class="cen{{$list->friends->id}}">{{ __('translate.folowing')}}</cen>
-                     <img src="{{ asset('img/loading.gif')}}" class="w-30 load{{$list->friends->id}}" style="display:none;margin-top: -11px;">
+                  <div class="list">
+                     @if(!count($areFollow))
+                     <li><i class="fa fa-lg fa-user-plus"></i></li>
+                     <li class="two">{{ ucwords(__('translate.folowing'))}}</li>
+                     <li class="three">{{ __("translate.You'll see all the people who follow you here.")}}</li>
                      @else
-                     <button class="followss zc{{$list->friends->id}}" onclick="followss('{{$list->friends->id}}')" ><cen class="cen{{$list->friends->id}}">{{ __('translate.folowing')}}</cen>
-                     <img src="{{ asset('img/loading.gif')}}" class="w-30 load{{$list->friends->id}}" style="display:none;margin-top: -11px;">
+                     <!-- đang theo dõi -->
+                     @foreach($areFollow as $key=> $list)   
+                     <li class="clr users{{$list->friends->id}}" style="height: 50px;">
+                        <a href="{{ $list->friends->user }}" class="zx position-relative">
+                        <img src="{{ pare_url_file($list->friends->avatar,'user') }}" class="w-35 rounded-circle"> 
+                        <b class="zz">{{ $list->friends->user }}</b><br>
+                        <b class="os zpo">{{ $list->friends->c_name }}</b>
+                        </a>
+                        @if($list->friends->id!=\Auth::id()) 
+                        @if(\App\Models\Follow::checkFollow(\Auth::id(),$list->friends->id))
+                        @if($user->id != \Auth::id())
+                        <button class="followss zc{{$list->friends->id}}" onclick="follows('{{$list->friends->id}}')" >
+                           <cen class="cen{{$list->friends->id}}">{{ __('translate.folowing')}}</cen>
+                           <img src="{{ asset('img/loading.gif')}}" class="w-30 load{{$list->friends->id}}" style="display:none;margin-top: -11px;">
+                           @else
+                        <button class="followss zc{{$list->friends->id}}" onclick="followss('{{$list->friends->id}}')" >
+                           <cen class="cen{{$list->friends->id}}">{{ __('translate.folowing')}}</cen>
+                           <img src="{{ asset('img/loading.gif')}}" class="w-30 load{{$list->friends->id}}" style="display:none;margin-top: -11px;">
+                           @endif
+                        </button>
+                        @else 
+                        @if($user->id != \Auth::id()) 
+                        <button class="follows zc{{$list->friends->id}}" onclick="follows('{{$list->friends->id}}')" >
+                           <cen class="cen{{$list->friends->id}}">{{ __('translate.follow')}}</cen>
+                           <img src="{{ asset('img/loading.gif')}}"  style="display:none;"class="w-30 load{{$list->friends->id}}">
+                        </button>
+                        @else
+                        <button class="follows zc{{$list->friends->id}}" onclick="followss('{{$list->friends->id}}')" >
+                           <cen class="cen{{$list->friends->id}}">{{ __('translate.follow')}}</cen>
+                           <img src="{{ asset('img/loading.gif')}}"  style="display:none;"class="w-30 load{{$list->friends->id}}">
+                        </button>
+                        @endif
+                        @endif
+                        @endif
+                     </li>
+                     @endforeach
                      @endif
-                  </button>
-                     @else 
-                     @if($user->id != \Auth::id()) 
-                     <button class="follows zc{{$list->friends->id}}" onclick="follows('{{$list->friends->id}}')" ><cen class="cen{{$list->friends->id}}">{{ __('translate.follow')}}</cen>
-                      <img src="{{ asset('img/loading.gif')}}"  style="display:none;"class="w-30 load{{$list->friends->id}}">
-                  </button> 
-                  @else
-                  <button class="follows zc{{$list->friends->id}}" onclick="followss('{{$list->friends->id}}')" ><cen class="cen{{$list->friends->id}}">{{ __('translate.follow')}}</cen>
-                      <img src="{{ asset('img/loading.gif')}}"  style="display:none;"class="w-30 load{{$list->friends->id}}">
-                  </button> 
-                  @endif
-                     @endif
-
-                     @endif
-                  </li> 
-                  @endforeach
-                  @endif
-                 </div>
+                  </div>
                </div>
             </div>
             <!--end modal-->
@@ -194,7 +197,6 @@
       </div>
       <img id="image-post" src="{{ asset('img/heart-outline.png') }}" >
    </div>
-   
    <div class="posts">
    <div class="d-gri csd">
    <button  class="bt" id="first"  style="text-transform: uppercase;"><i class="fa fa-table"></i> {{ __('translate.posts')}}</button>
@@ -210,13 +212,13 @@
    <div class="label">
    <label for="profiles" class="cs">{{ __('translate.Add to Profile')}}</label>  
    <!--file-->
-   <input type="file" name="profiles"  id="profiles" class='d-none'>
+   <input type="file" name="profiles" accept="image/*" id="profiles" class='d-none'>
    <!--file-->
    <p class="p">{{ __('translate.or')}}</p>
    </div>
    <div class="label label2">
    <label for="stories" class="cs">{{ __('translate.Add to Stories')}}</label>
-   <input type="file" accept="image/*" name="stories" id="stories"  accept="image/*" class="d-none"> 
+   <input type="file"  name="stories" id="stories"  accept="image/*" class="d-none"> 
    </div>
    </div>
    </div>
@@ -241,8 +243,10 @@
          @foreach($post as $key=> $val) 
          <div class="cs cse"  id="myBtnn{{$val->id}}">
             <div class="clr csf">
-               <i class="fa fa-heart"></i> <p class="likes{{$val->id}}">{{ $val->p_favourite}}</p>
-               <i class="fa fa-comment"></i> <p class="comment{{$val->id}}"> {{$val->p_comment }}</p>
+               <i class="fa fa-heart"></i> 
+               <p class="likes{{$val->id}}">{{ $val->p_favourite}}</p>
+               <i class="fa fa-comment"></i> 
+               <p class="comment{{$val->id}}"> {{$val->p_comment }}</p>
             </div>
             <img data-img="{{ pare_url_file($val->p_image,'profile') }}" class="lazyload" id="image{{$key}}">  
          </div>
@@ -260,7 +264,7 @@
                            @endif
                         </p>
                      </div>
-                  @include('layout.infomation',['value'=>$val->id])
+                     @include('layout.infomation',['value'=>$val->id])
                   </div>
                   <div class="her hdl{{$val->id}}" id="hell">
                      @if($val->p_content!='')
@@ -272,162 +276,92 @@
                         <i class="fa fa-ellipsis-h"></i> 
                         <div class="os heo">{{ $val->created_at->diffForHumans($now) }} 
                         </div>
-                       
-                     </div>  
-                    
+                     </div>
                      @endif   
-                    <div class="list-comment{{$val->id}}">
-                    @foreach(\App\Models\Comment::where('c_post',$val->id)->orderBy('created_at','desc')->get() as $value => $cmt)  
-                     <div class="clr het hjk{{$value}} "  style="display:none">
-                      <div class="hew"><a href="{{ route('get.home-page',$cmt->users->user)}}"><img src="{{ pare_url_file($cmt->users->avatar,'user') }}" class="{{ $cmt->c_user_id ==\Auth::id() ? 'avatar_user_uploaded' :''}}"></a> </div>
-                        <div class="hep">
-                           <p><b><a href="{{ route('get.home-page',$cmt->users->user)}}">{{$cmt->users->c_name}}</a> </b> {{$cmt->c_comment}}</p>
+                     <div class="list-comment{{$val->id}}">
+                        @foreach(\App\Models\Comment::where('c_post',$val->id)->orderBy('created_at','desc')->get() as $value => $cmt)  
+                        <div class="clr het hjk{{$value}} "  style="display:none">
+                           <div class="hew"><a href="{{ route('get.home-page',$cmt->users->user)}}"><img src="{{ pare_url_file($cmt->users->avatar,'user') }}" class="{{ $cmt->c_user_id ==\Auth::id() ? 'avatar_user_uploaded' :''}}"></a> </div>
+                           <div class="hep">
+                              <p><b><a href="{{ route('get.home-page',$cmt->users->user)}}">{{$cmt->users->c_name}}</a> </b> {{$cmt->c_comment}}</p>
+                           </div>
+                           <i class="fa fa-ellipsis-h"></i>
+                           <div class="os heo">{{ $cmt->created_at->diffForHumans($now) }} </div>
                         </div>
-                        <i class="fa fa-ellipsis-h"></i>
-                        <div class="os heo">{{ $cmt->created_at->diffForHumans($now) }} </div>
-                     </div> 
-                     
-                     @endforeach
+                        @endforeach
                      </div>
                      <div class="buttons"><button class="button{{$val->id}} ">+</button> </div>
                      <script>
-                     
-                     $('.button{{$val->id}}').on('click',function(){  
-                           loadmore(); 
-                     }) 
-                     currentindex=0;
-                     maxindex ="{{\App\Models\Comment::where('c_post',$val->id)->count()}}";
-                     function loadmore(){ 
-                     x=  window.scrollY;
-                     var maxresult = 5;
-
-                     for(var i = 0; i < maxresult; i++)
-                     {
-                        $(".hjk"+(currentindex+i)).show();
-                     }
-                     if(currentindex+5>=maxindex){
-                        $('.button{{$val->id}}').hide();
-                     }
-                     window.scrollTo(0,x);
-                     currentindex += maxresult;
-
-                  }
-
-                  loadmore();
+                        $('.button{{$val->id}}').on('click',function(){  
+                              loadmore(); 
+                        }) 
+                        currentindex=0;
+                        maxindex ="{{\App\Models\Comment::where('c_post',$val->id)->count()}}";
+                        function loadmore(){ 
+                        x=  window.scrollY;
+                        var maxresult = 5;
+                        
+                        for(var i = 0; i < maxresult; i++)
+                        {
+                           $(".hjk"+(currentindex+i)).show();
+                        }
+                        if(currentindex+5>=maxindex){
+                           $('.button{{$val->id}}').hide();
+                        }
+                        window.scrollTo(0,x);
+                        currentindex += maxresult;
+                        
+                        }
+                        
+                        loadmore();
                      </script>
                   </div>
-                  @php
-                  $class=" fa-heart-o ";
-                  if(\App\Models\Like::checkLove($val->id))
-                  $class="fa-heart text-red";
-                  @endphp
                   <div class="hey">
-                     <i class="fa fa-15x heart{{$val->id}} {{ $class }}" onclick="likepost('{{$val->id}}')"></i> 
-                     <i class="fa fa-15x fa-comment-o"></i> 
-                     <i class="fa fa-15x fa-share-alt"></i>
-                     <i class="fa fa-15x fa-bookmark-o float-right"></i><br>
+                     @include('layout.attraction_button',['value'=>$val->id])
                      <p class="f-6 "><b class="view{{$val->id}}">{{$val->p_view}}</b> {{ __('translate.views')}}</p>
-                     <p class="f-6 " style="margin-top:-6px"> @include('layout.like',['value'=>$val->id])</p> 
+                     <p class="f-6 " style="margin-top:-6px"> @include('layout.like',['value'=>$val->id])</p>
                      <p class="os">{{ $val->created_at->diffForHumans($now) }}</p>
                   </div>
-                  <script> 
-                     $('.heart{{$val->id}}').on('click',function(){
-                        $(this).toggleClass('text-red');
-                        $(this).toggleClass('fa-heart-o ');
-                        $(this).toggleClass('fa-heart');
-                     }) 
-                  </script>
-                  <div class="heu">
-                     <form action="{{ route('comment.post')}}">
-                        @csrf
-                        <textarea class="textarea-{{$val->id}} textarea-comment{{$val->id}}" placeholder="{{ __('translate.Add a comment')}}..."></textarea>
-                        <input type="hidden" value="{{$val->id}}" class="post-comment{{$val->id}}">   
-                        <button type="button" class="submit-{{$val->id}} submit-comment{{$val->id}} disabled">{{ __('translate.Post')}}</button>
-                        <img src="{{ asset('img/loading.gif')}}" class="w-30 load-comment" style="top: 10px;right: 15px;position: absolute;display:none;">
-                     </form>
-                  </div>
+                    @include('layout.comment',['value'=>$val->id])
                </div>
             </div>
          </div>
          <script>   
-         //click để scroll đến cuối trang
-            // $('body').on('click','#myBtnn{{$val->id}}',function(){
-            //    var $div = $("#hell"); 
-            //    $div.scrollTop($div[0].scrollHeight);
-            // })
-            //không cho người dùng đăng khi chưa comment
-            $('.textarea-{{$val->id}}').on('keyup',function(){
-               if(!$('.textarea-{{$val->id}}').val())
-               $('.submit-{{$val->id}}').addClass('disabled'); 
-               else{ 
-               $('.submit-{{$val->id}}').removeClass('disabled');
+            //click để scroll đến cuối trang
+               // $('body').on('click','#myBtnn{{$val->id}}',function(){
+               //    var $div = $("#hell"); 
+               //    $div.scrollTop($div[0].scrollHeight);
+               // })
+                
+               //hiện modal bài viết 
+             
+               var thismodal{{$val->id}} = document.getElementById("myModall{{$val->id}}"); 
+               var thisbtn{{$val->id}} = document.getElementById("myBtnn{{$val->id}}"); 
+               var html=document.getElementsByTagName("html");
+               thisbtn{{$val->id}}.onclick = function() {
+               thismodal{{$val->id}}.style.display = "block";
+               var post='{{$val->id}}';
+               var URL ="{{ route('post.increview')}}";  
+               $.get({
+                  url:URL,
+                  data:{post:post},
+                  success:function(e){  
+                     $('.view{{$val->id}}').text(e.p_view);
+                  }
+               })
+               }   
+               //ẩn modal bài viết
+               thismodal{{$val->id}}.onclick = function(event) {   
+                  if (event.target == thismodal{{$val->id}}) {    
+                  thismodal{{$val->id}}.style.display = "none";
+                 
+                  }
                }
-            })
-            //hiện modal bài viết 
-          
-            var thismodal{{$val->id}} = document.getElementById("myModall{{$val->id}}"); 
-            var thisbtn{{$val->id}} = document.getElementById("myBtnn{{$val->id}}"); 
-            var html=document.getElementsByTagName("html");
-            thisbtn{{$val->id}}.onclick = function() {
-            thismodal{{$val->id}}.style.display = "block";
-            var post='{{$val->id}}';
-            var URL ="{{ route('post.increview')}}";  
-            $.get({
-               url:URL,
-               data:{post:post},
-               success:function(e){  
-                  $('.view{{$val->id}}').text(e.p_view);
-               }
-            })
-            }   
-            //ẩn modal bài viết
-            thismodal{{$val->id}}.onclick = function(event) {   
-               if (event.target == thismodal{{$val->id}}) {    
-               thismodal{{$val->id}}.style.display = "none";
               
-               }
-            }
-           
-         
-         
-            //comment
-            $(".submit-comment{{$val->id}}").on('click',function(e){
-            e.preventDefault();
-            var URL= $(this).parents('form').attr('action');
-            var c_comment=$('.textarea-comment{{$val->id}}').val();
-            var c_post=$('.post-comment{{$val->id}}').val();
-            var c_user_id='{{ \Auth::id()}}'; 
-            $.get({ 
-            url:URL,
-            data:{c_comment:c_comment,c_post:c_post,c_user_id:c_user_id},
-            beforeSend:function(){
-               $('.load-comment').show();
-               $('.submit-{{$val->id}}').hide();
-            },
-            complete:function(){
-               $('.load-comment').hide();
-               $('.submit-{{$val->id}}').show();
-            }
-            }).done(function(e){
+            
+            
                
-            $('.comment{{$val->id}}').text(e.count.p_comment);
-            $(".list-comment{{$val->id}}").prepend(`
-            <div class="clr het">
-            <div class="hew"><a href="/${e.user.user}"><img src="${e.avatar}" class="avatar_user_uploaded"></a> </div>
-            <div class="hep"><p><b><a href="/${e.user.user}">${e.user.c_name}</a> </b>${c_comment}</p></div>
-            <i class="fa fa-ellipsis-h"></i>
-            <div class="os heo">1 giây trước </div>
-            </div>
-            `);
-            $('.textarea-comment{{$val->id}}').val('');
-            $('.submit-comment{{$val->id}}').addClass('disabled');
-
-            // var $div = $("#hell"); 
-            // $div.scrollBottom($div[0].scrollHeight); 
-            });
-            })
-            
-            
+               
          </script>     
          @endforeach 
       </div>
@@ -443,7 +377,6 @@
       @endif
    </div>
    <footer>
-   
       <ul>
          <li class=" "><a href="">{{ __('translate.About')}}</a></li>
          <li class=" "><a href="">Blog</a></li>
@@ -467,28 +400,28 @@
 <script src="{{ asset('js/post.js') }}"></script> 
 <script src="{{ asset('js/avatar.js') }}"></script> 
 <script>
-//lazy load img
-let id="{{count($post)}}";
-let options={
-   root:null,
-   rootMargin:'0px',
-   threshold:0.25
-};
-let callback =(entries,observer)=>{
-   entries.forEach(entry=>{
-      if(entry.isIntersecting && entry.target.className === 'lazyload'){
-         let imageUrl = entry.target.getAttribute('data-img');
-         if(imageUrl){
-            entry.target.src =imageUrl;
-            observer.unobserve(entry.target);
+   //lazy load img
+   let id="{{count($post)}}";
+   let options={
+      root:null,
+      rootMargin:'0px',
+      threshold:0.25
+   };
+   let callback =(entries,observer)=>{
+      entries.forEach(entry=>{
+         if(entry.isIntersecting && entry.target.className === 'lazyload'){
+            let imageUrl = entry.target.getAttribute('data-img');
+            if(imageUrl){
+               entry.target.src =imageUrl;
+               observer.unobserve(entry.target);
+            }
          }
-      }
-   })
-} 
-let observer =new IntersectionObserver(callback,options);
-for( var i=0;i<id;i++) { 
-observer.observe(document.querySelector('#image'+i)); 
-} 
+      })
+   } 
+   let observer =new IntersectionObserver(callback,options);
+   for( var i=0;i<id;i++) { 
+   observer.observe(document.querySelector('#image'+i)); 
+   } 
 </script> 
 <script>
    $('#first').on('click',function(e){

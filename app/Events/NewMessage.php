@@ -31,6 +31,12 @@ class NewMessage implements ShouldBroadcast
      *
      * @return \Illuminate\Broadcasting\Channel|array
      */
+    public function broadcastWith()
+    {
+        return [
+            'conversation' => $this->conversation,
+        ];
+    }
     public function broadcastOn()
     {
         return new PrivateChannel('Groups.' . $this->conversation->group->id);

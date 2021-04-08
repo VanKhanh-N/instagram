@@ -88,36 +88,13 @@
                loadmore();
             </script>
          </div>
-         @php
-            $class=" fa-heart-o ";
-            if(\App\Models\Like::checkLove($val->id))
-            $class="fa-heart text-red";
-         @endphp
          <div class="hey">
-            <i class="fa fa-15x heart {{ $class }}" onclick="likepost('{{$val->id}}')"></i> 
-            <i class="fa fa-15x fa-comment-o"></i> 
-            <i class="fa fa-15x fa-share-alt"></i>
-            <i class="fa fa-15x fa-bookmark-o float-right"></i><br>
+         @include('layout.attraction_button',['value'=>$val->id])
             <p class="asf "><b class="view">{{$val->p_view}}</b> {{ __('translate.views')}}</p>
             <p class="asf ">@include('layout.like',['value'=>$val->id])</p>
             <p class="os">{{ $val->created_at->diffForHumans($now) }} </p>
          </div>
-         <script> 
-            $('.heart').on('click',function(){
-               $(this).toggleClass('text-red');
-               $(this).toggleClass('fa-heart-o ');
-               $(this).toggleClass('fa-heart');
-            }) 
-         </script>
-         <div class="heu">
-            <form action="{{ route('comment.post')}}" method="get">
-               @csrf
-               <textarea class="textarea"  placeholder="{{ __('translate.Add a comment')}}..."></textarea>
-               <input type="hidden" value="{{$val->id}}" class="comments">   
-               <button class="submit disabled" type="button">{{ __('translate.Post')}}</button>
-               <img src="{{ asset('img/loading.gif')}}" class="w-30 load-comment" style="top: 10px;right: 15px;position: absolute;display:none;">
-            </form>
-         </div>
+         @include('layout.comment',['value'=>$val->id])
       </div>
    </div>
 </div>
@@ -167,46 +144,7 @@
          modal.style.display = "none";
       }
      
-</script>
-<script>
-   $(function(){
-         //comment
-         $(".submit").on('click',function(e){
-      var URL= $(this).parents('form').attr('action');
-      var c_comment=$('.textarea').val();
-      var c_post=$('.comments').val();
-      var c_user_id='{{ \Auth::id()}}'; 
-      $.get({ 
-      url:URL,
-      data:{c_comment:c_comment,c_post:c_post,c_user_id:c_user_id},
-      beforeSend:function(){
-         $('.load-comment').show();
-         $('.submit').hide();
-      },
-      complete:function(){
-         $('.load-comment').hide();
-         $('.submit').show();
-      }
-      }).done(function(e){
-         
-      $('.comment{{$val->id}}').text(e.count.p_comment);
-      $(".list-comment{{$val->id}}").prepend(`
-      <div class="clr het">
-      <div class="hew"><a href="/${e.user.user}"><img src="${e.avatar}" class="avatar_user_uploaded"></a> </div>
-      <div class="hep"><p><b><a href="/${e.user.user}">${e.user.c_name}</a> </b>${c_comment}</p></div>
-      <i class="fa fa-ellipsis-h"></i>
-      <div class="os heo">1 giây trước </div>
-      </div>
-      `);
-      $('.textarea').val('');
-      $('.submit').addClass('disabled');
-   
-      // var $div = $("#hell"); 
-      // $div.scrollBottom($div[0].scrollHeight); 
-      });
-      })
-   })
-</script>
+</script> 
 <br>
 @if(count($related_post))
 <hr><br>

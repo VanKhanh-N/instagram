@@ -111,8 +111,11 @@ function follow(followed){
  
 //user trong số người theo dõi trong trang của người khác
 function follows(followed){      
-    $.get({
+    $.post({
         url:"/follow",
+        headers: {
+           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
         data:{followed:followed},
         beforeSend:function(){
              
@@ -142,8 +145,11 @@ function follows(followed){
     
  //user trong số  người đang theo dõi trong auth
 function followss(followed){      
-    $.get({
+    $.post({
         url:"/follow",
+        headers: {
+           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
         data:{followed:followed},
         beforeSend:function(){
              

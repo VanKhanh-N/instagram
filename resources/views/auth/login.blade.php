@@ -28,7 +28,7 @@
         <form action="" method="POST">
         @csrf
             <div class="username">
-                <input  type="text" class="username" id="username" name="email" placeholder="Số điện thoại, tên người dùng hoặc email" autocomplete="off">
+                <input  type="text" value="0948561668" class="username" id="username" name="email" placeholder="Số điện thoại, tên người dùng hoặc email" autocomplete="off">
                
                
             </div>
@@ -36,7 +36,7 @@
                 <span class="text-danger">{{$errors->first('email') }}</span>
                 @endif
             <div class="username">
-                <input type="password" class="password" id="password" name="password" placeholder="Mật khẩu" > 
+                <input type="password" class="password" value="123456" id="password" name="password" placeholder="Mật khẩu" > 
                 
                 <i class="fa fa-lg fa-eye-slash click"></i>     
             </div> 

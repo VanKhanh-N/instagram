@@ -4,18 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Events\NewMessage;
 
 class Conversation extends Model
 {
     use HasFactory;
-    protected $dispatchesEvents = [
-        'created' => NewMessage::class
-    ];
     protected $fillable = [
-        'id','message','user_id' ,'group_id','repeats'
+        'id','message','user_id' ,'group_id'
     ];
-    public function users(){
+    public function user(){
         return $this->belongsTo('App\Models\User','user_id');
     }
     public function group(){

@@ -44,6 +44,8 @@ Route::group(['namespace'=>'App\Http\Controllers\Personal'], function () {
     Route::get('/direct/{id}', 'DirectController@show')->name('chat.show');
     Route::post('/chat/getChat/{id}', 'DirectController@getChat');
     Route::post('/chat/sendChat', 'DirectController@sendChat');
+    //delete conversation
+    Route::get('/fefsf/rs', 'DirectController@deleteConver')->name('chat.delete');
     //call video
     Route::get('/video',  'DirectController@video')->name('chat.video');
     // Route::post('/pusher/auth', 'App\Http\Controllers\HomeController@authenticate'); 
@@ -53,7 +55,7 @@ Route::group(['namespace'=>'App\Http\Controllers\Personal'], function () {
 Route::group(['namespace'=>'App\Http\Controllers\Page'], function () { 
     //follow user
     Route::get('/incre-view','HomePageController@incre_view')->name('post.increview'); 
-    Route::get('/follow','HomePageController@follow'); 
+    Route::post('/follow','HomePageController@follow'); 
     Route::post('/upload_user','HomePageController@uploadProfile')->name('upload.user'); 
     Route::get('/delete','HomePageController@deleteProfile')->name('post.delete');
     Route::get('/{user}','HomePageController@index')->name('get.home-page');   
@@ -67,7 +69,7 @@ Route::get('/callback/{provider}', 'App\Http\Controllers\SocialController@callba
 Route::group(['namespace'=>'App\Http\Controllers\Activate'], function () {   
     // post image
     Route::get('/like/post','PostImage@LikePost')->name('like.post'); 
-    Route::get('/comment/post','PostImage@CommentPost')->name('comment.post');  
+    Route::post('/comment/post','PostImage@CommentPost')->name('comment.post');  
     Route::get('/share/post','PostImage@SharePost')->name('share.post');  
     //post video
     Route::get('/upload/video','PostVideo@UploadVideo')->name('upload.video'); 

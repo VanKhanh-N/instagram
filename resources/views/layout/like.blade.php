@@ -13,7 +13,7 @@
       <div class="posts{{$value}}">
          @foreach(\App\Models\Like::where('r_post',$value)->get() as $item)
          <div class="clr users{{$item->users->id}}{{$value}}" style="height: 50px;">
-            <a href="{{ $item->users->user }}" class="zx position-relative" style="width:75%">
+            <a href="{{ route('get.home-page',$item->users->user) }}" class="zx position-relative" style="width:75%">
             <img src="{{ pare_url_file($item->users->avatar,'user') }}" class="w-35 rounded-circle"> 
             <b class="zz">{{ $item->users->user }}</b><br>
             <b class="os zpo">{{ $item->users->c_name }}</b>

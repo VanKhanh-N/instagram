@@ -314,27 +314,23 @@ footer ul{
     padding: 10px;
 }
 .hey p{margin-left: 10px;}
-.heu{height: 7%;}
-.heu form{height: 100%;position: relative;}
-.heu form textarea{
-    position: absolute;
+.textarea-comment{
+    padding-top: 9px;
+    font-size: 13px;
+    width: 90%;
     height: 100%;
-    width: 80%;
-    border: none;
-    outline: none;
     resize: none;
-    padding: 10px;
-}
-.heu form textarea::-webkit-scrollbar {
-    display: none;
-}
-.heu form button{
-    position: absolute;
     border: none;
-    background: transparent;
-    color: #2c60af;
-    right: 15px;
-    top: 15px;
+    float: left;
+}
+.button-comment{
+    width: 10%;
+    float: left;
+    margin-top: 11px;
+    color:#0095f6;
+}
+textarea::-webkit-scrollbar {
+    display: none;
 }
 .heo{
     position: absolute;

@@ -124,15 +124,11 @@
                <img src="{{pare_url_file($val->p_image,'profile') }}" class="article-img">
                <div class="attractive">
                   <div class="d-block">
-                     <div class="d-inline-block"><i class="fa fa-15x heart{{$val->id}} {{ \App\Models\Like::checkLove($val->id) ? 'fa-heart text-red' :'fa-heart-o' }}" onclick="likepost('{{$val->id}}')"></i> </div>
-                     <div class="d-inline-block"><i class="fa fa-15x fa-comment-o"></i></div>
-                     <div class="d-inline-block"><i class="fa fa-15x fa-share-alt"></i></div>
-                     <div class="d-inline-block float-right"> <i class="fa fa-15x fa-bookmark-o float-right"></i></div>
-                     <br>
+                  @include('layout.attraction_button',['value'=>$val->id])
                     @include('layout.like',['value'=>$val->id])
                      <div class="d-inline-block w-100">
                         <div class="status">
-                           <a href="{{ $val->user->user}}" class="text-black">{{$val->user->c_name}} </a>{{$val->p_content}} <br>    
+                           <a href="{{ $val->user->user}}" class="text-black">{{$val->user->c_name}} </a>{{$val->p_content}}    
                            <br>
                         </div>
                         <div class="hdl{{$key}}">
@@ -143,19 +139,11 @@
                            </div>
                            @endforeach
                         </div>
-                        <a href="javascript:;" class="text-gray button{{$key}}">{{ __('translate.View more comments')}}</a> 
-                        <br>
-                        <a href="" class="text-gray" style="font-size:12px;line-height:30px">{{ $val->created_at->diffForHumans($now) }} </a>
+                        <p class="text-gray button{{$key}}">{{ __('translate.View more comments')}}</p> 
+                        <span class="text-gray" style="font-size:13px">{{ $val->created_at->diffForHumans($now) }} </span>
                         <hr>
-                        <form class="position-relative form" action="{{ route('comment.post')}}">
-                           <textarea rows="10"  autocomplete="off" class="textarea-{{$key}} textarea-comment{{$key}}" placeholder="{{ __('translate.Add a comment')}}..."></textarea>
-                           <input type="hidden" value="{{$val->id}}" class="post-comment{{$key}}">
-                           <input type="hidden" value="{{\Auth::id()}}" class="user-comment{{$key}}">  
-                           <input type="submit" class="os comment-submit submit-{{$key}} submit-comment{{$key}}" value="{{ __('translate.Post')}}">
-                           <img src="{{ asset('img/loading.gif')}}" class="w-30 loading{{$key}}" style="display:none;position: absolute;right: 0;">
-                        </form>
+                        @include('layout.comment',['value'=>$val->id])
                      </div>
-                     <div class="d-inline-block"></div>
                   </div>
                </div>
             </article>
@@ -186,55 +174,6 @@
                }
                
                  loadmore({{$key}});
-               //yêu thích
-               $(function(){ $('.heart{{$val->id}}').on('click',function(){
-                     $(this).toggleClass('text-red');
-                     $(this).toggleClass('fa-heart-o ');
-                     $(this).toggleClass('fa-heart');
-               }); 
-               //event comment
-                  $('.textarea-{{$key}}').on('keyup',function(){
-                     if(!$('.textarea-{{$key}}').val()){
-                     $('.submit-{{$key}}').addClass('disabled'); 
-                     $('.submit-{{$key}}').addClass('os'); 
-                     }
-                     else{ 
-                     $('.submit-{{$key}}').removeClass('disabled');
-                     $('.submit-{{$key}}').removeClass('os');
-                     }
-                  })
-                   
-                     //comment
-               $(".submit-comment{{$key}}").on('click',function(e){
-               e.preventDefault();
-               var URL= $(this).parents('form').attr('action');
-               var c_comment=$('.textarea-comment{{$key}}').val();
-               var c_post=$('.post-comment{{$key}}').val();
-               var c_user_id=$('.user-comment{{$key}}').val(); 
-               
-               $.get({ 
-                  url:URL,
-                  data:{c_comment:c_comment,c_post:c_post,c_user_id:c_user_id},
-                  beforeSend:function(){
-                     $('.loading{{$key}}').show();
-                     $('.submit-{{$key}}').addClass('os');
-                  },
-                  complete:function(){
-                     $('.loading{{$key}}').hide();
-                     $('.submit-{{$key}}').removeClass('os');
-                  }
-               }).done(function(e){
-                  $(".hdl{{$key}}").append(`
-                  <div class="chat w-100 position-relative">
-                              <a href="/${e.user.user}" class="text-black">${e.user.c_name}</a> ${c_comment}
-                              <i class="fa fa-heart-o float-right"></i> 
-                           </div>  
-               `);
-               $('.textarea-comment{{$key}}').val('');
-               $('.submit-comment{{$key}}').addClass('disabled');
-               });
-               })
-               })
             })
             </script>     
             @endforeach
