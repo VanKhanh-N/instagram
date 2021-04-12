@@ -1982,6 +1982,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['chat_group', 'userid'],
   data: function data() {
@@ -6715,7 +6719,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.red {\n    color: red;\n}\n.green {\n    color: rgb(82, 197, 82);\n}\n.is-pulled-right{margin-left:50px;}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.red {\n    color: red;\n}\n.green {\n    color: rgb(82, 197, 82);\n}\n.is-pulled-right{margin-left:50px;\nmargin-top: -15px;}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -65940,15 +65944,12 @@ var render = function() {
     [
       _c(
         "div",
-        {
-          staticClass: "bottom-right position-relative",
-          attrs: { id: "hihi" }
-        },
+        { staticClass: "bottom-right", attrs: { id: "hihi" } },
         [
           _vm._l(_vm.chats.chat, function(chat, index) {
             return _c("div", { key: index }, [
               chat.user_id == _vm.userid
-                ? _c("div", { staticClass: "my-messages position-relative" }, [
+                ? _c("div", { staticClass: "my-messages" }, [
                     _c("div", { staticClass: "time" }, [
                       _vm._v(_vm._s(_vm._f("formatDate")(chat.created_at)))
                     ]),
@@ -65957,42 +65958,37 @@ var render = function() {
                       _c("p", [_vm._v(" " + _vm._s(chat.chat))])
                     ])
                   ])
-                : _c(
-                    "div",
-                    { staticClass: "friend-messages position-relative" },
-                    [
-                      _c("div", { staticClass: "time" }, [
-                        _vm._v(_vm._s(_vm._f("formatDate")(chat.created_at)))
-                      ]),
+                : _c("div", { staticClass: "friend-messages clr" }, [
+                    _c("div", { staticClass: "time" }, [
+                      _vm._v(_vm._s(_vm._f("formatDate")(chat.created_at)))
+                    ]),
+                    _vm._v(" "),
+                    _c("a", { attrs: { href: "/" + _vm.chats.friend.user } }, [
+                      _vm.chats.friend.avatar.substr(0, 4) != "http"
+                        ? _c("img", {
+                            staticClass: "friend-img rounded-circle",
+                            attrs: {
+                              src: "/uploads/user/" + _vm.chats.friend.avatar
+                            }
+                          })
+                        : _vm._e(),
                       _vm._v(" "),
-                      _c(
-                        "a",
-                        { attrs: { href: "/" + _vm.chats.friend.user } },
-                        [
-                          _vm.chats.friend.avatar.substr(0, 4) != "http"
-                            ? _c("img", {
-                                staticClass: "friend-img rounded-circle",
-                                attrs: {
-                                  src:
-                                    "/uploads/user/" + _vm.chats.friend.avatar
-                                }
-                              })
-                            : _vm._e(),
-                          _vm._v(" "),
-                          _vm.chats.friend.avatar.substr(0, 4) == "http"
-                            ? _c("img", {
-                                staticClass: "friend-img rounded-circle",
-                                attrs: { src: _vm.chats.friend.avatar }
-                              })
-                            : _vm._e()
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "your-messages" }, [
-                        _c("p", [_vm._v(_vm._s(chat.chat))])
-                      ])
-                    ]
-                  )
+                      _vm.chats.friend.avatar.substr(0, 4) == "http"
+                        ? _c("img", {
+                            staticClass: "friend-img rounded-circle",
+                            attrs: { src: _vm.chats.friend.avatar }
+                          })
+                        : _vm._e()
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "friend-chat" }, [
+                      _vm._v(
+                        " \n                    " +
+                          _vm._s(chat.chat) +
+                          "\n                "
+                      )
+                    ])
+                  ])
             ])
           }),
           _vm._v(" "),
@@ -66119,21 +66115,43 @@ var render = function() {
                   _c("p", [_vm._v(" " + _vm._s(group_chat.message))])
                 ])
               ])
-            : _c("div", { staticClass: "friend-messages position-relative" }, [
-                _c("div", { staticClass: "time" }, [
-                  _vm._v(_vm._s(_vm._f("formatDate")(group_chat.created_at)))
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "your-messages position-absolute" }, [
-                  _c("span", { staticClass: "os " }, [
-                    _vm._v(_vm._s(group_chat.user_id))
+            : _c(
+                "div",
+                { staticClass: "friend-messages clr position-relative" },
+                [
+                  _c("div", { staticClass: "time" }, [
+                    _vm._v(_vm._s(_vm._f("formatDate")(group_chat.created_at)))
                   ]),
                   _vm._v(" "),
-                  _c("p", { staticClass: "position-absolute" }, [
-                    _vm._v(_vm._s(group_chat.message))
+                  _c("a", { attrs: { href: "/" + group_chat.user } }, [
+                    group_chat.avatar.substr(0, 4) != "http"
+                      ? _c("img", {
+                          staticClass: "friend-img rounded-circle",
+                          attrs: { src: "/uploads/user/" + group_chat.avatar }
+                        })
+                      : _vm._e(),
+                    _vm._v(" "),
+                    group_chat.avatar.substr(0, 4) == "http"
+                      ? _c("img", {
+                          staticClass: "friend-img rounded-circle",
+                          attrs: { src: group_chat.avatar }
+                        })
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "os " }, [
+                    _vm._v(_vm._s(group_chat.c_name))
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "friend-chat" }, [
+                    _vm._v(
+                      " \n                       " +
+                        _vm._s(group_chat.message) +
+                        "\n                   "
+                    )
                   ])
-                ])
-              ])
+                ]
+              )
         ])
       }),
       0

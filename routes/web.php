@@ -44,8 +44,6 @@ Route::group(['namespace'=>'App\Http\Controllers\Personal'], function () {
     Route::get('/direct/{id}', 'DirectController@show')->name('chat.show');
     Route::post('/chat/getChat/{id}', 'DirectController@getChat');
     Route::post('/chat/sendChat', 'DirectController@sendChat');
-    //delete conversation
-    Route::get('/fefsf/rs', 'DirectController@deleteConver')->name('chat.delete');
     //call video
     Route::get('/video',  'DirectController@video')->name('chat.video');
     // Route::post('/pusher/auth', 'App\Http\Controllers\HomeController@authenticate'); 

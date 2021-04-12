@@ -47,7 +47,7 @@ class RegisterController extends Controller
             ]);
             $data['phone'] =$data['email'];
             $data['code_otp']=SendCode::SendCode($data['email']); 
-            $id =User::insertGetId($data);
+            User::insertGetId($data);
             \Session::flash('toastr',[
                 'type'=>'success',
                 'messages'=>'Đăng ký thành công . Vui lòng nhập mã xác minh !'

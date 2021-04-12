@@ -27,6 +27,8 @@
     width: 100%;
     height: 87%; 
     overflow: auto;
+    font-size: 12px;
+
 }  
 .bottom-right{
     border-bottom-right-radius: 5px;
@@ -59,30 +61,32 @@
     border-radius: 5px;
 }
 .user{
-    
-    height: 75%;
-    position: absolute;
-    top: 20%;
-    width: 200px;
-    left: 5%; 
+    width: 80%;
+    float: left;
+    padding: 15px;
+    font-weight: 700;
 }
 .user img{
-    position: absolute;
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
+    margin-right: 5px;
+    vertical-align: middle;
 }
-.user p,.user span{
-    padding-left:50px;
-}
-.user p{
-    width: 200%;
-    font-size: 16px;
-    line-height: 30px;
-    margin: -6px 0 -6px;
-    font-weight: 600;
+.infos{
+    width: 20%;
+    float: left;
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
 
-
+.info{
+    padding: 8px;
+    padding-left: 12px;
+    padding-right: 12px;
+    border: 1px solid black;
+    border-radius: 50%;}
 .bottom-left img{
     height: 50px;
     width: 50px;
@@ -105,13 +109,7 @@
     height: 300px;
     width: 200px;
     border-radius: 20px;
-}
-.bottom-right .time{
-    opacity: 0.5;
-    text-align: center;
-    font-size: 12px;
-    line-height: 24px;
-}   
+} 
 .my-messages{
 
     float: right;
@@ -121,41 +119,45 @@
     
 }
 .my-messages .me-messages{ 
-    float: right; 
     margin-right: 20px;
 }
 .my-messages p{
+    box-sizing: content-box;
     background-color:#80808021 ;
-    border-radius: 20px;
-    padding: 15px;
-    width: 200px;
+    padding: 12px 8px;
+    float: right;
+    max-width: 45%;
+    border-radius: 18px;
 }
 .friend-messages{float: left;
     width: 100%;
     margin-bottom:60px;
 }
-.friend-messages p{
-    
-    left:0;
-    top:40px;
-    background-color:#fff ;
-    border-radius: 20px;
-    border: 1px solid gray;
-    padding: 10px;
-    margin-left: 57px;
-    width: 200px;
-    box-sizing: border-box;
-}
-.your-messages{
-    top:0;
-    left:0;
-    padding-left: 70px;
-    padding-top: 18px;
-}
-.your-messages img{
+.friend-img{
+    margin: 0 10px;
+    height: 40px;
+    width: 40px;
+    object-fit: cover;
+} 
+.time{font-size: 13px;
+    opacity: 0.5;
+    text-align: center;
+    line-height: 24px;}
+.friend-messages .os{
     position: absolute;
-    bottom: 0;
-}   
+    top: 8px;
+    left: 67px;
+}
+.friend-chat{
+    padding: 12px 8px;
+    float: left;
+    border: 1px solid gray;
+    max-width: 45%;
+    border-radius: 18px;
+}  
+.friend-messages a{
+    float: left
+}
 .form-chat{
     width: 90%; 
     margin: 15px;
@@ -334,18 +336,3 @@
     width: 105%;
     flex-wrap: wrap;
     box-sizing: content-box;} 
-.info{
-    float: right;
-    margin: 15px;
-    padding: 8px;
-    padding-left: 12px;
-    padding-right: 12px;
-    border: 1px solid black;
-    border-radius: 50%;}
-.friend-img{
-    position: absolute;
-    margin: 17px 8px;
-    height: 40px;
-    width: 40px;
-    object-fit: cover;
-}

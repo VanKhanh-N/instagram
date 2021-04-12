@@ -9,7 +9,7 @@ class Conversation extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'id','message','user_id' ,'group_id'
+        'id','message','user_id' ,'group_id','user','avatar','c_name'
     ];
     public function user(){
         return $this->belongsTo('App\Models\User','user_id');

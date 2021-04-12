@@ -1,13 +1,8 @@
 <title>{{ $user->c_name}}</title>
 @include('header')
-<style>.user{margin-left:150px}</style>
 <body>
    <section class="sd">
-      @if(!$user->avatar) 
-      <label for="upload_user_avatar"> <img src="/img/no-user.png" class="rounded-circle user cs avatar_user_uploaded"></label>
-      @else 
-      <img src="{{ pare_url_file($user->avatar,'user') }}" class="rounded-circle user cs avatar_user_uploaded" id="myBtn-5">
-      @endif
+      <img src="{{ pare_url_file($user->avatar,'user') }}" class="rounded-circle user cs avatar_user_uploaded" id="{{$user->id == \Auth::id() ? 'myBtn-5' : ''}}">
       <img src="{{ asset('img/loading.gif')}}" class=" uploadavatar imguser" style="display:none;">
       </div>
       <form method="POST" enctype="multipart/form-data" id="form_upload_user_avatar">
@@ -30,8 +25,8 @@
          </div>
       </div>
       <div class="csa">
-         <div class="clr csb">
-            <span class="os" style="float:left">{{ $user->user }}</span>
+         <div class="csb">
+            <span class="os">{{ $user->user }}</span>
             @if($user->user === \Auth::user()->user)
             <a href="{{ route('profile.edit') }}">{{ __('translate.Edit Profile')}}</a>
             <i class="fa fa-2x fa-sun-o" id="myBtn-2"></i> 
@@ -68,7 +63,7 @@
                <li><a href="#" id="exit">{{ __('translate.Cancel')}}</a></li>
             </div>
          </div>
-         <div class="clr csc">
+         <div class="csc">
             <p><b style="padding-right: 5px;">{{ count($post)}}</b> {{ __('translate.posts')}}</p>
             <p class="cs" id="myBtn-6"><b style="padding-right: 5px;" class="follower">{{count($userFollow)}}</b>{{ __('translate.followers')}}</p>
             <!-- modal setting -->
@@ -175,7 +170,7 @@
             </div>
             <!--end modal-->
          </div>
-         <b class="hem">{{ $user->c_name}}</b>  
+         <b>{{ $user->c_name}}</b>  
       </div>
    </section>
    <div class="image d-none">
@@ -198,7 +193,7 @@
       <img id="image-post" src="{{ asset('img/heart-outline.png') }}" >
    </div>
    <div class="posts">
-   <div class="d-gri csd">
+   <div class="csd">
    <button  class="bt" id="first"  style="text-transform: uppercase;"><i class="fa fa-table"></i> {{ __('translate.posts')}}</button>
    <button id="second"><i class="fa fa-television"></i> IGTV</button>
    <button id="third"  style="text-transform: uppercase;"><i class="fa  fa-arrows-alt"></i> {{ __('translate.saved')}}</button>

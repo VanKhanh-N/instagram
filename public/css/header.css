@@ -4,7 +4,9 @@
     box-sizing: border-box;
     scroll-behavior: smooth;
     outline: none;
-    user-select: none;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    user-select: none;  
+    font-size: 13px;
 }
 li{list-style: none;} 
 img{object-fit: cover;}

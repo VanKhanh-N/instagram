@@ -8,7 +8,6 @@ html{
     display: none;
 } */
 p{
-    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
     font-size: 15px;
     font-style: normal;
     font-variant: normal;
@@ -19,11 +18,13 @@ section{
     margin: 0 auto;
     position: relative;
 }
-.sd{height: 200px;}
+.sd{height: 200px;
+    width: 70%;
+    margin: 0 auto;}
 section img.user{
     width: 150px;
     height: 150px; 
-    
+    margin-left: 20px;
 }
 .imguser{ 
     height: 40px;
@@ -40,12 +41,7 @@ section span{
     height: 100%;
     margin-left: 30%;
     padding-top: 20px;
-}
-.csb{
-    position: relative;
-    height: 40%;
-    padding: 15px;
-}
+} 
 .csb a{
     padding: 10px;
     border: 1px solid #bdbdbd;
@@ -55,6 +51,7 @@ section span{
 #myBtn-2{margin-right: 20px;}
 .csc{
    height: 15%;
+   margin: 15px 0;
 }
 .csc p,.list-follow{
     float: left; 
@@ -63,7 +60,7 @@ section span{
     margin: 5px;
 }
 .csc p{
-    width: 22%;
+    padding-right: 22px;
 }
 .csz span{
    font-size: 22px;
@@ -96,9 +93,10 @@ section span{
 } 
 .modal-content {
     background-color: #fefefe;
-    margin: auto;
     position: absolute;
-    left: 35%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     border: 1px solid #888;
 }
 .upload{
@@ -200,19 +198,15 @@ section span{
     width: 60%;
     margin: 0 auto;
     margin-bottom: 20px;
-
+    display: flex;
+    justify-content: space-around;
 }
 .posts{
     position: relative;
     width: 70%; 
     margin: 0 auto; 
     border-top: 1px solid #bdbdbd;
-    min-height: 350px;}
-.d-gri{
-    display: grid;
-    grid-template-columns: auto auto auto auto;
-    text-align: center;
-    grid-gap: 85px;}
+    min-height: 350px;} 
 .posts .csd button{   
     padding-top: 20px;   
     opacity: 0.7;
@@ -316,7 +310,6 @@ footer ul{
 .hey p{margin-left: 10px;}
 .textarea-comment{
     padding-top: 9px;
-    font-size: 13px;
     width: 90%;
     height: 100%;
     resize: none;
@@ -439,9 +432,8 @@ h2{
     background: #0095f6;
     border-radius: 5px;
     color: white;
-    margin-left: 20px;
-    width: 80px;
-    height: 30px;padding-left: 10px;margin-top:-5px
+    margin-right: 20px;
+    padding: 5px 10px;
 }
 .follows{  
     background: #0095f6;
@@ -458,8 +450,6 @@ h2{
     width: 95px;
     height: 30px;margin-top:5px
 }
-.hem{font-size: 15px;
-    font-family: "lucida grande",tahoma,verdana,arial,sans-serif;}
 .fa-15x{font-size: 1.5em !important;}
 .settings{text-align: center;
     border-radius: 10px;
@@ -550,29 +540,11 @@ h2{
         opacity: 1;
       }
 
-@media only screen and (min-width: 670px )and (max-width: 1030px){
-    .user{margin-left: 100px !important;}
-
-}
 @media only screen and (max-width: 670px){
      .modal-content{
-        position: absolute;
-        left: 20px;
         width: 88%;
     }
-    #myModal .modal-content{
-    height: 140px;
-    }
-    #myModal .modal-content .label {
-        width: 38%;
-    }
     #myModal .modal-content p {left:44%}
-    #myBtn-2{
-        margin-top: 8px;
-    }
-    #myBtn{
-        margin-top: -10px;
-    }
     .sd,.posts{width: 100%;}
     section img.user{
             width: 75px;
@@ -586,9 +558,7 @@ h2{
         width: 100%;
     }
     .csb a{
-        width: 77%;
-        float: left;
-        margin-left: 0;}
+        margin: 0;}
 
     .csc p{width: 100%; } 
     .csc p:nth-child(1),.csc p:nth-child(2){width: 50%; } 

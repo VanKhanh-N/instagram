@@ -23,5 +23,6 @@
     .green {
         color: rgb(82, 197, 82);
     }
-    .is-pulled-right{margin-left:50px;}
+    .is-pulled-right{margin-left:50px;
+    margin-top: -15px;}
 </style>

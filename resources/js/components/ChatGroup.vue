@@ -9,17 +9,21 @@
                         <p> {{ group_chat.message }}</p>
                     </div>
             </div>
-            <div class="friend-messages position-relative" v-else>
+ 
+
+                   <div class="friend-messages clr position-relative" v-else>
                 <div class="time">{{ group_chat.created_at | formatDate }}</div>
-                <!-- <a :href="'/'+group_chat.user" >
+                
+                <a :href="'/'+group_chat.user">
                 <img :src="'/uploads/user/'+group_chat.avatar" class="friend-img rounded-circle" v-if="group_chat.avatar.substr(0,4)!='http'">
                 <img :src="group_chat.avatar" class="friend-img rounded-circle" v-if="group_chat.avatar.substr(0,4)=='http'">
-                </a> -->
-                    <div class="your-messages position-absolute">
-                    <span class="os ">{{group_chat.user_id}}</span>
-                        <p class="position-absolute">{{ group_chat.message }}</p>
+                </a>
+                    <span class="os ">{{group_chat.c_name}}</span>
+                    <div class="friend-chat"> 
+                        {{group_chat.message }}
                     </div>
             </div>
+
         </div>
         <!-- <img src="/img/typing.gif" style="height:100px"> -->
     </div>

@@ -169,18 +169,17 @@ class DirectController extends Controller
         return $data;
     }
     public function sendGroupChat(Request $request) { 
+        $users=User::find($request->user_id);
         $conversation=Conversation::create([
             'user_id'  => $request->user_id,
             'group_id' => $request->group_id,
             'message'  => $request->message,
+            'user'     => $users->user,
+            'avatar'   => $users->avatar,
+            'c_name'   => $users->c_name,
         ]);
         broadcast(new NewMessage($conversation))->toOthers();
 
         return [];
-    }
-    public function deleteConver(){
-        $id=Conversation::where('group_id',3);
-        $id->delete();
-        return redirect()->back();
     }
 }
