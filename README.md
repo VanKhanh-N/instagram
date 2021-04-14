@@ -10,7 +10,7 @@
 - HTML
 - CSS
 ### Cài đặt 
-+ Tải xuống bằng cmd : https://github.com/satosis/instagram.git
++ Tải xuống bằng cmd :git clone https://github.com/satosis/instagram.git
 + Truy cập website :http://localhost và tạo database tên instagram 
 + Cài đặt bằng cmd :
 - composer install
