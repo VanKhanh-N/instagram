@@ -16,8 +16,7 @@
 - composer install
 - npm install 
 - copy .env.example .env
-- php artisan migrate
-- php artisan db:seed
+- php artisan migrate --seed
 - php artisan serve
 - Truy cập website :http://localhost:8000
 ### Chức năng chính
