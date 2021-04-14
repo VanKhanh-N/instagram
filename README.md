@@ -11,6 +11,7 @@
 - CSS
 ### Cài đặt 
 + Tải xuống bằng cmd : https://github.com/satosis/instagram.git
++ Truy cập website :http://localhost và tạo database tên instagram 
 + Cài đặt bằng cmd :
 - composer install
 - npm install 
@@ -18,7 +19,7 @@
 - php artisan migrate
 - php artisan db:seed
 - php artisan serve
-- Truy cập website :localhost:8000
+- Truy cập website :http://localhost:8000
 ### Chức năng chính
 + Trang đăng nhập dành cho người dùng
     - Đăng nhập 
