@@ -48,12 +48,12 @@ Route::group(['namespace'=>'App\Http\Controllers\Personal'], function () {
     Route::get('/video',  'DirectController@video')->name('chat.video');
     // Route::post('/pusher/auth', 'App\Http\Controllers\HomeController@authenticate'); 
    
-});
+}); 
 //home page
 Route::group(['namespace'=>'App\Http\Controllers\Page'], function () { 
     //follow user
     Route::get('/incre-view','HomePageController@incre_view')->name('post.increview'); 
-    Route::post('/follow','HomePageController@follow'); 
+    Route::get('/follow','HomePageController@follow'); 
     Route::post('/upload_user','HomePageController@uploadProfile')->name('upload.user'); 
     Route::get('/delete','HomePageController@deleteProfile')->name('post.delete');
     Route::get('/{user}','HomePageController@index')->name('get.home-page');   

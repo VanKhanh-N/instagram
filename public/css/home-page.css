@@ -22,8 +22,8 @@ section{
     width: 70%;
     margin: 0 auto;}
 section img.user{
-    width: 150px;
-    height: 150px; 
+    width: 200px;
+    height: 200px; 
     margin-left: 20px;
 }
 .imguser{ 
@@ -45,7 +45,6 @@ section span{
 .csb a{
     padding: 10px;
     border: 1px solid #bdbdbd;
-    margin-left: 20px;
     margin-right: 20px;
 }
 #myBtn-2{margin-right: 20px;}

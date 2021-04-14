@@ -1,4 +1,4 @@
-1@extends('layout.accounts')
+@extends('layout.accounts')
 @section('contents')
         <div class="w-80">
             <div class="clr">
