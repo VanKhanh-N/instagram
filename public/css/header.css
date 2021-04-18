@@ -9,7 +9,9 @@
     font-size: 13px;
 }
 li{list-style: none;} 
-img{object-fit: cover;}
+img{object-fit: cover;
+    content-visibility: auto;
+}
 body{
     margin-top: 80px;
 }

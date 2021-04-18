@@ -236,7 +236,7 @@
       @endif
       <div class="clr">
          @foreach($post as $key=> $val) 
-         <div class="cs cse"  id="myBtnn{{$val->id}}">
+         <div class="cs cse {{ $key%3 == 1 ? 'uio' : '' }}"  id="myBtnn{{$val->id}}">
             <div class="clr csf">
                <i class="fa fa-heart"></i> 
                <p class="likes{{$val->id}}">{{ $val->p_favourite}}</p>
