@@ -2,7 +2,8 @@
    @csrf
    <textarea autocomplete="off"  class="textarea-{{$value}} textarea-comment{{$value}} textarea-comment" placeholder="{{ __('translate.Add a comment')}}..."></textarea>
    <input type="hidden" value="{{$value}}" class="post-comment{{$value}}">   
-   <button type="button" class="submit-{{$value}}  button-comment disabled position-relative"><div class="position-absolute">{{ __('translate.Post')}}</div>
+   <button type="button" class="submit-{{$value}}  button-comment disabled position-relative">
+   <div class="position-absolute">{{ __('translate.Post')}}</div>
    <img src="{{ asset('img/loading.gif')}}" class="w-30 load-comment" style="display:none;">
    </button>
 </form>
@@ -21,9 +22,9 @@
    $(".submit-{{$value}}").on('click',function(e){
    e.preventDefault();
    var URL= $(this).parents('form').attr('action');
-   var c_comment=$('.textarea-comment{{$value}}').val();
-   var c_post=$('.post-comment{{$value}}').val();
-   var c_user_id='{{ \Auth::id()}}'; 
+   var c_comment=$('.textarea-comment{{$value}}').val();//text bai post
+   var c_post=$('.post-comment{{$value}}').val();//id bai post
+   var c_user_id='{{ \Auth::id()}}'; //id nguoi comment
    $.post({ 
    url:URL,
    headers: {

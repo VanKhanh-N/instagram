@@ -21,13 +21,14 @@ class PostImage extends Controller
         $data['created_at']=Carbon::now();
         $data['updated_at']=Carbon::now(); 
         $id=Comment::InsertGetId($data);
-        $post=Post::find($data['c_post']);
-        $user=User::find(\Auth::id());
+        $post=Post::find($data['c_post']);//lay bai post
+        $user=User::find(\Auth::id());//lay ra user
 
-        if($data['c_user_id'] != $post->user->id)
+        if($data['c_user_id'] != $post->user->id)//nguoi comment khac nguoi dang bai
+        //notifycation
         User::find($post->user->id)->notify(new CommentPost($post,$user,'comment'));
         return response([
-            'count'=> Post::find($data['c_post']),
+            'count'=> Post::find($data['c_post']),//post
             'user'=>\Auth::user(), 
             'avatar' =>pare_url_file(\Auth::user()->avatar,'user')
             ]);

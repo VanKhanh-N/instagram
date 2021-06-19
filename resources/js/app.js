@@ -33,6 +33,7 @@ Vue.component('onlineuser', require('./components/OnlineUser.vue').default);
  */
 import moment from 'moment';
 const app = new Vue({
+    //khai bao
     el: '#app',
     data: {
         notifications:'',
@@ -49,10 +50,12 @@ const app = new Vue({
         const roomId = $('meta[name="roomId"]').attr('content');
         //notification
         axios.post('/notification/get').then(response =>{
+ 
             this.notifications =response.data.notification;
             this.notification_readed =response.data.notification_readed;
              
         });
+        
         Echo.private('App.Models.User.' + userId).notification((notification)=>{
             this.notifications.push(notification);
         })
